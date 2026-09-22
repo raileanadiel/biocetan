@@ -1,0 +1,28 @@
+---
+/** Page section with consistent vertical rhythm. Alternate `white` / `mint` down a page. */
+interface Props {
+  tone?: 'white' | 'mint' | 'navy' | 'forest';
+  id?: string;
+  class?: string;
+  /** Extra-tight padding for strips (stats, logos). */
+  compact?: boolean;
+}
+
+const { tone = 'white', id, class: className, compact = false } = Astro.props;
+
+const tones = {
+  white: 'bg-white',
+  mint: 'bg-mint-50',
+  navy: 'bg-navy-900 text-white on-dark',
+  forest: 'bg-forest-900 text-white on-dark',
+} as const;
+---
+
+<section
+  id={id}
+  class:list={[tones[tone], compact ? 'py-8 md:py-10' : 'py-14 md:py-20', className]}
+>
+  <div class="container-x">
+    <slot />
+  </div>
+</section>

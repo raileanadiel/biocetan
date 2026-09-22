@@ -1,0 +1,452 @@
+{
+  "meta": {
+    "siteName": "BIOCETAN",
+    "tagline": "Chimie vegetală pentru un mâine mai curat",
+    "defaultDescription": "Esteri metilici vegetali personalizați (RME, SFME, SME), producție la comandă și formulări personalizate din Săcueni, România. Livrare în vrac și în IBC în toată Europa."
+  },
+  "nav": {
+    "home": "Acasă",
+    "products": "Produse",
+    "services": "Servicii",
+    "applications": "Aplicații",
+    "technology": "Tehnologie",
+    "quality": "Calitate",
+    "facility": "Facilități și logistică",
+    "about": "Despre noi",
+    "contact": "Contact"
+  },
+  "cta": {
+    "quote": "Solicită ofertă",
+    "experts": "Vorbește cu experții noștri",
+    "band": {
+      "title": "Să transformăm cerințele dumneavoastră în realitate",
+      "text": "Spuneți-ne despre materia primă, specificația și volumul dorit. Echipa noastră tehnică vă va evalua proiectul și va propune cea mai bună soluție."
+    }
+  },
+  "a11y": {
+    "skip": "Salt la conținutul principal",
+    "mainNav": "Navigare principală",
+    "openMenu": "Deschide meniul",
+    "closeMenu": "Închide meniul",
+    "language": "Limba",
+    "breadcrumb": "Cale de navigare",
+    "home": "BIOCETAN — acasă",
+    "quickContact": "Contact rapid",
+    "call": "Sună",
+    "email": "E-mail",
+    "quoteShort": "Ofertă"
+  },
+  "footer": {
+    "quickLinks": "Linkuri rapide",
+    "contact": "Contact",
+    "address": "Str. Letea Mare nr. 44, Oraș Săcueni, Județul Bihor, România",
+    "nearBorder": "Lângă granița cu Ungaria",
+    "hours": "Luni – Vineri, 08:00 – 17:00 (EET)",
+    "madeIn": "Produs în Europa",
+    "madeInSub": "pentru o industrie sustenabilă",
+    "rights": "Toate drepturile rezervate.",
+    "privacy": "Confidențialitate",
+    "terms": "Termeni",
+    "cookies": "Cookie-uri",
+    "cui": "CUI",
+    "regCom": "Reg. Com.",
+    "shareCapital": "Capital social"
+  },
+  "pages": {
+    "home": {
+      "title": "Esteri metilici vegetali personalizați",
+      "accent": "Produși la comandă.",
+      "lead": "Materia dumneavoastră primă. Specificația dumneavoastră. Produsul dumneavoastră. Producție europeană flexibilă de esteri metilici vegetali și formulări lichide.",
+      "metaTitle": "Esteri metilici vegetali personalizați, produși la comandă",
+      "metaDescription": "Esteri metilici vegetali personalizați (RME, SFME, SME), producție la comandă și formulări personalizate din Săcueni, România. Livrare în vrac și în IBC."
+    },
+    "products": {
+      "title": "Esteri metilici vegetali",
+      "accent": "RME · SFME · SME · Personalizați",
+      "lead": "Esteri din rapiță, floarea-soarelui, soia și esteri personalizați, produși conform specificației dumneavoastră și livrați în vrac sau în IBC.",
+      "metaTitle": "Esteri metilici vegetali: RME, SFME, SME și esteri personalizați",
+      "metaDescription": "RME, SFME, SME și esteri metilici vegetali personalizați, produși conform specificației dumneavoastră. Certificat de analiză pentru fiecare lot, livrare în vrac și în IBC."
+    },
+    "services": {
+      "title": "Servicii de producție",
+      "accent": "La comandă sau prelucrare la façon.",
+      "lead": "Alegeți modul de colaborare: procurăm și procesăm uleiul, îl furnizați dumneavoastră sau dezvoltăm produsul împreună.",
+      "metaTitle": "Producție la comandă, prelucrare la façon și formulări personalizate",
+      "metaDescription": "Producție la comandă și prelucrare la façon de esteri metilici vegetali, formulări personalizate și loturi pilot la Săcueni, România."
+    },
+    "applications": {
+      "title": "Aplicații",
+      "accent": "Pe industrii.",
+      "lead": "Unde se folosesc esterii metilici vegetali, de la solvenți pentru agrochimie la fluide de prelucrare a metalelor, și cum îi adaptăm.",
+      "metaTitle": "Aplicațiile esterilor metilici vegetali pe industrii",
+      "metaDescription": "Esteri metilici vegetali pentru agrochimie, vopsele, lubrifianți, fluide de prelucrare a metalelor, detergenți industriali și polimeri."
+    },
+    "technology": {
+      "title": "Tehnologia noastră",
+      "accent": "",
+      "lead": "Cum transformăm uleiurile vegetale în esteri consecvenți, de înaltă calitate.",
+      "metaTitle": "Tehnologia de producție a esterilor metilici vegetali",
+      "metaDescription": "Tehnologia de proces din spatele esterilor metilici vegetali BIOCETAN."
+    },
+    "quality": {
+      "title": "Calitate",
+      "accent": "în care puteți avea încredere.",
+      "lead": "Analize în laboratorul propriu și documentație pentru fiecare lot, conform specificației dumneavoastră.",
+      "metaTitle": "Controlul calității și analize de laborator",
+      "metaDescription": "Analize în laborator propriu, metode standardizate și documentație pentru fiecare lot de esteri metilici vegetali BIOCETAN."
+    },
+    "facility": {
+      "title": "Facilități și logistică",
+      "accent": "Săcueni, România.",
+      "lead": "Producție, depozitare și încărcare în județul Bihor, lângă granița cu Ungaria.",
+      "metaTitle": "Facilități și logistică la Săcueni, România",
+      "metaDescription": "Două linii de producție, patru vase de proces de 15 tone, laborator propriu și încărcare în vrac sau în IBC la Săcueni, lângă granița cu Ungaria."
+    },
+    "about": {
+      "title": "Despre BIOCETAN",
+      "accent": "",
+      "lead": "Producător român de esteri vegetali și formulări lichide personalizate.",
+      "metaTitle": "Despre BIOCETAN",
+      "metaDescription": "BIOCETAN S.R.L. produce esteri metilici vegetali și formulări lichide personalizate la Săcueni, județul Bihor, România."
+    },
+    "contact": {
+      "title": "Solicitați o ofertă",
+      "accent": "",
+      "lead": "Spuneți-ne despre proiectul dumneavoastră și echipa noastră vă va răspunde.",
+      "metaTitle": "Solicitați o ofertă sau contactați BIOCETAN",
+      "metaDescription": "Contactați BIOCETAN la Săcueni, România. Solicitați o ofertă pentru esteri metilici vegetali, prelucrare la façon sau formulări personalizate."
+    },
+    "privacy": {
+      "title": "Politica de confidențialitate",
+      "accent": "",
+      "lead": "Cum prelucrează BIOCETAN S.R.L. datele dumneavoastră personale.",
+      "metaTitle": "Politica de confidențialitate",
+      "metaDescription": "Cum colectează și utilizează BIOCETAN S.R.L. datele cu caracter personal."
+    },
+    "terms": {
+      "title": "Termeni de utilizare",
+      "accent": "",
+      "lead": "Termenii care se aplică utilizării acestui site.",
+      "metaTitle": "Termeni de utilizare",
+      "metaDescription": "Termenii de utilizare ai site-ului BIOCETAN."
+    },
+    "cookies": {
+      "title": "Politica de cookie-uri",
+      "accent": "",
+      "lead": "Ce cookie-uri folosește acest site și de ce.",
+      "metaTitle": "Politica de cookie-uri",
+      "metaDescription": "Cookie-urile utilizate pe site-ul BIOCETAN."
+    }
+  },
+  "stub": {
+    "notice": "Pagină schelet. Conținutul final al acestei pagini este realizat într-o fază ulterioară."
+  },
+  "notFound": {
+    "title": "Pagina nu a fost găsită",
+    "lead": "Pagina căutată nu există sau a fost mutată.",
+    "home": "Înapoi la pagina principală"
+  },
+  "form": {
+    "required": "* Câmpuri obligatorii",
+    "fields": {
+      "name": "Nume complet",
+      "company": "Denumirea companiei",
+      "email": "E-mail",
+      "product": "Produs / serviciu de interes",
+      "message": "Mesajul dumneavoastră / detalii despre proiect",
+      "phone": "Telefon",
+      "country": "Țara",
+      "industry": "Industrie / aplicație",
+      "volume": "Volum estimat",
+      "volumeUnit": "Unitate",
+      "files": "Atașați fișiere"
+    },
+    "placeholders": {
+      "name": "Numele dumneavoastră complet",
+      "company": "Compania dumneavoastră",
+      "email": "dvs@companie.ro",
+      "message": "Vă rugăm să descrieți cerințele, specificația, aplicația și orice alte informații.",
+      "phone": "+40 …",
+      "volume": "ex. 20"
+    },
+    "select": "Alegeți…",
+    "hints": {
+      "files": "PDF, DOC(X), XLS(X), JPG sau PNG. Maximum 3 fișiere, 10 MB în total."
+    },
+    "consent": "Sunt de acord ca BIOCETAN să îmi utilizeze datele pentru a răspunde solicitării mele.",
+    "privacyLink": "Politica de confidențialitate",
+    "details": "Adăugați mai multe detalii (opțional)",
+    "detailsHint": "Telefonul, țara, industria, volumul și atașamentele ne ajută să răspundem mai repede.",
+    "submit": "Trimite solicitarea",
+    "sending": "Se trimite…",
+    "verifying": "Se verifică…",
+    "options": {
+      "product": {
+        "rme": "RME (ester metilic din rapiță)",
+        "sfme": "SFME (ester metilic din floarea-soarelui)",
+        "sme": "SME (ester metilic din soia)",
+        "custom-ester": "Ester metilic vegetal personalizat",
+        "custom-formulation": "Formulare personalizată",
+        "toll": "Prelucrare la façon",
+        "pilot": "Lot pilot / C&D",
+        "logistics": "Logistică / ambalare",
+        "documentation": "Documentație (CoA, SDS, TDS)",
+        "visit": "Vizită la fabrică",
+        "other": "Altele"
+      },
+      "industry": {
+        "agrochemicals": "Agrochimie",
+        "coatings": "Vopsele, lacuri și cerneluri",
+        "lubricants": "Lubrifianți",
+        "metalworking": "Fluide de prelucrare a metalelor",
+        "cleaners": "Detergenți și degresanți industriali",
+        "polymers": "Polimeri și mase plastice",
+        "chemicals": "Produse chimice industriale",
+        "soil": "Stabilizarea solului",
+        "other": "Altele"
+      },
+      "unit": {
+        "t-month": "t / lună",
+        "t-year": "t / an",
+        "one-off": "unică"
+      }
+    },
+    "errors": {
+      "required": "Acest câmp este obligatoriu.",
+      "email": "Introduceți o adresă de e-mail validă.",
+      "tooShort": "Introduceți cel puțin {min} caractere.",
+      "tooLong": "Valoarea este prea lungă.",
+      "invalid": "Verificați această valoare.",
+      "consent": "Vă rugăm să confirmați pentru a continua.",
+      "fileCount": "Puteți atașa cel mult 3 fișiere.",
+      "fileSize": "Atașamentele nu pot depăși 10 MB în total.",
+      "fileType": "Sunt acceptate doar fișiere PDF, DOC(X), XLS(X), JPG și PNG."
+    },
+    "status": {
+      "successTitle": "Vă mulțumim — solicitarea a fost trimisă.",
+      "successText": "Am primit solicitarea dumneavoastră și vă vom răspunde în curând. O confirmare a fost trimisă la {email}.",
+      "another": "Trimiteți o altă solicitare",
+      "validation": "Vă rugăm să corectați câmpurile marcate.",
+      "captcha": "Nu am putut verifica faptul că sunteți o persoană reală. Vă rugăm să încercați din nou.",
+      "delivery": "Ne cerem scuze, solicitarea nu a putut fi trimisă. Vă rugăm să ne scrieți la office@biocetan.ro sau să sunați la +40 741 039 292.",
+      "config": "Ne cerem scuze, formularul este temporar indisponibil. Vă rugăm să ne scrieți la office@biocetan.ro sau să sunați la +40 741 039 292.",
+      "origin": "Ne cerem scuze, solicitarea nu a putut fi trimisă. Vă rugăm să ne scrieți la office@biocetan.ro sau să sunați la +40 741 039 292.",
+      "invalid": "Datele trimise conțin erori. Verificați formularul și încercați din nou.",
+      "network": "Eroare de rețea. Verificați conexiunea și încercați din nou."
+    },
+    "noscript": "Pentru a trimite acest formular este necesar JavaScript. Vă rugăm să ne scrieți la office@biocetan.ro sau să sunați la +40 741 039 292."
+  },
+  "email": {
+    "autoreply": {
+      "subject": "Am primit solicitarea dumneavoastră — BIOCETAN",
+      "greeting": "Stimată/Stimate {name},",
+      "intro": "Vă mulțumim că ați contactat BIOCETAN. Am primit solicitarea dumneavoastră și echipa noastră vă va răspunde în curând. Iată un rezumat al informațiilor trimise:",
+      "product": "Produs / serviciu",
+      "message": "Mesajul dumneavoastră",
+      "files": "Atașamente",
+      "closing": "Dacă doriți să adăugați ceva, răspundeți pur și simplu la acest e-mail. Cu stimă, echipa BIOCETAN."
+    }
+  },
+  "contact": {
+    "infoTitle": "Informații de contact",
+    "address": "Adresă",
+    "phone": "Telefon",
+    "email": "E-mail",
+    "hours": "Program",
+    "openMaps": "Deschide în Google Maps",
+    "formTitle": "Trimiteți-ne solicitarea",
+    "formIntro": "Cu cât ne oferiți mai multe detalii, cu atât mai rapid și mai precis vă putem oferi o ofertă.",
+    "checklistTitle": "Ce să ne trimiteți pentru o ofertă rapidă",
+    "checklist": {
+      "a": "Produsul sau materia primă de care aveți nevoie",
+      "b": "Volumul estimat și frecvența",
+      "c": "Specificația dumneavoastră sau fișa tehnică atașată",
+      "d": "Locul de livrare și ambalarea (vrac sau IBC)",
+      "e": "Termenul dorit"
+    },
+    "visitTitle": "Vizitați fabrica noastră",
+    "visitText": "Vă arătăm cu plăcere amplasamentul. Alegeți „Vizită la fabrică” în formular și spuneți-ne când vă convine."
+  },
+  "home": {
+    "hero": {
+      "explore": "Descoperiți produsele",
+      "script": "Chimie reală. Soluții reale.",
+      "point": {
+        "a": "Materii prime vegetale regenerabile",
+        "b": "Produse conform specificației dumneavoastră",
+        "c": "Producție la comandă și prelucrare la façon",
+        "d": "Livrare în vrac și în IBC în toată Europa"
+      }
+    },
+    "proof": {
+      "a": {
+        "value": "60 t/zi",
+        "label": "Capacitate de producție (20 t pe tură de 8 ore)"
+      },
+      "b": {
+        "value": "2",
+        "label": "Linii de producție independente"
+      },
+      "c": {
+        "value": "4 × 15 t",
+        "label": "Vase de proces pentru separare și formulare"
+      },
+      "d": {
+        "value": "Laborator propriu",
+        "label": "Analize și verificarea fiecărui lot"
+      }
+    },
+    "ways": {
+      "title": "Trei moduri de a colabora",
+      "lead": "Materia dumneavoastră primă. Specificația dumneavoastră. Producția noastră. Alegeți modelul potrivit proiectului dumneavoastră.",
+      "a": {
+        "title": "Producție la comandă",
+        "text": "Dumneavoastră definiți produsul și specificația. Noi procurăm uleiul vegetal și gestionăm întregul proces de producție."
+      },
+      "b": {
+        "title": "Prelucrare la façon",
+        "text": "Dumneavoastră furnizați materia primă. Noi o transformăm în fabrica noastră conform specificației, cu trasabilitatea loturilor și confidențialitate."
+      },
+      "c": {
+        "title": "Formulare personalizată",
+        "text": "Dezvoltăm împreună esterul sau formularea potrivită, de la lotul pilot până la scară industrială."
+      },
+      "more": "Descoperiți serviciile noastre"
+    },
+    "products": {
+      "title": "Esteri metilici vegetali",
+      "lead": "Materii prime diferite, posibilități multiple. Fiecare produs este realizat conform specificației dumneavoastră.",
+      "rme": {
+        "name": "RME",
+        "full": "Ester metilic din rapiță",
+        "text": "Ester metilic din ulei de rapiță pentru aplicații industriale și tehnice."
+      },
+      "sfme": {
+        "name": "SFME",
+        "full": "Ester metilic din floarea-soarelui",
+        "text": "Ester metilic din ulei de floarea-soarelui pentru aplicații industriale și tehnice."
+      },
+      "sme": {
+        "name": "SME",
+        "full": "Ester metilic din soia",
+        "text": "Ester metilic din ulei de soia pentru aplicații industriale și tehnice."
+      },
+      "custom": {
+        "name": "Esteri personalizați",
+        "full": "Alți esteri metilici vegetali",
+        "text": "Adaptați materiei dumneavoastră prime, inclusiv uleiuri cu conținut ridicat de acid oleic și uleiuri speciale, la cerere."
+      },
+      "learn": "Aflați mai multe",
+      "all": "Vedeți toate produsele"
+    },
+    "process": {
+      "title": "De la cerință la livrare",
+      "lead": "Un drum simplu de la cerința dumneavoastră la produsul final.",
+      "a": {
+        "title": "Cerința dumneavoastră",
+        "text": "Materie primă, specificație și aplicație."
+      },
+      "b": {
+        "title": "Lot pilot",
+        "text": "Formulare și testare înainte de scalare, la cerere."
+      },
+      "c": {
+        "title": "Producție",
+        "text": "Pe linii dedicate, de la scară pilot la scară industrială."
+      },
+      "d": {
+        "title": "Controlul calității",
+        "text": "Analize în laborator propriu și verificarea lotului."
+      },
+      "e": {
+        "title": "Livrare",
+        "text": "Autocisternă, IBC sau ambalare personalizată."
+      }
+    },
+    "applications": {
+      "title": "Aplicații",
+      "lead": "O singură platformă, multe industrii.",
+      "agro": {
+        "title": "Agrochimie",
+        "text": "Component purtător pentru formulări agrochimice."
+      },
+      "coatings": {
+        "title": "Vopsele, lacuri și cerneluri",
+        "text": "Solvent și component reactiv."
+      },
+      "lubricants": {
+        "title": "Lubrifianți și fluide de prelucrare",
+        "text": "Component de bază și aditiv de performanță."
+      },
+      "cleaners": {
+        "title": "Detergenți industriali",
+        "text": "Formulări de degresare și curățare."
+      },
+      "polymers": {
+        "title": "Polimeri și mase plastice",
+        "text": "Plastifiant și auxiliar de procesare."
+      },
+      "chemicals": {
+        "title": "Produse chimice industriale",
+        "text": "Intermediar pentru diverse produse chimice."
+      },
+      "all": "Descoperiți aplicațiile"
+    },
+    "quality": {
+      "title": "Calitate în fiecare lot",
+      "lead": "Fiecare lot este analizat în laboratorul nostru propriu, iar pentru fiecare lot se furnizează un certificat de analiză.",
+      "params": {
+        "a": "Conținut de ester",
+        "b": "Indice de aciditate",
+        "c": "Conținut de apă",
+        "d": "Densitate",
+        "e": "Vâscozitate",
+        "f": "Punct de inflamabilitate",
+        "g": "Culoare"
+      },
+      "explore": "Aflați mai multe despre calitate",
+      "docs": "Solicitați documentația"
+    },
+    "location": {
+      "title": "Locație strategică în inima Europei",
+      "text": "Săcueni, județul Bihor, România: lângă granița cu Ungaria, cu acces rutier către piețele din Europa Centrală și de Vest.",
+      "marketsTitle": "Livrăm clienților din",
+      "markets": {
+        "a": "România",
+        "b": "Ungaria",
+        "c": "Austria",
+        "d": "Cehia",
+        "e": "Slovacia",
+        "f": "Polonia",
+        "g": "Germania",
+        "h": "și mai departe"
+      },
+      "cta": "Facilități și logistică"
+    },
+    "faq": {
+      "title": "Întrebări frecvente",
+      "q1": "Care este diferența dintre producția la comandă și prelucrarea la façon?",
+      "a1": "În producția la comandă procurăm uleiul vegetal și gestionăm întregul proces conform specificației dumneavoastră. În prelucrarea la façon dumneavoastră furnizați materia primă, iar noi o transformăm în fabrica noastră, cu trasabilitatea loturilor și confidențialitate.",
+      "q2": "Ce materii prime puteți procesa?",
+      "a2": "Uleiul de rapiță, de floarea-soarelui și de soia sunt materiile noastre prime standard. Alte uleiuri vegetale, inclusiv uleiuri cu conținut ridicat de acid oleic și uleiuri speciale, sunt posibile la cerere.",
+      "q3": "Ce dimensiuni ale loturilor sunt posibile?",
+      "a3": "Loturile tipice sunt de 10–20 de tone, iar cele două linii de producție pot produce până la 60 de tone pe zi. Loturi pilot sunt disponibile la cerere.",
+      "q4": "Cum se livrează produsul?",
+      "a4": "În vrac, în autocisterne, sau în IBC de 1.000 L. Alte tipuri de ambalare pot fi organizate la cerere.",
+      "q5": "Ce analize efectuați și ce documente furnizați?",
+      "a5": "Fiecare lot este analizat în laboratorul nostru propriu: conținut de ester, indice de aciditate, conținut de apă, densitate, vâscozitate, punct de inflamabilitate, culoare și alți parametri, conform specificației dumneavoastră. Pentru fiecare lot se furnizează un certificat de analiză, iar fișele de securitate și fișele tehnice sunt disponibile la cerere.",
+      "q6": "Puteți dezvolta o formulare personalizată?",
+      "a6": "Da. Combinăm esteri metilici vegetali cu aditivi conform specificației dumneavoastră, îi testăm în laboratorul nostru și scalăm de la loturi pilot la producție industrială.",
+      "q7": "Unde vă aflați și pe ce piețe livrați?",
+      "a7": "Ne aflăm la Săcueni, județul Bihor, România, lângă granița cu Ungaria. Livrăm clienților din România, Ungaria, Austria, Cehia, Slovacia, Polonia, Germania și mai departe.",
+      "q8": "Ce trebuie să trimit pentru a primi o ofertă?",
+      "a8": "Produsul sau materia primă de care aveți nevoie, volumul estimat, specificația (sau fișa tehnică), locul de livrare și termenul dorit. Folosiți formularul de mai jos sau scrieți-ne un e-mail."
+    },
+    "final": {
+      "title": "Solicitați o ofertă",
+      "text": "Spuneți-ne despre proiectul dumneavoastră. Echipa noastră tehnică vă va evalua cerințele și vă va răspunde.",
+      "moreDetails": "Doriți să adăugați specificații sau fișiere?",
+      "moreLink": "Folosiți formularul detaliat"
+    }
+  }
+}

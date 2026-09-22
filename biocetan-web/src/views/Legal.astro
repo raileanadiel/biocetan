@@ -1,0 +1,60 @@
+---
+import PageHero from '../components/ui/PageHero.astro';
+import Section from '../components/ui/Section.astro';
+import { useTranslations } from '../i18n';
+import type { PageId } from '../i18n/routes';
+import type { Locale } from '../i18n/config';
+
+/** Privacy / Terms / Cookies. Text lives in src/legal/<locale>/<page>.md. */
+interface Props {
+  locale: Locale;
+  pageId: PageId;
+}
+
+const { locale, pageId } = Astro.props;
+const t = useTranslations(locale);
+
+const docs = import.meta.glob<{ Content: any }>('../legal/*/*.md', { eager: true });
+const doc = docs[`../legal/${locale}/${pageId}.md`];
+if (!doc) throw new Error(`Missing legal text: src/legal/${locale}/${pageId}.md`);
+const { Content } = doc;
+---
+
+<PageHero
+  locale={locale}
+  pageId={pageId}
+  title={t(`pages.${pageId}.title`)}
+  lead={t(`pages.${pageId}.lead`)}
+/>
+
+<Section>
+  <div class="legal max-w-3xl">
+    <Content />
+  </div>
+</Section>
+
+<style>
+  .legal :global(h2) {
+    margin: 2.25rem 0 0.75rem;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-navy-900);
+  }
+  .legal :global(p),
+  .legal :global(ul) {
+    margin: 0.75rem 0;
+  }
+  .legal :global(ul) {
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .legal :global(li) {
+    margin: 0.35rem 0;
+  }
+  .legal :global(a) {
+    color: var(--color-green-700);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

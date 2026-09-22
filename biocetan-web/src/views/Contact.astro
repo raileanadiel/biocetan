@@ -1,0 +1,110 @@
+---
+import PageHero from '../components/ui/PageHero.astro';
+import Section from '../components/ui/Section.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import ContactForm from '../components/forms/ContactForm.astro';
+import { site } from '../config/site';
+import { useTranslations } from '../i18n';
+import type { PageId } from '../i18n/routes';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+  pageId: PageId;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const checklist = (['a', 'b', 'c', 'd', 'e'] as const).map((key) => t(`contact.checklist.${key}`));
+---
+
+<PageHero
+  locale={locale}
+  pageId="contact"
+  title={t('pages.contact.title')}
+  lead={t('pages.contact.lead')}
+/>
+
+<Section tone="mint">
+  <div class="grid items-start gap-10 lg:grid-cols-[1fr_1.6fr]">
+    <div class="space-y-6">
+      <section class="rounded-lg border border-line bg-white p-6">
+        <h2 class="font-heading text-h3 font-bold text-navy-900">{t('contact.infoTitle')}</h2>
+        <address class="mt-5 space-y-4 not-italic">
+          <p class="flex gap-3">
+            <Icon name="map-pin" class="mt-0.5 size-5 text-green-700" />
+            <span>
+              <strong class="block text-navy-900">{site.legalName}</strong>
+              {t('footer.address')}
+              <br />
+              {t('footer.nearBorder')}
+            </span>
+          </p>
+          <p class="flex gap-3">
+            <Icon name="phone" class="mt-0.5 size-5 text-green-700" />
+            <a
+              href={`tel:${site.phone.href}`}
+              class="font-semibold text-navy-900 underline-offset-4 hover:underline"
+            >
+              {site.phone.display}
+            </a>
+          </p>
+          <p class="flex gap-3">
+            <Icon name="mail" class="mt-0.5 size-5 text-green-700" />
+            <a
+              href={`mailto:${site.email}`}
+              class="font-semibold text-navy-900 underline-offset-4 hover:underline"
+            >
+              {site.email}
+            </a>
+          </p>
+          <p class="flex gap-3">
+            <Icon name="clock" class="mt-0.5 size-5 text-green-700" />
+            <span>{t('footer.hours')}</span>
+          </p>
+        </address>
+        <p class="mt-6">
+          <Button
+            href={site.mapsUrl}
+            variant="outline"
+            icon="map-pin"
+            target="_blank"
+            rel="noopener"
+          >
+            {t('contact.openMaps')}
+          </Button>
+        </p>
+      </section>
+
+      <section class="rounded-lg border border-line bg-white p-6">
+        <h2 class="font-heading text-h3 font-bold text-navy-900">{t('contact.checklistTitle')}</h2>
+        <ul class="mt-4 space-y-3">
+          {checklist.map((item) => (
+            <li class="flex gap-3">
+              <Icon name="check" class="mt-0.5 size-5 rounded-full bg-green-600 p-1 text-white" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="rounded-lg bg-navy-900 p-6 text-white on-dark">
+        <h2 class="font-heading text-h3 font-bold">{t('contact.visitTitle')}</h2>
+        <p class="mt-2 text-white/85">{t('contact.visitText')}</p>
+      </section>
+    </div>
+
+    <section
+      class="rounded-xl border border-line bg-white p-6 shadow-sm md:p-8"
+      aria-labelledby="rfq-title"
+    >
+      <h2 id="rfq-title" class="font-heading text-h2 font-extrabold text-navy-900 uppercase">
+        {t('contact.formTitle')}
+      </h2>
+      <p class="mt-2 mb-6 text-muted">{t('contact.formIntro')}</p>
+      <ContactForm locale={locale} variant="full" idPrefix="contact" />
+    </section>
+  </div>
+</Section>

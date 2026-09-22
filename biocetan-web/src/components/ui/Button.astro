@@ -1,0 +1,58 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import Icon, { type IconName } from './Icon.astro';
+
+/**
+ * Primary = the one dominant action per view ("Request a Quote"). Secondary actions use
+ * `outline` on light backgrounds and `outline-light` on dark ones.
+ * Renders <a> when `href` is set, otherwise <button>.
+ */
+interface Props extends HTMLAttributes<'a'> {
+  variant?: 'primary' | 'secondary' | 'outline' | 'outline-light' | 'link';
+  size?: 'md' | 'lg';
+  icon?: IconName | null;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  icon = 'arrow-right',
+  type = 'button',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const variants = {
+  primary: 'bg-green-600 text-white hover:bg-green-700',
+  secondary: 'bg-navy-900 text-white hover:bg-navy-800',
+  outline: 'border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white',
+  'outline-light': 'border-2 border-white/80 text-white hover:bg-white hover:text-navy-900',
+  link: 'text-green-700 underline-offset-4 hover:underline',
+} as const;
+
+const sizes = {
+  md: 'min-h-11 px-5 text-[0.9375rem]',
+  lg: 'min-h-12 px-7 text-base',
+} as const;
+
+const classes = [
+  'inline-flex items-center justify-center gap-2 rounded-md font-semibold whitespace-nowrap transition-colors',
+  variant === 'link' ? 'min-h-11' : sizes[size],
+  variants[variant],
+  className,
+];
+---
+
+{href ? (
+  <a href={href} class:list={classes} {...rest}>
+    <slot />
+    {icon && <Icon name={icon} class="size-4" />}
+  </a>
+) : (
+  <button type={type} class:list={classes} {...(rest as HTMLAttributes<'button'>)}>
+    <slot />
+    {icon && <Icon name={icon} class="size-4" />}
+  </button>
+)}

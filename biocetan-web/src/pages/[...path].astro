@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Stub from '../views/_Stub.astro';
+import Styleguide from '../views/_Styleguide.astro';
+import { useTranslations } from '../i18n';
+import { defaultLocale, locales, type Locale } from '../i18n/config';
+import { legalNav, pages, type PageId } from '../i18n/routes';
+
+/**
+ * One route generates every page in every locale (see src/i18n/routes.ts).
+ * A page's content is src/views/<Id>.astro (Home.astro, Products.astro, …); pages without
+ * a view yet fall back to _Stub.astro. Views render only the <main> content; the layout
+ * (header, footer, meta, hreflang) is added here.
+ */
+export function getStaticPaths() {
+  const paths = locales.flatMap((locale) =>
+    pages.map((page) => {
+      const path = [locale === defaultLocale ? '' : locale, page.slug].filter(Boolean).join('/');
+      return {
+        params: { path: path || undefined },
+        props: { locale, pageId: page.id as PageId, styleguide: false },
+      };
+    }),
+  );
+
+  // Design-token / component preview, only served by the dev server.
+  if (import.meta.env.DEV) {
+    paths.push({
+      params: { path: 'styleguide' },
+      props: { locale: defaultLocale, pageId: 'home' as PageId, styleguide: true },
+    });
+  }
+  return paths;
+}
+
+const { locale, pageId, styleguide } = Astro.props as {
+  locale: Locale;
+  pageId: PageId;
+  styleguide: boolean;
+};
+const t = useTranslations(locale);
+
+const isLegal = (legalNav as readonly PageId[]).includes(pageId);
+const viewName = isLegal ? 'Legal' : pageId.charAt(0).toUpperCase() + pageId.slice(1);
+const views = import.meta.glob<{ default: typeof Stub }>('../views/[!_]*.astro', { eager: true });
+const View = views[`../views/${viewName}.astro`]?.default ?? Stub;
+---
+
+{styleguide ? (
+  <BaseLayout locale="en" title="Styleguide" description="Design tokens and components" noindex>
+    <Styleguide />
+  </BaseLayout>
+) : (
+  <BaseLayout
+    locale={locale}
+    pageId={pageId}
+    title={t(`pages.${pageId}.metaTitle`)}
+    description={t(`pages.${pageId}.metaDescription`)}
+  >
+    <View locale={locale} pageId={pageId} />
+  </BaseLayout>
+)}

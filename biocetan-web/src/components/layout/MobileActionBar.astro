@@ -1,0 +1,35 @@
+---
+import Icon from '../ui/Icon.astro';
+import { site } from '../../config/site';
+import { useTranslations } from '../../i18n';
+import { pathFor } from '../../i18n/routes';
+import type { Locale } from '../../i18n/config';
+
+/** Sticky Call · Email · Quote bar on phones (plan §4.3). BaseLayout reserves space for it. */
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const item = 'flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs font-semibold';
+---
+
+<nav
+  aria-label={t('a11y.quickContact')}
+  class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-line bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_12px_rgb(0_39_70/0.08)] md:hidden"
+>
+  <a href={`tel:${site.phone.href}`} class:list={[item, 'text-navy-900']}>
+    <Icon name="phone" />
+    {t('a11y.call')}
+  </a>
+  <a href={`mailto:${site.email}`} class:list={[item, 'text-navy-900']}>
+    <Icon name="mail" />
+    {t('a11y.email')}
+  </a>
+  <a href={pathFor('contact', locale)} class:list={[item, 'bg-green-600 text-white']}>
+    <Icon name="arrow-right" />
+    {t('a11y.quoteShort')}
+  </a>
+</nav>

@@ -1,0 +1,8 @@
+# Local secrets for `npm run dev:full` (wrangler pages dev). Copy to .dev.vars — never commit it.
+# Cloudflare's public Turnstile TEST secret (always passes). Use the real secret in production.
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+# Point at the local mock (node scripts/mock-resend.mjs). In production use the real Resend key and remove RESEND_API_URL.
+RESEND_API_KEY=re_local_test
+RESEND_API_URL=http://127.0.0.1:8899
+CONTACT_FROM=BIOCETAN Website <no-reply@biocetan.ro>
+CONTACT_TO=office@biocetan.ro

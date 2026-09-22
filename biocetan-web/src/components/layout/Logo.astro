@@ -1,0 +1,31 @@
+---
+/**
+ * PLACEHOLDER wordmark. The client has not supplied the vector logo yet (plan §10, §11 Q2).
+ * When it arrives, replace the markup below with the SVG (colour + white versions) and keep
+ * the `variant` prop; nothing else needs to change.
+ */
+interface Props {
+  variant?: 'color' | 'white';
+  class?: string;
+}
+
+const { variant = 'color', class: className } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-flex items-baseline font-heading text-[1.75rem] leading-none font-extrabold tracking-tight italic',
+    className,
+  ]}
+>
+  <span class={variant === 'white' ? 'text-green-300' : 'text-green-600'}>BIO</span>
+  <span class={variant === 'white' ? 'text-white' : 'text-logo-blue'}>CETAN</span>
+  <sup
+    class:list={[
+      'ml-0.5 self-start text-[0.5em] not-italic',
+      variant === 'white' ? 'text-white' : 'text-logo-blue',
+    ]}
+  >
+    ®
+  </sup>
+</span>

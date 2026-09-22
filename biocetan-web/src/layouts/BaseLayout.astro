@@ -1,0 +1,87 @@
+---
+import '@fontsource-variable/montserrat';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/caveat';
+import '../styles/global.css';
+
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import MobileActionBar from '../components/layout/MobileActionBar.astro';
+import { useTranslations } from '../i18n';
+import { locales, localeMeta, defaultLocale, type Locale } from '../i18n/config';
+import { pathFor, type PageId } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  /** Set for real pages: drives canonical, hreflang and the active nav item. */
+  pageId?: PageId;
+  /** Unsuffixed page title; " | BIOCETAN" is appended. */
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+
+const { locale, pageId, title, description, noindex = false } = Astro.props;
+const t = useTranslations(locale);
+
+const fullTitle = `${title} | ${t('meta.siteName')}`;
+const url = (path: string) => new URL(path, Astro.site).href;
+
+// Indexing is opt-in per environment so preview/staging builds never leak into search.
+const allowIndexing = import.meta.env.PUBLIC_ALLOW_INDEXING === 'true' && !noindex;
+
+const canonical = pageId ? url(pathFor(pageId, locale)) : undefined;
+const alternates = pageId
+  ? locales.map((l) => ({ hreflang: localeMeta[l].hreflang, href: url(pathFor(pageId, l)) }))
+  : [];
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={allowIndexing ? 'index, follow' : 'noindex, nofollow'} />
+    <meta name="theme-color" content="#002746" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+    ))}
+    {pageId && (
+      <link rel="alternate" hreflang="x-default" href={url(pathFor(pageId, defaultLocale))} />
+    )}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={t('meta.siteName')} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={localeMeta[locale].ogLocale} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {locales
+      .filter((l) => l !== locale)
+      .map((l) => (
+        <meta property="og:locale:alternate" content={localeMeta[l].ogLocale} />
+      ))}
+    <!-- TODO Phase 5: og:image / twitter:image (1200×630) once real photography exists. -->
+  </head>
+  <body class="flex min-h-dvh flex-col pb-14 md:pb-0">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-md focus:bg-navy-900 focus:px-4 focus:py-3 focus:font-semibold focus:text-white"
+    >
+      {t('a11y.skip')}
+    </a>
+    <Header locale={locale} pageId={pageId} />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <MobileActionBar locale={locale} />
+  </body>
+</html>

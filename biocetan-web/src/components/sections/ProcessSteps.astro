@@ -1,0 +1,31 @@
+---
+/** Numbered steps: a horizontal rail on desktop, a vertical timeline on mobile. */
+interface Props {
+  steps: { title: string; text: string }[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="grid gap-8 lg:grid-flow-col lg:auto-cols-fr lg:gap-6">
+  {steps.map((step, index) => (
+    <li class="relative flex gap-4 lg:block">
+      <span
+        aria-hidden="true"
+        class="relative z-10 flex size-11 shrink-0 items-center justify-center rounded-full bg-green-600 font-heading text-lg font-extrabold text-white"
+      >
+        {index + 1}
+      </span>
+      {index < steps.length - 1 && (
+        <span
+          aria-hidden="true"
+          class="absolute top-11 left-[1.3rem] h-[calc(100%+2rem-2.75rem)] w-0.5 bg-green-400/50 lg:top-[1.3rem] lg:left-11 lg:h-0.5 lg:w-[calc(100%-2.75rem+1.5rem)]"
+        />
+      )}
+      <div class="lg:mt-4">
+        <h3 class="font-heading text-lg font-bold text-navy-900">{step.title}</h3>
+        <p class="mt-1 text-muted">{step.text}</p>
+      </div>
+    </li>
+  ))}
+</ol>

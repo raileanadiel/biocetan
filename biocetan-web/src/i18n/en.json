@@ -1,0 +1,452 @@
+{
+  "meta": {
+    "siteName": "BIOCETAN",
+    "tagline": "Vegetable Chemistry for a Cleaner Tomorrow",
+    "defaultDescription": "Custom vegetable methyl esters (RME, SFME, SME), toll manufacturing and custom formulation from Săcueni, Romania. Bulk and IBC supply across Europe."
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "services": "Services",
+    "applications": "Applications",
+    "technology": "Technology",
+    "quality": "Quality",
+    "facility": "Facility & Logistics",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "cta": {
+    "quote": "Request a Quote",
+    "experts": "Talk to our experts",
+    "band": {
+      "title": "Let's turn your requirements into reality",
+      "text": "Tell us about your feedstock, specification and volume. Our technical team will evaluate your project and propose the best solution."
+    }
+  },
+  "a11y": {
+    "skip": "Skip to main content",
+    "mainNav": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "breadcrumb": "Breadcrumb",
+    "home": "BIOCETAN — home",
+    "quickContact": "Quick contact",
+    "call": "Call",
+    "email": "Email",
+    "quoteShort": "Quote"
+  },
+  "footer": {
+    "quickLinks": "Quick links",
+    "contact": "Contact",
+    "address": "Str. Letea Mare nr. 44, Oraș Săcueni, Bihor County, Romania",
+    "nearBorder": "Near the Hungarian border",
+    "hours": "Monday – Friday, 08:00 – 17:00 (EET)",
+    "madeIn": "Made in Europe",
+    "madeInSub": "for a sustainable industry",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies",
+    "cui": "CUI",
+    "regCom": "Reg. Com.",
+    "shareCapital": "Share capital"
+  },
+  "pages": {
+    "home": {
+      "title": "Custom Vegetable Methyl Esters",
+      "accent": "Made to order.",
+      "lead": "Your feedstock. Your specification. Your product. Flexible European manufacturing of vegetable methyl esters and liquid formulations.",
+      "metaTitle": "Custom Vegetable Methyl Esters, Made to Order",
+      "metaDescription": "Custom vegetable methyl esters (RME, SFME, SME), toll manufacturing and custom formulation from Săcueni, Romania. Bulk and IBC supply across Europe."
+    },
+    "products": {
+      "title": "Vegetable Methyl Esters",
+      "accent": "RME · SFME · SME · Custom",
+      "lead": "Rapeseed, sunflower, soybean and custom esters, manufactured to your specification and supplied in bulk or IBC.",
+      "metaTitle": "Vegetable Methyl Esters: RME, SFME, SME and Custom Esters",
+      "metaDescription": "RME, SFME, SME and custom vegetable methyl esters manufactured to your specification. Certificate of analysis per batch, bulk and IBC supply."
+    },
+    "services": {
+      "title": "Manufacturing Services",
+      "accent": "Made to order or toll.",
+      "lead": "Choose how we work together: we source and process the oil, you supply it, or we develop the product with you.",
+      "metaTitle": "Made-to-Order, Toll Manufacturing and Custom Formulation",
+      "metaDescription": "Made-to-order and toll manufacturing of vegetable methyl esters, custom formulation and pilot batches in Săcueni, Romania."
+    },
+    "applications": {
+      "title": "Applications",
+      "accent": "By industry.",
+      "lead": "Where vegetable methyl esters are used, from agrochemical carriers to metalworking fluids, and how we adapt them.",
+      "metaTitle": "Applications of Vegetable Methyl Esters by Industry",
+      "metaDescription": "Vegetable methyl esters for agrochemicals, coatings, lubricants, metalworking fluids, industrial cleaners and polymers."
+    },
+    "technology": {
+      "title": "Our Technology",
+      "accent": "",
+      "lead": "How we convert vegetable oils into consistent, high-quality esters.",
+      "metaTitle": "Process Technology for Vegetable Methyl Esters",
+      "metaDescription": "The process technology behind BIOCETAN vegetable methyl esters."
+    },
+    "quality": {
+      "title": "Quality",
+      "accent": "You can trust.",
+      "lead": "In-house laboratory analysis and batch documentation to meet your specification.",
+      "metaTitle": "Quality Control and Laboratory Analysis",
+      "metaDescription": "In-house laboratory analysis, standardised methods and batch documentation for BIOCETAN vegetable methyl esters."
+    },
+    "facility": {
+      "title": "Facility & Logistics",
+      "accent": "Săcueni, Romania.",
+      "lead": "Production, storage and loading in Bihor County, near the Hungarian border.",
+      "metaTitle": "Facility and Logistics in Săcueni, Romania",
+      "metaDescription": "Two production lines, four 15-ton process vessels, in-house laboratory and bulk or IBC loading in Săcueni, near the Hungarian border."
+    },
+    "about": {
+      "title": "About BIOCETAN",
+      "accent": "",
+      "lead": "A Romanian producer of vegetable esters and custom liquid formulations.",
+      "metaTitle": "About BIOCETAN",
+      "metaDescription": "BIOCETAN S.R.L. produces vegetable methyl esters and custom liquid formulations in Săcueni, Bihor County, Romania."
+    },
+    "contact": {
+      "title": "Request a Quote",
+      "accent": "",
+      "lead": "Tell us about your project and our team will get back to you.",
+      "metaTitle": "Request a Quote or Contact BIOCETAN",
+      "metaDescription": "Contact BIOCETAN in Săcueni, Romania. Request a quote for vegetable methyl esters, toll manufacturing or custom formulation."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "accent": "",
+      "lead": "How BIOCETAN S.R.L. handles your personal data.",
+      "metaTitle": "Privacy Policy",
+      "metaDescription": "How BIOCETAN S.R.L. collects and uses personal data."
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "accent": "",
+      "lead": "The terms that apply to your use of this website.",
+      "metaTitle": "Terms of Use",
+      "metaDescription": "Terms of use for the BIOCETAN website."
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "accent": "",
+      "lead": "Which cookies this website uses, and why.",
+      "metaTitle": "Cookie Policy",
+      "metaDescription": "The cookies used on the BIOCETAN website."
+    }
+  },
+  "stub": {
+    "notice": "Scaffold page. The final content for this page is built in a later phase."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "lead": "The page you are looking for does not exist or has moved.",
+    "home": "Back to the home page"
+  },
+  "form": {
+    "required": "* Required fields",
+    "fields": {
+      "name": "Full name",
+      "company": "Company name",
+      "email": "Email",
+      "product": "Product / service of interest",
+      "message": "Your message / project details",
+      "phone": "Phone",
+      "country": "Country",
+      "industry": "Industry / application",
+      "volume": "Estimated volume",
+      "volumeUnit": "Unit",
+      "files": "Attach files"
+    },
+    "placeholders": {
+      "name": "Your full name",
+      "company": "Your company",
+      "email": "you@company.com",
+      "message": "Please describe your requirements, specification, application and any additional information.",
+      "phone": "+40 …",
+      "volume": "e.g. 20"
+    },
+    "select": "Select…",
+    "hints": {
+      "files": "PDF, DOC(X), XLS(X), JPG or PNG. Up to 3 files, max. 10 MB in total."
+    },
+    "consent": "I agree that BIOCETAN may use my data to respond to my inquiry.",
+    "privacyLink": "Privacy Policy",
+    "details": "Add more details (optional)",
+    "detailsHint": "Phone, country, industry, volume and attachments help us reply faster.",
+    "submit": "Send request",
+    "sending": "Sending…",
+    "verifying": "Verifying…",
+    "options": {
+      "product": {
+        "rme": "RME (rapeseed methyl ester)",
+        "sfme": "SFME (sunflower methyl ester)",
+        "sme": "SME (soybean methyl ester)",
+        "custom-ester": "Custom vegetable methyl ester",
+        "custom-formulation": "Custom formulation",
+        "toll": "Toll manufacturing",
+        "pilot": "Pilot batch / R&D",
+        "logistics": "Logistics / packaging",
+        "documentation": "Documentation (CoA, SDS, TDS)",
+        "visit": "Site visit",
+        "other": "Other"
+      },
+      "industry": {
+        "agrochemicals": "Agrochemicals",
+        "coatings": "Coatings, paints & inks",
+        "lubricants": "Lubricants",
+        "metalworking": "Metalworking fluids",
+        "cleaners": "Industrial cleaners & degreasers",
+        "polymers": "Polymers & plastics",
+        "chemicals": "Industrial chemicals",
+        "soil": "Soil stabilisation",
+        "other": "Other"
+      },
+      "unit": {
+        "t-month": "t / month",
+        "t-year": "t / year",
+        "one-off": "one-off"
+      }
+    },
+    "errors": {
+      "required": "This field is required.",
+      "email": "Enter a valid email address.",
+      "tooShort": "Please enter at least {min} characters.",
+      "tooLong": "This value is too long.",
+      "invalid": "Please check this value.",
+      "consent": "Please confirm to continue.",
+      "fileCount": "You can attach up to 3 files.",
+      "fileSize": "Attachments must not exceed 10 MB in total.",
+      "fileType": "Only PDF, DOC(X), XLS(X), JPG and PNG files are accepted."
+    },
+    "status": {
+      "successTitle": "Thank you — your request has been sent.",
+      "successText": "We have received your request and will get back to you shortly. A confirmation was sent to {email}.",
+      "another": "Send another request",
+      "validation": "Please correct the highlighted fields.",
+      "captcha": "We could not verify that you are human. Please try again.",
+      "delivery": "Sorry, we could not send your request. Please email us at office@biocetan.ro or call +40 741 039 292.",
+      "config": "Sorry, the form is temporarily unavailable. Please email us at office@biocetan.ro or call +40 741 039 292.",
+      "origin": "Sorry, we could not send your request. Please email us at office@biocetan.ro or call +40 741 039 292.",
+      "invalid": "Something was wrong with the submitted data. Please check the form and try again.",
+      "network": "Network error. Please check your connection and try again."
+    },
+    "noscript": "JavaScript is required to send this form. Please email us at office@biocetan.ro or call +40 741 039 292."
+  },
+  "email": {
+    "autoreply": {
+      "subject": "We received your request — BIOCETAN",
+      "greeting": "Dear {name},",
+      "intro": "Thank you for contacting BIOCETAN. We have received your request and our team will get back to you shortly. This is a summary of what you sent us:",
+      "product": "Product / service",
+      "message": "Your message",
+      "files": "Attachments",
+      "closing": "If you would like to add anything, simply reply to this email. Kind regards, the BIOCETAN team."
+    }
+  },
+  "contact": {
+    "infoTitle": "Contact information",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "hours": "Opening hours",
+    "openMaps": "Open in Google Maps",
+    "formTitle": "Send us your request",
+    "formIntro": "The more detail you give us, the faster and more precisely we can quote.",
+    "checklistTitle": "What to send for a fast quote",
+    "checklist": {
+      "a": "The product or feedstock you need",
+      "b": "Estimated volume and frequency",
+      "c": "Your specification, or attach the technical data sheet",
+      "d": "Delivery location and packaging (bulk or IBC)",
+      "e": "Your planned timing"
+    },
+    "visitTitle": "Visit our facility",
+    "visitText": "We are happy to show you the site. Choose “Site visit” in the form and tell us when it suits you."
+  },
+  "home": {
+    "hero": {
+      "explore": "Explore products",
+      "script": "Real Chemistry. Real Solutions.",
+      "point": {
+        "a": "Renewable vegetable feedstocks",
+        "b": "Made to your specification",
+        "c": "Made-to-order and toll manufacturing",
+        "d": "Bulk and IBC supply across Europe"
+      }
+    },
+    "proof": {
+      "a": {
+        "value": "60 t/day",
+        "label": "Production capacity (20 t per 8-hour shift)"
+      },
+      "b": {
+        "value": "2",
+        "label": "Independent production lines"
+      },
+      "c": {
+        "value": "4 × 15 t",
+        "label": "Process vessels for separation and formulation"
+      },
+      "d": {
+        "value": "In-house",
+        "label": "Laboratory analysis and batch verification"
+      }
+    },
+    "ways": {
+      "title": "Three ways to work with us",
+      "lead": "Your feedstock. Your specification. Our manufacturing. Choose the model that fits your project.",
+      "a": {
+        "title": "Made-to-order",
+        "text": "You define the product and specification. We source the vegetable oil and manage the whole production process."
+      },
+      "b": {
+        "title": "Toll manufacturing",
+        "text": "You supply the raw material. We convert it at our facility to your specification, with batch traceability and confidentiality."
+      },
+      "c": {
+        "title": "Custom formulation",
+        "text": "We develop the right ester or formulation with you, from pilot batch to industrial scale."
+      },
+      "more": "Explore our services"
+    },
+    "products": {
+      "title": "Vegetable methyl esters",
+      "lead": "Different feedstocks, multiple possibilities. Every product is made to your specification.",
+      "rme": {
+        "name": "RME",
+        "full": "Rapeseed methyl ester",
+        "text": "Methyl ester from rapeseed oil for industrial and technical applications."
+      },
+      "sfme": {
+        "name": "SFME",
+        "full": "Sunflower methyl ester",
+        "text": "Methyl ester from sunflower oil for industrial and technical applications."
+      },
+      "sme": {
+        "name": "SME",
+        "full": "Soybean methyl ester",
+        "text": "Methyl ester from soybean oil for industrial and technical applications."
+      },
+      "custom": {
+        "name": "Custom esters",
+        "full": "Other vegetable methyl esters",
+        "text": "Tailored to your feedstock, including high-oleic and specialty oils, on request."
+      },
+      "learn": "Learn more",
+      "all": "See all products"
+    },
+    "process": {
+      "title": "From requirement to delivery",
+      "lead": "A simple path from your requirement to your product.",
+      "a": {
+        "title": "Your requirement",
+        "text": "Feedstock, specification and application."
+      },
+      "b": {
+        "title": "Pilot batch",
+        "text": "Formulation and testing before scale-up, on request."
+      },
+      "c": {
+        "title": "Production",
+        "text": "On dedicated lines, from pilot to industrial scale."
+      },
+      "d": {
+        "title": "Quality control",
+        "text": "In-house analysis and batch verification."
+      },
+      "e": {
+        "title": "Delivery",
+        "text": "Bulk tanker, IBC or custom packaging."
+      }
+    },
+    "applications": {
+      "title": "Applications",
+      "lead": "One platform, many industries.",
+      "agro": {
+        "title": "Agrochemicals",
+        "text": "Carrier component for agrochemical formulations."
+      },
+      "coatings": {
+        "title": "Coatings, paints & inks",
+        "text": "Solvent and reactive component."
+      },
+      "lubricants": {
+        "title": "Lubricants & metalworking fluids",
+        "text": "Base component and performance additive."
+      },
+      "cleaners": {
+        "title": "Industrial cleaners",
+        "text": "Degreasing and cleaning formulations."
+      },
+      "polymers": {
+        "title": "Polymers & plastics",
+        "text": "Plasticiser and processing aid."
+      },
+      "chemicals": {
+        "title": "Industrial chemicals",
+        "text": "Intermediate for a variety of chemical products."
+      },
+      "all": "Explore applications"
+    },
+    "quality": {
+      "title": "Quality in every batch",
+      "lead": "Every batch is analysed in our in-house laboratory, and a certificate of analysis is provided for each batch.",
+      "params": {
+        "a": "Ester content",
+        "b": "Acid value",
+        "c": "Water content",
+        "d": "Density",
+        "e": "Viscosity",
+        "f": "Flash point",
+        "g": "Colour"
+      },
+      "explore": "Explore quality",
+      "docs": "Request documentation"
+    },
+    "location": {
+      "title": "Strategic location in the heart of Europe",
+      "text": "Săcueni, Bihor County, Romania: near the Hungarian border, with road access to Central and Western European markets.",
+      "marketsTitle": "We supply customers in",
+      "markets": {
+        "a": "Romania",
+        "b": "Hungary",
+        "c": "Austria",
+        "d": "Czech Republic",
+        "e": "Slovakia",
+        "f": "Poland",
+        "g": "Germany",
+        "h": "and beyond"
+      },
+      "cta": "Facility & logistics"
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "q1": "What is the difference between made-to-order and toll manufacturing?",
+      "a1": "In made-to-order production we source the vegetable oil and manage the whole process to your specification. In toll manufacturing you supply the raw material and we convert it at our facility, with batch traceability and confidentiality.",
+      "q2": "Which feedstocks can you process?",
+      "a2": "Rapeseed, sunflower and soybean oil are our standard feedstocks. Other vegetable oils, including high-oleic and specialty oils, are possible on request.",
+      "q3": "What batch sizes are possible?",
+      "a3": "Typical batches are 10–20 tonnes, and our two production lines can produce up to 60 tonnes per day. Pilot batches are available on request.",
+      "q4": "How is the product supplied?",
+      "a4": "In bulk by road tanker or in 1,000 L IBCs. Other packaging can be arranged on request.",
+      "q5": "Which analyses do you carry out, and which documents do you provide?",
+      "a5": "Each batch is analysed in our in-house laboratory: ester content, acid value, water content, density, viscosity, flash point, colour and other parameters as your specification requires. A certificate of analysis is provided for each batch, and safety and technical data sheets are available on request.",
+      "q6": "Can you develop a custom formulation?",
+      "a6": "Yes. We blend vegetable methyl esters with additives to your specification, test them in our laboratory and scale up from pilot batches to industrial production.",
+      "q7": "Where are you located and which markets do you supply?",
+      "a7": "We are in Săcueni, Bihor County, Romania, near the Hungarian border. We supply customers in Romania, Hungary, Austria, the Czech Republic, Slovakia, Poland, Germany and beyond.",
+      "q8": "What should I send to receive a quote?",
+      "a8": "The product or feedstock you need, the estimated volume, your specification (or technical data sheet), the delivery location and your timing. Use the form below or email us."
+    },
+    "final": {
+      "title": "Request a quote",
+      "text": "Tell us about your project. Our technical team will evaluate your requirements and get back to you.",
+      "moreDetails": "Need to add specifications or files?",
+      "moreLink": "Use the detailed form"
+    }
+  }
+}

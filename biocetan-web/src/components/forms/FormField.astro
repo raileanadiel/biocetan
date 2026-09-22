@@ -1,0 +1,103 @@
+---
+/**
+ * One labelled form control with hint + error slots. Errors are filled in by
+ * src/scripts/contact-form.ts (which finds them by `[data-field]` and `#<id>-error`).
+ */
+interface Option {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  type?: 'text' | 'email' | 'tel' | 'textarea' | 'select' | 'file';
+  required?: boolean;
+  autocomplete?: string;
+  placeholder?: string;
+  hint?: string;
+  options?: Option[];
+  selectLabel?: string;
+  rows?: number;
+  maxlength?: number;
+  inputmode?: 'text' | 'decimal' | 'numeric' | 'tel' | 'email';
+  accept?: string;
+  multiple?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  name,
+  label,
+  type = 'text',
+  required = false,
+  autocomplete,
+  placeholder,
+  hint,
+  options = [],
+  selectLabel = '',
+  rows = 6,
+  maxlength,
+  inputmode,
+  accept,
+  multiple,
+  class: className,
+} = Astro.props;
+
+const describedBy = [hint && `${id}-hint`, `${id}-error`].filter(Boolean).join(' ');
+const common = {
+  id,
+  name,
+  required,
+  'aria-describedby': describedBy,
+};
+---
+
+<div data-field={name} class={className}>
+  <label for={id} class="field-label">
+    {label}
+    {required && <span aria-hidden="true"> *</span>}
+  </label>
+  {type === 'textarea' ? (
+    <textarea
+      {...common}
+      rows={rows}
+      maxlength={maxlength}
+      placeholder={placeholder}
+      class="field-control resize-y"
+    ></textarea>
+  ) : type === 'select' ? (
+    <select {...common} autocomplete={autocomplete} class="field-control">
+      <option value="">{selectLabel}</option>
+      {options.map((o) => (
+        <option value={o.value}>{o.label}</option>
+      ))}
+    </select>
+  ) : type === 'file' ? (
+    <input
+      {...common}
+      type="file"
+      accept={accept}
+      multiple={multiple}
+      class="field-control cursor-pointer p-2 text-sm file:mr-3 file:cursor-pointer file:rounded file:border-0 file:bg-mint-100 file:px-3 file:py-2 file:font-semibold file:text-navy-900"
+    />
+  ) : (
+    <input
+      {...common}
+      type={type}
+      autocomplete={autocomplete}
+      placeholder={placeholder}
+      inputmode={inputmode}
+      maxlength={maxlength}
+      class="field-control"
+    />
+  )}
+  {hint && (
+    <p id={`${id}-hint`} class="field-hint">
+      {hint}
+    </p>
+  )}
+  <p id={`${id}-error`} class="field-error" hidden></p>
+</div>

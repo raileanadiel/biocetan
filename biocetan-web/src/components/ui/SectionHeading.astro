@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string;
+  eyebrow?: string;
+  lead?: string;
+  align?: 'left' | 'center';
+  /** Heading level. Use h2 for page sections, h3 inside a section. */
+  as?: 'h2' | 'h3';
+  class?: string;
+}
+
+const { title, eyebrow, lead, align = 'left', as: Tag = 'h2', class: className } = Astro.props;
+const center = align === 'center';
+---
+
+<div class:list={['max-w-3xl', center && 'mx-auto text-center', className]}>
+  {eyebrow && (
+    <p class="mb-2 text-sm font-bold tracking-[0.14em] text-green-700 uppercase [.on-dark_&]:text-green-300">
+      {eyebrow}
+    </p>
+  )}
+  <Tag
+    class:list={['font-extrabold tracking-tight', Tag === 'h2' ? 'text-h2 uppercase' : 'text-h3']}
+  >
+    {title}
+  </Tag>
+  <span
+    aria-hidden="true"
+    class:list={['mt-3 block h-1 w-12 rounded-full bg-green-400', center && 'mx-auto']}
+  ></span>
+  {lead && <p class="mt-4 text-lead text-muted [.on-dark_&]:text-white/80">{lead}</p>}
+</div>

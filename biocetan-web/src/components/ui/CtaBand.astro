@@ -1,0 +1,37 @@
+---
+import Button from './Button.astro';
+import Section from './Section.astro';
+import { useTranslations } from '../../i18n';
+import { pathFor } from '../../i18n/routes';
+import type { Locale } from '../../i18n/config';
+
+/** Closing band for every page: one primary CTA + one softer secondary. */
+interface Props {
+  locale: Locale;
+  title?: string;
+  text?: string;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const title = Astro.props.title ?? t('cta.band.title');
+const text = Astro.props.text ?? t('cta.band.text');
+const contactHref = pathFor('contact', locale);
+---
+
+<Section tone="forest">
+  <div class="grid items-center gap-8 lg:grid-cols-[1.4fr_1fr]">
+    <div>
+      <h2 class="text-h2 font-extrabold tracking-tight uppercase">{title}</h2>
+      <p class="mt-4 max-w-2xl text-lead text-white/85">{text}</p>
+    </div>
+    <div class="flex flex-wrap gap-3 lg:justify-end">
+      <Button href={contactHref} size="lg">
+        {t('cta.quote')}
+      </Button>
+      <Button href={contactHref} size="lg" variant="outline-light">
+        {t('cta.experts')}
+      </Button>
+    </div>
+  </div>
+</Section>

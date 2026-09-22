@@ -1,0 +1,293 @@
+---
+import PageHero from '../components/ui/PageHero.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Button from '../components/ui/Button.astro';
+import Icon, { type IconName } from '../components/ui/Icon.astro';
+import ScriptTagline from '../components/ui/ScriptTagline.astro';
+import ProcessSteps from '../components/sections/ProcessSteps.astro';
+import Faq from '../components/sections/Faq.astro';
+import ContactForm from '../components/forms/ContactForm.astro';
+import { site } from '../config/site';
+import { useTranslations } from '../i18n';
+import { pathFor, type PageId } from '../i18n/routes';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+  pageId: PageId;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const href = (id: PageId) => pathFor(id, locale);
+const contactHref = href('contact');
+
+const heroPoints = ['a', 'b', 'c', 'd'] as const;
+
+const proof = (
+  [
+    ['a', 'factory'],
+    ['b', 'settings'],
+    ['c', 'layers'],
+    ['d', 'flask'],
+  ] as const
+).map(([key, icon]) => ({
+  icon: icon as IconName,
+  value: t(`home.proof.${key}.value`),
+  label: t(`home.proof.${key}.label`),
+}));
+
+const ways = (
+  [
+    ['a', 'leaf'],
+    ['b', 'factory'],
+    ['c', 'flask'],
+  ] as const
+).map(([key, icon]) => ({
+  icon: icon as IconName,
+  title: t(`home.ways.${key}.title`),
+  text: t(`home.ways.${key}.text`),
+}));
+
+const products = (
+  [
+    ['rme', 'rme'],
+    ['sfme', 'sfme'],
+    ['sme', 'sme'],
+    ['custom', 'custom-esters'],
+  ] as const
+).map(([key, anchor]) => ({
+  name: t(`home.products.${key}.name`),
+  full: t(`home.products.${key}.full`),
+  text: t(`home.products.${key}.text`),
+  href: `${href('products')}#${anchor}`,
+}));
+
+const steps = (['a', 'b', 'c', 'd', 'e'] as const).map((key) => ({
+  title: t(`home.process.${key}.title`),
+  text: t(`home.process.${key}.text`),
+}));
+
+const applications = (
+  [
+    ['agro', 'sprout'],
+    ['coatings', 'layers'],
+    ['lubricants', 'settings'],
+    ['cleaners', 'droplet'],
+    ['polymers', 'package'],
+    ['chemicals', 'flask'],
+  ] as const
+).map(([key, icon]) => ({
+  icon: icon as IconName,
+  title: t(`home.applications.${key}.title`),
+  text: t(`home.applications.${key}.text`),
+}));
+
+const qualityParams = (['a', 'b', 'c', 'd', 'e', 'f', 'g'] as const).map((key) =>
+  t(`home.quality.params.${key}`),
+);
+const markets = (['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] as const).map((key) =>
+  t(`home.location.markets.${key}`),
+);
+const faq = (['1', '2', '3', '4', '5', '6', '7', '8'] as const).map((n) => ({
+  q: t(`home.faq.q${n}`),
+  a: t(`home.faq.a${n}`),
+}));
+---
+
+<PageHero
+  locale={locale}
+  pageId="home"
+  eyebrow={t('meta.tagline')}
+  title={t('pages.home.title')}
+  accent={t('pages.home.accent')}
+  lead={t('pages.home.lead')}
+>
+  <Fragment slot="actions">
+    <Button href={contactHref} size="lg">
+      {t('cta.quote')}
+    </Button>
+    <Button href={href('products')} size="lg" variant="outline-light">
+      {t('home.hero.explore')}
+    </Button>
+  </Fragment>
+  <div slot="aside" class="ml-auto max-w-sm">
+    <ul class="space-y-3 rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-sm">
+      {heroPoints.map((key) => (
+        <li class="flex items-start gap-3 font-semibold">
+          <Icon name="check" class="mt-0.5 size-5 rounded-full bg-green-400 p-1 text-navy-900" />
+          {t(`home.hero.point.${key}`)}
+        </li>
+      ))}
+    </ul>
+    <ScriptTagline>{t('home.hero.script')}</ScriptTagline>
+  </div>
+</PageHero>
+
+<Section compact class="border-b border-line">
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {proof.map((item) => (
+      <li class="flex items-start gap-4">
+        <Icon name={item.icon} class="size-9 text-green-700" />
+        <div>
+          <p class="font-heading text-2xl font-extrabold text-navy-900">{item.value}</p>
+          <p class="text-sm text-muted">{item.label}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<Section tone="mint" id="ways">
+  <SectionHeading title={t('home.ways.title')} lead={t('home.ways.lead')} />
+  <div class="mt-10 grid gap-6 md:grid-cols-3">
+    {ways.map((way) => (
+      <article class="rounded-lg border border-line bg-white p-6 shadow-xs">
+        <span class="flex size-12 items-center justify-center rounded-full bg-mint-100 text-green-700">
+          <Icon name={way.icon} class="size-6" />
+        </span>
+        <h3 class="mt-4 font-heading text-h3 font-bold text-navy-900">{way.title}</h3>
+        <p class="mt-2 text-muted">{way.text}</p>
+      </article>
+    ))}
+  </div>
+  <p class="mt-8">
+    <Button href={href('services')} variant="link">
+      {t('home.ways.more')}
+    </Button>
+  </p>
+</Section>
+
+<Section id="products">
+  <SectionHeading title={t('home.products.title')} lead={t('home.products.lead')} />
+  <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {products.map((product) => (
+      <a
+        href={product.href}
+        class="group flex flex-col rounded-lg border border-line bg-white p-6 transition-shadow hover:shadow-md"
+      >
+        <span class="font-heading text-3xl font-extrabold text-green-700">{product.name}</span>
+        <span class="mt-1 font-semibold text-navy-900">{product.full}</span>
+        <span class="mt-3 flex-1 text-muted">{product.text}</span>
+        <span class="mt-5 inline-flex items-center gap-2 font-semibold text-green-700 group-hover:underline">
+          {t('home.products.learn')}
+          <Icon name="arrow-right" class="size-4" />
+        </span>
+      </a>
+    ))}
+  </div>
+  <p class="mt-8">
+    <Button href={href('products')} variant="link">
+      {t('home.products.all')}
+    </Button>
+  </p>
+</Section>
+
+<Section tone="mint" id="process">
+  <SectionHeading title={t('home.process.title')} lead={t('home.process.lead')} />
+  <div class="mt-12">
+    <ProcessSteps steps={steps} />
+  </div>
+</Section>
+
+<Section id="applications">
+  <SectionHeading title={t('home.applications.title')} lead={t('home.applications.lead')} />
+  <ul class="mt-10 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+    {applications.map((app) => (
+      <li class="flex gap-4">
+        <span class="flex size-12 shrink-0 items-center justify-center rounded-full bg-mint-100 text-green-700">
+          <Icon name={app.icon} class="size-6" />
+        </span>
+        <div>
+          <h3 class="font-heading text-lg font-bold text-navy-900">{app.title}</h3>
+          <p class="text-muted">{app.text}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+  <p class="mt-8">
+    <Button href={href('applications')} variant="link">
+      {t('home.applications.all')}
+    </Button>
+  </p>
+</Section>
+
+<Section tone="navy" id="quality">
+  <div class="grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <SectionHeading title={t('home.quality.title')} lead={t('home.quality.lead')} />
+      <div class="mt-8 flex flex-wrap gap-3">
+        <Button href={href('quality')} variant="outline-light">
+          {t('home.quality.explore')}
+        </Button>
+        <Button href={`${contactHref}?product=documentation`} icon="file-text">
+          {t('home.quality.docs')}
+        </Button>
+      </div>
+    </div>
+    <ul class="grid gap-3 sm:grid-cols-2">
+      {qualityParams.map((param) => (
+        <li class="flex items-center gap-3 rounded-md border border-white/15 bg-white/5 px-4 py-3">
+          <Icon name="check" class="size-5 rounded-full bg-green-400 p-1 text-navy-900" />
+          {param}
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>
+
+<Section tone="mint" id="location">
+  <div class="grid items-start gap-10 lg:grid-cols-2">
+    <div>
+      <SectionHeading title={t('home.location.title')} lead={t('home.location.text')} />
+      <p class="mt-8">
+        <Button href={href('facility')} icon="map-pin">
+          {t('home.location.cta')}
+        </Button>
+      </p>
+    </div>
+    <div>
+      <h3 class="font-heading text-lg font-bold text-navy-900">
+        {t('home.location.marketsTitle')}
+      </h3>
+      <ul class="mt-4 flex flex-wrap gap-2">
+        {markets.map((market) => (
+          <li class="rounded-full border border-line bg-white px-4 py-2 text-sm font-semibold text-navy-900">
+            {market}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</Section>
+
+<Section id="faq">
+  <SectionHeading title={t('home.faq.title')} />
+  <div class="mt-10 max-w-3xl">
+    <Faq items={faq} />
+  </div>
+</Section>
+
+<Section tone="forest" id="quote">
+  <div class="grid items-start gap-10 lg:grid-cols-[1fr_1.2fr]">
+    <div>
+      <SectionHeading title={t('home.final.title')} lead={t('home.final.text')} />
+      <p class="mt-8 flex items-center gap-3 text-white/90">
+        <Icon name="phone" class="size-5 text-green-300" />
+        <a href={`tel:${site.phone.href}`} class="font-semibold underline-offset-4 hover:underline">
+          {site.phone.display}
+        </a>
+      </p>
+      <p class="mt-3 flex items-center gap-3 text-white/90">
+        <Icon name="mail" class="size-5 text-green-300" />
+        <a href={`mailto:${site.email}`} class="font-semibold underline-offset-4 hover:underline">
+          {site.email}
+        </a>
+      </p>
+    </div>
+    <div class="rounded-xl bg-white p-6 text-ink shadow-lg md:p-8">
+      <ContactForm locale={locale} variant="quick" idPrefix="home" />
+    </div>
+  </div>
+</Section>

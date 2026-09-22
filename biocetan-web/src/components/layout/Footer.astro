@@ -1,0 +1,135 @@
+---
+import Logo from './Logo.astro';
+import Icon from '../ui/Icon.astro';
+import { site } from '../../config/site';
+import { useTranslations } from '../../i18n';
+import { legalNav, mainNav, pathFor } from '../../i18n/routes';
+import type { Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const year = new Date().getFullYear();
+
+const links = [
+  ...mainNav.map((id) => ({ href: pathFor(id, locale), label: t(`nav.${id}`) })),
+  { href: pathFor('contact', locale), label: t('nav.contact') },
+];
+const legal = legalNav.map((id) => ({ href: pathFor(id, locale), label: t(`footer.${id}`) }));
+
+const { cui, regCom, shareCapital } = site.registration;
+const registration = [
+  cui && `${t('footer.cui')} ${cui}`,
+  regCom && `${t('footer.regCom')} ${regCom}`,
+  shareCapital && `${t('footer.shareCapital')} ${shareCapital}`,
+].filter(Boolean);
+
+// EU flag: 12 stars on a circle.
+const stars = Array.from({ length: 12 }, (_, i) => {
+  const angle = (i * 30 * Math.PI) / 180;
+  return { x: 12 + 5 * Math.sin(angle), y: 8 - 5 * Math.cos(angle) };
+});
+---
+
+<footer class="on-dark bg-navy-900 text-white">
+  <div class="container-x grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1.2fr]">
+    <div>
+      <a href={pathFor('home', locale)} aria-label={t('a11y.home')} class="inline-block">
+        <Logo variant="white" class="text-[2rem]" />
+      </a>
+      <p class="mt-4 max-w-xs text-sm text-white/80">{t('meta.tagline')}</p>
+      <div class="mt-6 inline-flex items-center gap-3 rounded-md border border-white/20 px-3 py-2">
+        <svg viewBox="0 0 24 16" class="h-6 w-9 shrink-0" aria-hidden="true">
+          <rect width="24" height="16" rx="1.5" fill="#003399" />
+          {stars.map((s) => (
+            <circle cx={s.x} cy={s.y} r="0.8" fill="#FFCC00" />
+          ))}
+        </svg>
+        <p class="text-sm leading-tight">
+          <span class="block font-semibold">{t('footer.madeIn')}</span>
+          <span class="text-white/70">{t('footer.madeInSub')}</span>
+        </p>
+      </div>
+    </div>
+
+    <nav aria-labelledby="footer-links-title">
+      <h2 id="footer-links-title" class="text-base font-bold">
+        {t('footer.quickLinks')}
+      </h2>
+      <ul class="mt-4 grid grid-cols-2 gap-x-6 gap-y-1 text-[0.9375rem]">
+        {links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="inline-flex min-h-9 items-center text-white/85 underline-offset-4 hover:text-white hover:underline"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="text-base font-bold">{t('footer.contact')}</h2>
+      <address class="mt-4 space-y-3 text-[0.9375rem] text-white/85 not-italic">
+        <p class="flex gap-3">
+          <Icon name="map-pin" class="mt-0.5 size-5 text-green-300" />
+          <span>
+            {t('footer.address')}
+            <br />
+            {t('footer.nearBorder')}
+          </span>
+        </p>
+        <p class="flex gap-3">
+          <Icon name="phone" class="mt-0.5 size-5 text-green-300" />
+          <a
+            href={`tel:${site.phone.href}`}
+            class="underline-offset-4 hover:text-white hover:underline"
+          >
+            {site.phone.display}
+          </a>
+        </p>
+        <p class="flex gap-3">
+          <Icon name="mail" class="mt-0.5 size-5 text-green-300" />
+          <a
+            href={`mailto:${site.email}`}
+            class="underline-offset-4 hover:text-white hover:underline"
+          >
+            {site.email}
+          </a>
+        </p>
+        <p class="flex gap-3">
+          <Icon name="clock" class="mt-0.5 size-5 text-green-300" />
+          <span>{t('footer.hours')}</span>
+        </p>
+      </address>
+    </div>
+  </div>
+
+  <div class="border-t border-white/15">
+    <div class="container-x flex flex-col gap-3 py-5 text-sm text-white/75 md:flex-row md:items-center md:justify-between">
+      <div>
+        <p>
+          © {year} {site.legalName} {t('footer.rights')}
+        </p>
+        {registration.length > 0 && <p class="mt-1">{registration.join(' · ')}</p>}
+      </div>
+      <ul class="flex flex-wrap gap-x-5">
+        {legal.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="inline-flex min-h-9 items-center underline-offset-4 hover:text-white hover:underline"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,71 @@
+---
+import Breadcrumb from './Breadcrumb.astro';
+import type { Locale } from '../../i18n/config';
+import type { PageId } from '../../i18n/routes';
+
+/**
+ * Inner-page hero: navy band, breadcrumb, two-tone H1 (white + green accent), lead, actions.
+ * Slots: default (extra content under the lead), `actions` (buttons), `aside` (right-hand
+ * panel, e.g. the badge list from the mockups; hidden below lg).
+ * No photo yet — real photography is a client dependency (plan §10). Add a background
+ * image here once it exists.
+ */
+interface Props {
+  locale: Locale;
+  pageId: PageId;
+  title: string;
+  /** Second line of the H1, shown in green. */
+  accent?: string;
+  eyebrow?: string;
+  lead?: string;
+}
+
+const { locale, pageId, title, accent, eyebrow, lead } = Astro.props;
+const isHome = pageId === 'home';
+const hasAside = Astro.slots.has('aside');
+const hasActions = Astro.slots.has('actions');
+---
+
+<div class="on-dark relative overflow-hidden bg-navy-900 text-white [background-image:radial-gradient(60rem_30rem_at_85%_-10%,rgb(114_175_51/0.22),transparent_60%),radial-gradient(40rem_24rem_at_-10%_110%,rgb(29_79_196/0.22),transparent_60%)]">
+  <div
+    class:list={[
+      'container-x grid gap-10 py-10 md:py-14 lg:py-20',
+      hasAside && 'lg:grid-cols-[1.25fr_0.75fr]',
+    ]}
+  >
+    <div>
+      {!isHome && <Breadcrumb locale={locale} pageId={pageId} />}
+      {eyebrow && (
+        <p
+          class:list={[
+            'text-sm font-bold tracking-[0.14em] text-green-300 uppercase',
+            !isHome && 'mt-6',
+          ]}
+        >
+          {eyebrow}
+        </p>
+      )}
+      <h1
+        class:list={[
+          'text-display font-extrabold tracking-tight uppercase',
+          eyebrow ? 'mt-3' : isHome ? 'mt-0' : 'mt-6',
+        ]}
+      >
+        {title}
+        {accent && <span class="block text-green-300">{accent}</span>}
+      </h1>
+      {lead && <p class="mt-5 max-w-2xl text-lead text-white/90">{lead}</p>}
+      <slot />
+      {hasActions && (
+        <div class="mt-8 flex flex-wrap gap-3">
+          <slot name="actions" />
+        </div>
+      )}
+    </div>
+    {hasAside && (
+      <div class="hidden lg:block">
+        <slot name="aside" />
+      </div>
+    )}
+  </div>
+</div>

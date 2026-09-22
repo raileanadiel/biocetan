@@ -1,0 +1,150 @@
+---
+import Logo from './Logo.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import { useTranslations } from '../../i18n';
+import { mainNav, pathFor, type PageId } from '../../i18n/routes';
+import type { Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+  pageId?: PageId;
+}
+
+const { locale, pageId } = Astro.props;
+const t = useTranslations(locale);
+const links = mainNav.map((id) => ({
+  id,
+  href: pathFor(id, locale),
+  label: t(`nav.${id}`),
+  current: id === pageId,
+}));
+const homeHref = pathFor('home', locale);
+const contactHref = pathFor('contact', locale);
+---
+
+<header
+  id="site-header"
+  class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur transition-shadow data-scrolled:shadow-md"
+>
+  <div class="container-x flex h-[4.5rem] items-center justify-between gap-6 nav:h-20">
+    <a href={homeHref} aria-label={t('a11y.home')} class="shrink-0">
+      <Logo />
+    </a>
+
+    <nav aria-label={t('a11y.mainNav')} class="hidden nav:block">
+      <ul class="flex items-center gap-6">
+        {links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              aria-current={link.current ? 'page' : undefined}
+              class:list={[
+                'inline-flex min-h-11 items-center border-b-2 text-[0.9375rem] font-medium whitespace-nowrap transition-colors',
+                link.current
+                  ? 'border-green-600 text-navy-900'
+                  : 'border-transparent text-ink hover:text-green-700',
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <LanguageSwitcher locale={locale} pageId={pageId} class="hidden nav:flex" />
+      <div class="hidden nav:block">
+        <Button href={contactHref}>{t('cta.quote')}</Button>
+      </div>
+      <button
+        id="menu-toggle"
+        type="button"
+        class="group inline-flex size-11 items-center justify-center rounded-md text-navy-900 hover:bg-mint-100 nav:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label={t('a11y.openMenu')}
+        data-open-label={t('a11y.openMenu')}
+        data-close-label={t('a11y.closeMenu')}
+      >
+        <Icon name="menu" class="size-6 group-aria-expanded:hidden" />
+        <Icon name="x" class="hidden size-6 group-aria-expanded:block" />
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-menu"
+    hidden
+    class="absolute inset-x-0 top-full h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line bg-white nav:hidden"
+  >
+    <nav aria-label={t('a11y.mainNav')} class="container-x py-4">
+      <ul>
+        {[{ href: homeHref, label: t('nav.home'), current: pageId === 'home' }, ...links].map(
+          (link) => (
+            <li class="border-b border-line">
+              <a
+                href={link.href}
+                aria-current={link.current ? 'page' : undefined}
+                class:list={[
+                  'flex min-h-14 items-center text-lg font-semibold',
+                  link.current ? 'text-green-700' : 'text-navy-900',
+                ]}
+              >
+                {link.label}
+              </a>
+            </li>
+          ),
+        )}
+      </ul>
+      <div class="mt-6 flex flex-wrap items-center justify-between gap-4 pb-24">
+        <Button href={contactHref} size="lg">
+          {t('cta.quote')}
+        </Button>
+        <LanguageSwitcher locale={locale} pageId={pageId} />
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('menu-toggle') as HTMLButtonElement | null;
+  const menu = document.getElementById('mobile-menu');
+
+  if (header && toggle && menu) {
+    const desktop = window.matchMedia('(min-width: 75rem)');
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute(
+        'aria-label',
+        (open ? toggle.dataset.closeLabel : toggle.dataset.openLabel) ?? '',
+      );
+      menu.hidden = !open;
+      document.documentElement.classList.toggle('overflow-hidden', open);
+    };
+
+    toggle.addEventListener('click', () =>
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true'),
+    );
+    menu.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    desktop.addEventListener('change', (event) => {
+      if (event.matches) setOpen(false);
+    });
+
+    const onScroll = () => header.toggleAttribute('data-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/ui/Section.astro';
+import Button from '../components/ui/Button.astro';
+import { useTranslations } from '../i18n';
+import { pathFor } from '../i18n/routes';
+
+// Static hosting serves one 404 for every path, so it cannot know the visitor's language.
+// It is English with a link into each locale.
+const t = useTranslations('en');
+const tRo = useTranslations('ro');
+---
+
+<BaseLayout locale="en" title={t('notFound.title')} description={t('notFound.lead')} noindex>
+  <Section>
+    <div class="max-w-2xl py-8">
+      <p class="text-sm font-bold tracking-[0.14em] text-green-700 uppercase">404</p>
+      <h1 class="mt-2 text-display font-extrabold tracking-tight uppercase">
+        {t('notFound.title')}
+      </h1>
+      <p class="mt-4 text-lead text-muted">{t('notFound.lead')}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <Button href={pathFor('home', 'en')} size="lg">
+          {t('notFound.home')}
+        </Button>
+        <Button href={pathFor('home', 'ro')} size="lg" variant="outline" lang="ro">
+          {tRo('notFound.home')}
+        </Button>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

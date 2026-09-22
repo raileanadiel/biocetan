@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+import { useTranslations } from '../../i18n';
+import { pathFor, type PageId } from '../../i18n/routes';
+import type { Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+  /** Current page; the trail is Home › current page. */
+  pageId: PageId;
+}
+
+const { locale, pageId } = Astro.props;
+const t = useTranslations(locale);
+
+const items = [
+  { label: t('nav.home'), href: pathFor('home', locale) },
+  { label: t(`pages.${pageId}.title`), href: pathFor(pageId, locale) },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    item: new URL(item.href, Astro.site).href,
+  })),
+};
+---
+
+<nav aria-label={t('a11y.breadcrumb')} class="text-sm">
+  <ol class="flex flex-wrap items-center gap-1.5 text-white/80">
+    {items.map((item, index) => {
+      const last = index === items.length - 1;
+      return (
+        <li class="flex items-center gap-1.5">
+          {last ? (
+            <span aria-current="page" class="font-semibold text-white">
+              {item.label}
+            </span>
+          ) : (
+            <a href={item.href} class="underline-offset-4 hover:underline">
+              {item.label}
+            </a>
+          )}
+          {!last && <Icon name="chevron-right" class="size-3.5 opacity-70" />}
+        </li>
+      );
+    })}
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline></script>

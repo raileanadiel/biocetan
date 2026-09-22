@@ -1,0 +1,44 @@
+{
+  "name": "biocetan-web",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "icons": "node scripts/make-icons.mjs",
+    "mock:resend": "node scripts/mock-resend.mjs",
+    "dev:full": "astro build && wrangler pages dev dist --port 8788 --compatibility-date=2026-09-01",
+    "check:placeholders": "node scripts/check-placeholders.mjs --force",
+    "build:prod": "astro build && node scripts/check-placeholders.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/caveat": "^5.3.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/montserrat": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.3",
+    "tailwindcss": "^4.3.3"
+  },
+  "allowScripts": {
+    "esbuild": true
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "prettier": "^3.9.8",
+    "prettier-plugin-astro": "^1.0.1",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.1",
+    "wrangler": "^4.135.0"
+  }
+}

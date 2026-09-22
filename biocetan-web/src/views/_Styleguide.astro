@@ -1,0 +1,151 @@
+---
+import Button from '../components/ui/Button.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import ScriptTagline from '../components/ui/ScriptTagline.astro';
+import Logo from '../components/layout/Logo.astro';
+import Icon, { type IconName } from '../components/ui/Icon.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+
+// Dev-only preview of the design tokens and primitives (served at /styleguide/ by `npm run dev`).
+const swatches = [
+  ['navy-900', 'bg-navy-900'],
+  ['navy-800', 'bg-navy-800'],
+  ['logo-blue', 'bg-logo-blue'],
+  ['green-700', 'bg-green-700'],
+  ['green-600', 'bg-green-600'],
+  ['green-400', 'bg-green-400'],
+  ['green-300', 'bg-green-300'],
+  ['forest-900', 'bg-forest-900'],
+  ['mint-50', 'bg-mint-50 border border-line'],
+  ['mint-100', 'bg-mint-100'],
+  ['line', 'bg-line'],
+  ['ink', 'bg-ink'],
+  ['muted', 'bg-muted'],
+  ['facility', 'bg-facility'],
+  ['danger', 'bg-danger'],
+];
+const icons: IconName[] = [
+  'menu',
+  'x',
+  'arrow-right',
+  'chevron-right',
+  'check',
+  'phone',
+  'mail',
+  'map-pin',
+  'clock',
+  'download',
+  'plus',
+  'minus',
+  'chevron-down',
+  'flask',
+  'factory',
+  'truck',
+  'leaf',
+  'settings',
+  'shield-check',
+  'users',
+  'file-text',
+  'droplet',
+  'sprout',
+  'layers',
+  'package',
+  'paperclip',
+];
+---
+
+<PageHero
+  locale="en"
+  pageId="home"
+  title="Styleguide"
+  accent="Tokens & components"
+  lead="Dev-only preview of the design system. Not part of the production build."
+>
+  <Fragment slot="actions">
+    <Button size="lg">Primary</Button>
+    <Button size="lg" variant="outline-light">
+      Outline light
+    </Button>
+  </Fragment>
+  <ScriptTagline slot="aside">Real Chemistry. Real Solutions.</ScriptTagline>
+</PageHero>
+
+<Section>
+  <SectionHeading
+    title="Colour"
+    lead="Run `npm run check:contrast` to verify the text/background pairs."
+  />
+  <ul class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+    {swatches.map(([name, cls]) => (
+      <li>
+        <div class:list={['h-16 rounded-md', cls]} />
+        <p class="mt-2 text-sm font-semibold">{name}</p>
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<Section tone="mint">
+  <SectionHeading title="Typography" eyebrow="Montserrat · Inter · Caveat" />
+  <div class="mt-8 space-y-4">
+    <p class="text-display font-extrabold tracking-tight text-navy-900 uppercase">
+      Display heading
+    </p>
+    <p class="text-h2 font-extrabold tracking-tight text-navy-900 uppercase">Section heading</p>
+    <p class="font-heading text-h3 font-bold text-navy-900">Card heading, sentence case</p>
+    <p class="max-w-2xl text-lead text-muted">
+      Lead paragraph. Your feedstock. Your specification. Your product. Ăă Ââ Îî Șș Țț — Romanian
+      diacritics render in the self-hosted fonts.
+    </p>
+    <p class="max-w-2xl">
+      Body text at 16 px on a white or mint background. Nothing on the site is smaller than 14 px.
+    </p>
+    <p class="font-script text-3xl text-green-700">Real Chemistry. Real Solutions.</p>
+  </div>
+</Section>
+
+<Section>
+  <SectionHeading title="Buttons" />
+  <div class="mt-8 flex flex-wrap gap-3">
+    <Button>Request a Quote</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="outline">Outline</Button>
+    <Button variant="link" icon={null}>
+      Text link
+    </Button>
+    <Button size="lg">Large primary</Button>
+  </div>
+</Section>
+
+<Section tone="navy">
+  <SectionHeading
+    title="On dark"
+    eyebrow="Eyebrow"
+    lead="Headings and eyebrows adapt inside .on-dark sections."
+  />
+  <div class="mt-8 flex flex-wrap items-center gap-3">
+    <Button>Primary</Button>
+    <Button variant="outline-light">Outline light</Button>
+    <Logo variant="white" />
+  </div>
+</Section>
+
+<Section>
+  <SectionHeading
+    title="Icons & logo"
+    lead="Wordmark is a placeholder until the vector logo arrives."
+  />
+  <div class="mt-8 flex flex-wrap items-center gap-6">
+    <Logo />
+    {icons.map((name) => (
+      <span class="flex flex-col items-center gap-1 text-xs text-muted">
+        <Icon name={name} class="size-6 text-navy-900" />
+        {name}
+      </span>
+    ))}
+  </div>
+</Section>
+
+<CtaBand locale="en" />

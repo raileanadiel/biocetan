@@ -1,0 +1,309 @@
+---
+import FormField from './FormField.astro';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import { useTranslations } from '../../i18n';
+import { pathFor } from '../../i18n/routes';
+import { localeMeta, type Locale } from '../../i18n/config';
+import {
+  COUNTRY_CODES,
+  FILE_LIMITS,
+  INDUSTRY_VALUES,
+  LIMITS,
+  PRODUCT_VALUES,
+  VOLUME_UNITS,
+} from '../../lib/contact/constants';
+
+/**
+ * Request-for-quote form. `quick` = 6 fields (Home); `full` adds an "Add details" block with
+ * phone, country, industry, volume and attachments (Contact page). Behaviour lives in
+ * src/scripts/contact-form.ts; the server side in functions/api/contact.ts.
+ */
+interface Props {
+  locale: Locale;
+  variant?: 'quick' | 'full';
+  /** Makes element ids unique when two forms exist on one page. */
+  idPrefix?: string;
+}
+
+const { locale, variant = 'quick', idPrefix = 'rfq' } = Astro.props;
+const t = useTranslations(locale);
+const id = (name: string) => `${idPrefix}-${name}`;
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+
+const productOptions = PRODUCT_VALUES.map((value) => ({
+  value,
+  label: t(`form.options.product.${value}`),
+}));
+const industryOptions = INDUSTRY_VALUES.map((value) => ({
+  value,
+  label: t(`form.options.industry.${value}`),
+}));
+const unitOptions = VOLUME_UNITS.map((value) => ({
+  value,
+  label: t(`form.options.unit.${value}`),
+}));
+
+// Target markets stay in the order given in constants.ts, the rest is sorted by local name.
+const priority = COUNTRY_CODES.slice(0, 7);
+const names = new Intl.DisplayNames([localeMeta[locale].hreflang], { type: 'region' });
+const countryLabel = (code: string) =>
+  code === 'OTHER' ? t('form.options.product.other') : (names.of(code) ?? code);
+const rest = COUNTRY_CODES.slice(7, -1).map((code) => ({ value: code, label: countryLabel(code) }));
+rest.sort((a, b) => a.label.localeCompare(b.label, localeMeta[locale].hreflang));
+const countryOptions = [
+  ...priority.map((code) => ({ value: code, label: countryLabel(code) })),
+  ...rest,
+  { value: 'OTHER', label: countryLabel('OTHER') },
+];
+
+// Everything the browser script needs to show messages in the visitor's language.
+const messages = {
+  errors: {
+    required: t('form.errors.required'),
+    email: t('form.errors.email'),
+    tooShort: t('form.errors.tooShort'),
+    tooLong: t('form.errors.tooLong'),
+    invalid: t('form.errors.invalid'),
+    consent: t('form.errors.consent'),
+    fileCount: t('form.errors.fileCount'),
+    fileSize: t('form.errors.fileSize'),
+    fileType: t('form.errors.fileType'),
+  },
+  status: {
+    validation: t('form.status.validation'),
+    captcha: t('form.status.captcha'),
+    delivery: t('form.status.delivery'),
+    config: t('form.status.config'),
+    origin: t('form.status.origin'),
+    invalid: t('form.status.invalid'),
+    network: t('form.status.network'),
+    success: t('form.status.successText'),
+  },
+  labels: { submit: t('form.submit'), sending: t('form.sending'), verifying: t('form.verifying') },
+  limits: {
+    name: LIMITS.name.min,
+    company: LIMITS.company.min,
+    message: LIMITS.message.min,
+    phone: LIMITS.phone.min,
+  },
+};
+
+const contactHref = pathFor('contact', locale);
+const privacyHref = pathFor('privacy', locale);
+---
+
+<div data-contact-form-root>
+  <form
+    data-contact-form
+    data-locale={locale}
+    data-turnstile-key={siteKey}
+    action="/api/contact"
+    method="post"
+    enctype="multipart/form-data"
+    novalidate
+    class="space-y-5"
+  >
+    <script type="application/json" data-messages set:html={JSON.stringify(messages)}></script>
+    <input type="hidden" name="locale" value={locale} />
+    <input type="hidden" name="source" value="" />
+    <input type="hidden" name="utm" value="" />
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      <FormField
+        id={id('name')}
+        name="name"
+        label={t('form.fields.name')}
+        placeholder={t('form.placeholders.name')}
+        autocomplete="name"
+        required
+      />
+      <FormField
+        id={id('company')}
+        name="company"
+        label={t('form.fields.company')}
+        placeholder={t('form.placeholders.company')}
+        autocomplete="organization"
+        required
+      />
+    </div>
+    <div class="grid gap-5 sm:grid-cols-2">
+      <FormField
+        id={id('email')}
+        name="email"
+        type="email"
+        label={t('form.fields.email')}
+        placeholder={t('form.placeholders.email')}
+        autocomplete="email"
+        inputmode="email"
+        required
+      />
+      <FormField
+        id={id('product')}
+        name="product"
+        type="select"
+        label={t('form.fields.product')}
+        selectLabel={t('form.select')}
+        options={productOptions}
+        required
+      />
+    </div>
+    <FormField
+      id={id('message')}
+      name="message"
+      type="textarea"
+      label={t('form.fields.message')}
+      placeholder={t('form.placeholders.message')}
+      rows={variant === 'full' ? 6 : 4}
+      required
+    />
+
+    {variant === 'full' && (
+      <details class="group rounded-md border border-line bg-mint-50">
+        <summary class="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2 font-semibold text-navy-900 [&::-webkit-details-marker]:hidden">
+          <span>
+            {t('form.details')}
+            <span class="block text-sm font-normal text-muted">{t('form.detailsHint')}</span>
+          </span>
+          <Icon name="chevron-down" class="size-5 transition-transform group-open:rotate-180" />
+        </summary>
+        <div class="space-y-5 border-t border-line p-4">
+          <div class="grid gap-5 sm:grid-cols-2">
+            <FormField
+              id={id('phone')}
+              name="phone"
+              type="tel"
+              label={t('form.fields.phone')}
+              placeholder={t('form.placeholders.phone')}
+              autocomplete="tel"
+              inputmode="tel"
+            />
+            <FormField
+              id={id('country')}
+              name="country"
+              type="select"
+              label={t('form.fields.country')}
+              selectLabel={t('form.select')}
+              options={countryOptions}
+              autocomplete="country"
+            />
+          </div>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <FormField
+              id={id('industry')}
+              name="industry"
+              type="select"
+              label={t('form.fields.industry')}
+              selectLabel={t('form.select')}
+              options={industryOptions}
+            />
+            <div class="grid grid-cols-[1fr_auto] items-end gap-3">
+              <FormField
+                id={id('volume')}
+                name="volume"
+                label={t('form.fields.volume')}
+                placeholder={t('form.placeholders.volume')}
+                inputmode="decimal"
+                maxlength={LIMITS.volume.max}
+              />
+              <FormField
+                id={id('volumeUnit')}
+                name="volumeUnit"
+                type="select"
+                label={t('form.fields.volumeUnit')}
+                selectLabel="—"
+                options={unitOptions}
+              />
+            </div>
+          </div>
+          <FormField
+            id={id('files')}
+            name="files"
+            type="file"
+            label={t('form.fields.files')}
+            hint={t('form.hints.files')}
+            accept={FILE_LIMITS.extensions.map((ext) => `.${ext}`).join(',')}
+            multiple
+          />
+        </div>
+      </details>
+    )}
+
+    <!-- Honeypot: invisible to people, irresistible to bots. -->
+    <div class="absolute -left-[9999px]" aria-hidden="true">
+      <label>
+        Website <input type="text" name="website" tabindex="-1" autocomplete="off" />
+      </label>
+    </div>
+
+    <div data-field="consent">
+      <div class="flex items-start gap-3">
+        <input
+          id={id('consent')}
+          name="consent"
+          type="checkbox"
+          required
+          aria-required="true"
+          aria-describedby={`${id('consent')}-error`}
+          class="mt-0.5 size-5 shrink-0 cursor-pointer accent-green-600"
+        />
+        <label for={id('consent')} class="text-sm text-ink">
+          {t('form.consent')}{' '}
+          <a href={privacyHref} class="font-semibold text-green-700 underline underline-offset-2">
+            {t('form.privacyLink')}
+          </a>
+          <span aria-hidden="true"> *</span>
+        </label>
+      </div>
+      <p id={`${id('consent')}-error`} class="field-error" hidden></p>
+    </div>
+
+    <div data-turnstile class="min-h-0"></div>
+
+    <div class="flex flex-wrap items-center gap-4">
+      <Button type="submit" size="lg" data-submit>
+        <span data-label>{t('form.submit')}</span>
+      </Button>
+      <p class="text-sm text-muted">{t('form.required')}</p>
+    </div>
+    <p data-status role="status" aria-live="polite" class="text-sm font-medium empty:hidden"></p>
+
+    {variant === 'quick' && (
+      <p class="text-sm text-muted">
+        {t('home.final.moreDetails')}{' '}
+        <a href={contactHref} class="font-semibold text-green-700 underline underline-offset-2">
+          {t('home.final.moreLink')}
+        </a>
+      </p>
+    )}
+  </form>
+
+  <noscript>
+    <p class="mt-4 rounded-md border border-line bg-mint-50 p-4 text-sm text-ink">
+      {t('form.noscript')}
+    </p>
+  </noscript>
+
+  <div
+    data-success
+    hidden
+    tabindex="-1"
+    class="rounded-lg border border-green-600 bg-mint-50 p-6 text-ink outline-none"
+  >
+    <p class="flex items-center gap-3 text-h3 font-bold text-navy-900">
+      <Icon name="check" class="size-8 rounded-full bg-green-600 p-1.5 text-white" />
+      {t('form.status.successTitle')}
+    </p>
+    <p data-success-text class="mt-3"></p>
+    <div class="mt-5">
+      <Button type="button" variant="outline" icon={null} data-reset>
+        {t('form.status.another')}
+      </Button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initContactForms } from '../../scripts/contact-form';
+  initContactForms();
+</script>
