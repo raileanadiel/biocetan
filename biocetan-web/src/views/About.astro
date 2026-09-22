@@ -1,0 +1,78 @@
+---
+import PageHero from '../components/ui/PageHero.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+import { useTranslations } from '../i18n';
+import { pathFor, type PageId } from '../i18n/routes';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+  pageId: PageId;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const values = (['a', 'b', 'c', 'd'] as const).map((k) => ({
+  title: t(`about.values.${k}.title`),
+  text: t(`about.values.${k}.text`),
+}));
+---
+
+<PageHero
+  locale={locale}
+  pageId="about"
+  title={t('pages.about.title')}
+  lead={t('pages.about.lead')}
+>
+  <Fragment slot="actions">
+    <Button href={pathFor('contact', locale)} size="lg">
+      {t('cta.experts')}
+    </Button>
+  </Fragment>
+</PageHero>
+
+<Section>
+  <SectionHeading title={t('about.who.title')} />
+  <p class="mt-6 max-w-3xl text-lead text-muted">{t('about.who.text')}</p>
+</Section>
+
+<Section tone="mint">
+  <SectionHeading title={t('about.approach.title')} />
+  <p class="mt-6 max-w-3xl text-lead text-muted">{t('about.approach.text')}</p>
+</Section>
+
+<Section>
+  <SectionHeading title={t('about.values.title')} />
+  <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {values.map((v) => (
+      <div class="rounded-lg border border-line bg-white p-6">
+        <h3 class="font-heading text-lg font-bold text-navy-900">{v.title}</h3>
+        <p class="mt-2 text-muted">{v.text}</p>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<Section tone="navy">
+  <div class="grid items-center gap-8 lg:grid-cols-[1.3fr_0.7fr]">
+    <div>
+      <h2 class="font-heading text-h3 font-bold">{t('about.location.title')}</h2>
+      <p class="mt-3 flex items-start gap-2 max-w-xl text-white/85">
+        <Icon name="map-pin" class="mt-0.5 size-5 shrink-0 text-green-300" />
+        {t('about.location.text')}
+      </p>
+    </div>
+    <p class="lg:text-right">
+      <Button href={pathFor('facility', locale)} variant="outline-light" icon="arrow-right">
+        {t('about.location.cta')}
+      </Button>
+    </p>
+  </div>
+</Section>
+
+<CtaBand locale={locale} title={t('about.closing.title')} text={t('about.closing.text')} />

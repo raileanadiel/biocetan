@@ -1,0 +1,167 @@
+---
+import PageHero from '../components/ui/PageHero.astro';
+import Section from '../components/ui/Section.astro';
+import Button from '../components/ui/Button.astro';
+import Icon, { type IconName } from '../components/ui/Icon.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+import { useTranslations } from '../i18n';
+import { pathFor, type PageId } from '../i18n/routes';
+import type { Locale } from '../i18n/config';
+import type { IndustryValue } from '../lib/contact/constants';
+
+interface Props {
+  locale: Locale;
+  pageId: PageId;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const contactHref = pathFor('contact', locale);
+const quoteHref = (industry: IndustryValue) => `${contactHref}?industry=${industry}`;
+
+// Points are resolved here (one `t()` call per known id+letter pair) rather than composed from
+// two variables in the template: `t(`applications.${id}.point.${letter}`)` with both `id` and
+// `letter` as unions makes TS check every id×letter combination, most of which don't exist.
+const industries = [
+  {
+    id: 'agrochemicals',
+    icon: 'sprout' as IconName,
+    points: [
+      t('applications.agrochemicals.point.a'),
+      t('applications.agrochemicals.point.b'),
+      t('applications.agrochemicals.point.c'),
+      t('applications.agrochemicals.point.d'),
+      t('applications.agrochemicals.point.e'),
+    ],
+  },
+  {
+    id: 'coatings',
+    icon: 'layers' as IconName,
+    points: [
+      t('applications.coatings.point.a'),
+      t('applications.coatings.point.b'),
+      t('applications.coatings.point.c'),
+    ],
+  },
+  {
+    id: 'lubricants',
+    icon: 'settings' as IconName,
+    points: [
+      t('applications.lubricants.point.a'),
+      t('applications.lubricants.point.b'),
+      t('applications.lubricants.point.c'),
+    ],
+  },
+  {
+    id: 'cleaners',
+    icon: 'droplet' as IconName,
+    points: [t('applications.cleaners.point.a'), t('applications.cleaners.point.b')],
+  },
+  {
+    id: 'polymers',
+    icon: 'package' as IconName,
+    points: [t('applications.polymers.point.a'), t('applications.polymers.point.b')],
+  },
+  {
+    id: 'chemicals',
+    icon: 'flask' as IconName,
+    points: [
+      t('applications.chemicals.point.a'),
+      t('applications.chemicals.point.b'),
+      t('applications.chemicals.point.c'),
+    ],
+  },
+] as const;
+---
+
+<PageHero
+  locale={locale}
+  pageId="applications"
+  title={t('pages.applications.title')}
+  accent={t('pages.applications.accent')}
+  lead={t('pages.applications.lead')}
+>
+  <Fragment slot="actions">
+    <Button href={contactHref} size="lg">
+      {t('cta.experts')}
+    </Button>
+  </Fragment>
+</PageHero>
+
+<Section compact tone="mint">
+  <nav aria-label="Industries" class="flex flex-wrap gap-2">
+    {industries.map((ind) => (
+      <a
+        href={`#${ind.id}`}
+        class="inline-flex min-h-10 items-center gap-2 rounded-full border border-line bg-white px-4 text-sm font-semibold text-navy-900 hover:border-green-600"
+      >
+        <Icon name={ind.icon} class="size-4 text-green-700" />
+        {t(`applications.${ind.id}.title`)}
+      </a>
+    ))}
+  </nav>
+</Section>
+
+{industries.map((ind, index) => (
+  <Section id={ind.id} tone={index % 2 === 0 ? 'white' : 'mint'}>
+    <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div>
+        {ind.id === 'agrochemicals' && (
+          <p class="text-sm font-bold tracking-[0.14em] text-green-700 uppercase">
+            {t('applications.agrochemicals.eyebrow')}
+          </p>
+        )}
+        <span class="flex size-12 items-center justify-center rounded-full bg-mint-100 text-green-700">
+          <Icon name={ind.icon} class="size-6" />
+        </span>
+        <h2 class="mt-4 font-heading text-h2 font-extrabold tracking-tight text-navy-900 uppercase">
+          {t(`applications.${ind.id}.title`)}
+        </h2>
+        <p class="mt-2 text-lead text-muted">{t(`applications.${ind.id}.lead`)}</p>
+        <p class="mt-5 max-w-2xl">{t(`applications.${ind.id}.text`)}</p>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          {ind.id === 'lubricants' ? (
+            <>
+              <Button href={quoteHref('lubricants')} variant="outline" icon="arrow-right">
+                {t('applications.lubricants.ctaLubricants')}
+              </Button>
+              <Button href={quoteHref('metalworking')} variant="outline" icon="arrow-right">
+                {t('applications.lubricants.ctaMetalworking')}
+              </Button>
+            </>
+          ) : ind.id === 'chemicals' ? (
+            <>
+              <Button href={quoteHref('chemicals')} variant="outline" icon="arrow-right">
+                {t('applications.chemicals.ctaChemicals')}
+              </Button>
+              <Button href={quoteHref('soil')} variant="outline" icon="arrow-right">
+                {t('applications.chemicals.ctaSoil')}
+              </Button>
+            </>
+          ) : (
+            <Button href={quoteHref(ind.id)}>{t('cta.quote')}</Button>
+          )}
+        </div>
+      </div>
+
+      <ul class="grid content-start gap-3 rounded-lg border border-line bg-white p-6">
+        {ind.points.map((point) => (
+          <li class="flex items-start gap-3">
+            <Icon
+              name="check"
+              class="mt-0.5 size-5 shrink-0 rounded-full bg-green-600 p-1 text-white"
+            />
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+))}
+
+<CtaBand
+  locale={locale}
+  title={t('applications.closing.title')}
+  text={t('applications.closing.text')}
+/>

@@ -1,10 +1,10 @@
 # BIOCETAN website
 
 Marketing site for BIOCETAN S.R.L. (vegetable methyl esters, Săcueni, Romania).
-Astro 7 · Tailwind CSS 4 · TypeScript · static output · EN + RO (HU-ready).
+Astro 7 · Tailwind CSS 4 · TypeScript · static output · EN + RO (HU-ready). Map: Leaflet + OpenStreetMap (self-hosted, click-to-load, no API key).
 
 The plan, page specs and open client questions live in [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md).
-**Status: Phases 1–2 done** (foundation; Home, Contact, working quote form, draft legal pages). The other 7 pages are still stubs (Phase 3).
+**Status: Phases 1–3 done.** All 9 pages have real content (EN + RO): Home, Products, Services, Applications, Technology, Quality, Facility & Logistics, About, Contact (+ 3 draft legal pages). Next up is Phase 4 (localisation polish / Hungarian) and Phase 5 (hardening & launch) — see the plan's roadmap.
 
 ## Commands
 
@@ -40,16 +40,18 @@ src/
 ├─ layouts/BaseLayout.astro  <head> (title, canonical, hreflang, OG, robots), header, footer
 ├─ components/
 │  ├─ layout/              Header, Footer, Logo (placeholder), LanguageSwitcher, MobileActionBar
-│  ├─ ui/                  Button, Icon, Section, SectionHeading, Breadcrumb, PageHero, CtaBand, ScriptTagline
+│  ├─ ui/                  Button, Icon, Section, SectionHeading, Breadcrumb, PageHero, CtaBand,
+│  │                       ScriptTagline, SubNav (sticky in-page nav with scroll-spy), MapEmbed (click-to-load Leaflet map)
 │  ├─ sections/            ProcessSteps, Faq (with FAQPage JSON-LD)
 │  └─ forms/               ContactForm (quick / full variants), FormField
-├─ views/                  page content, one file per page id (Home.astro, Contact.astro, …)
+├─ views/                  page content, one file per page id (all 9 pages have real content)
 │  ├─ Legal.astro          shared by privacy / terms / cookies
-│  ├─ _Stub.astro          fallback until a page's own view exists
+│  ├─ _Stub.astro          fallback until a page's own view exists (none currently used)
 │  └─ _Styleguide.astro    dev-only token/component preview
 ├─ legal/{en,ro}/*.md      draft privacy / cookies / terms text
 ├─ lib/contact/            form backend: constants, validation, file checks, email templates,
 │                          handler (+ contact.test.ts). Shared by browser and server.
+├─ config/logistics.ts     driving distances (computed via OSRM, see the file header) for Facility & Logistics
 ├─ scripts/contact-form.ts browser side of the form (validation, Turnstile, submit)
 └─ pages/
    ├─ [...path].astro      generates every page in every locale from routes.ts
@@ -116,6 +118,8 @@ Sent mails are printed by the mock instead of being delivered.
 
 - Logo: text wordmark in `components/layout/Logo.astro` + placeholder `public/favicon.svg`
 - Legal registration data (CUI, Reg. Com., share capital) → `config/site.ts`
-- Photography, geo coordinates, certifications, TDS/SDS/CoA PDFs, analytics choice, email provider confirmation
+- Geo coordinates in `config/site.ts` and the distances in `config/logistics.ts` are **computed** (OpenStreetMap geocoding + OSRM routing), not client-supplied — good enough to ship, but replace with exact figures if the client provides them (see the files' header comments)
+- Photography, certifications, TDS/SDS/CoA PDFs, analytics choice, email provider confirmation
 - Legal texts are drafts with `[TODO: …]` markers (company registration data, providers, jurisdiction) and need review
-- Romanian strings (UI, Home copy, legal) are AI-written first drafts and need review by a native speaker
+- Romanian strings (UI, all page copy, legal) are AI-written first drafts and need review by a native speaker
+- No numeric product-spec table on `/products/` (ester content, density, viscosity…) — the client mockups' numbers were flagged as unreliable (plan §3.1-6) and no real values have been supplied yet; specs are deferred to a per-batch CoA / on-request TDS

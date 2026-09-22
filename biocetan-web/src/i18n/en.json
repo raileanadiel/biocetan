@@ -448,5 +448,591 @@
       "moreDetails": "Need to add specifications or files?",
       "moreLink": "Use the detailed form"
     }
+  },
+  "map": {
+    "load": "Load interactive map",
+    "privacyNote": "This map loads tiles from OpenStreetMap. Nothing is loaded until you click below.",
+    "approxNote": "Town-level location; contact us for exact directions."
+  },
+  "products": {
+    "nav": {
+      "rme": "RME",
+      "sfme": "SFME",
+      "sme": "SME",
+      "custom": "Custom Esters"
+    },
+    "intro": {
+      "title": "Choose your ester",
+      "lead": "RME, SFME and SME cover most industrial applications. If your process needs a different feedstock or a specific property, our Custom Esters and Custom Formulation services adapt the product to you."
+    },
+    "compare": {
+      "title": "At a glance",
+      "colProduct": "Product",
+      "colFeedstock": "Feedstock",
+      "colBestFor": "Typically used for",
+      "colPackaging": "Supply",
+      "action": "Request a quote",
+      "packagingValue": "Bulk · 1,000 L IBC"
+    },
+    "specNote": {
+      "title": "Properties confirmed on every batch",
+      "text": "Exact values for ester content, density, viscosity, acid value, water content, flash point and colour depend on the feedstock and your specification. We confirm them for every batch with a Certificate of Analysis, and can provide an indicative Technical Data Sheet before you order.",
+      "cta": "Request a Technical Data Sheet"
+    },
+    "rme": {
+      "eyebrow": "RME",
+      "title": "Rapeseed Methyl Ester",
+      "lead": "A versatile, renewable ester with excellent cold-flow properties.",
+      "overview": "RME is produced from rapeseed oil using our cavitation and ultrasonic process, manufactured to your specification rather than to a fixed technical sheet. Rapeseed-derived esters are known for good low-temperature (cold-flow) behaviour compared with other vegetable esters, which makes RME a common choice where a product needs to perform in cooler conditions.",
+      "feature": {
+        "a": "Renewable, plant-based origin",
+        "b": "Good cold-flow properties",
+        "c": "Low aromatic content",
+        "d": "Made to your specification",
+        "e": "Available in bulk or 1,000 L IBC"
+      },
+      "bestFor": "Industrial applications needing good cold-flow behaviour"
+    },
+    "sfme": {
+      "eyebrow": "SFME",
+      "title": "Sunflower Methyl Ester",
+      "lead": "A renewable ester from sunflower oil, made to your specification.",
+      "overview": "SFME is produced from sunflower oil on the same process platform as RME. It is a versatile base for industrial formulations and, like all our esters, is manufactured and quality-checked to your specification rather than to a single fixed grade.",
+      "feature": {
+        "a": "Renewable, plant-based origin",
+        "b": "Low aromatic content",
+        "c": "Consistent, batch-verified quality",
+        "d": "Made to your specification",
+        "e": "Available in bulk or 1,000 L IBC"
+      },
+      "bestFor": "General industrial and technical formulations"
+    },
+    "sme": {
+      "eyebrow": "SME",
+      "title": "Soybean Methyl Ester",
+      "lead": "A renewable ester from soybean oil, for industrial and agrochemical use.",
+      "overview": "SME is produced from soybean oil and supplied for industrial, technical and agrochemical-formulation applications. As with RME and SFME, we manufacture it to your specification and verify every batch in our laboratory.",
+      "feature": {
+        "a": "Renewable, plant-based origin",
+        "b": "Good solvency for formulation work",
+        "c": "Consistent, batch-verified quality",
+        "d": "Made to your specification",
+        "e": "Available in bulk or 1,000 L IBC"
+      },
+      "bestFor": "Industrial, technical and agrochemical formulations"
+    },
+    "custom": {
+      "eyebrow": "Custom Esters",
+      "title": "Other Vegetable Methyl Esters",
+      "lead": "Tailored to your feedstock, designed for your application.",
+      "overview": "In addition to RME, SFME and SME, we produce methyl esters from other vegetable oils on request, including high-oleic and specialty feedstocks. We work with you to select the feedstock, define the specification and, where useful, develop a custom formulation around it — from pilot batch to full-scale production.",
+      "feedstock": {
+        "a": "High-oleic oils (e.g. high-oleic sunflower or rapeseed)",
+        "b": "Camelina oil",
+        "c": "Safflower oil",
+        "d": "Linseed (flax) oil",
+        "e": "Castor oil",
+        "f": "Other vegetable oils, on request"
+      },
+      "feedstockTitle": "Feedstocks we can work with",
+      "cta": "Discuss your feedstock"
+    },
+    "closing": {
+      "title": "Not sure which ester fits?",
+      "text": "Tell us your application, target properties and volume. Our technical team will recommend a product or, if none of the standard esters fit, propose a custom formulation."
+    }
+  },
+  "distances": {
+    "title": "Distances & travel times",
+    "lead": "Approximate driving distances from Săcueni, calculated from the road network (OpenStreetMap routing, normal traffic). Confirm exact transit times with our logistics team for time-critical deliveries.",
+    "colDestination": "Destination",
+    "colDistance": "Distance",
+    "colTime": "Driving time",
+    "oradea": "Oradea",
+    "debrecen": "Debrecen (HU)",
+    "bors": "Borș — RO–HU border crossing",
+    "clujNapoca": "Cluj-Napoca",
+    "budapest": "Budapest (HU)",
+    "timisoara": "Timișoara",
+    "vienna": "Vienna (AT)"
+  },
+  "services": {
+    "nav": {
+      "madeToOrder": "Made-to-Order",
+      "toll": "Toll Manufacturing",
+      "formulation": "Custom Formulation",
+      "pilot": "Pilot & R&D"
+    },
+    "modelTable": {
+      "title": "Which model fits you?",
+      "colModel": "Model",
+      "colProvide": "You provide",
+      "colWeProvide": "We provide",
+      "colBestFor": "Best for"
+    },
+    "capabilities": {
+      "title": "One platform, four ways to work with us",
+      "a": {
+        "value": "2",
+        "label": "Independent production lines"
+      },
+      "b": {
+        "value": "4 × 15 t",
+        "label": "Process vessels for separation and formulation"
+      },
+      "c": {
+        "value": "10–60 t/day",
+        "label": "Flexible capacity across campaigns"
+      },
+      "d": {
+        "value": "In-house",
+        "label": "Laboratory for every batch"
+      }
+    },
+    "madeToOrder": {
+      "title": "Made-to-Order",
+      "lead": "You define the product and specification. We source the vegetable oil and manage the whole production process.",
+      "provide": "Your specification",
+      "weProvide": "Feedstock sourcing, production, quality control, delivery",
+      "bestFor": "Buyers who want a finished product without managing raw-material sourcing",
+      "step": {
+        "a": {
+          "title": "Your specification",
+          "text": "Tell us the product, quality parameters and intended application."
+        },
+        "b": {
+          "title": "Feedstock sourcing",
+          "text": "We source the vegetable oil that matches your requirement."
+        },
+        "c": {
+          "title": "Production",
+          "text": "Manufactured on our dedicated lines, using cavitation and ultrasonic processing."
+        },
+        "d": {
+          "title": "Quality control",
+          "text": "Every batch is analysed in-house and documented with a Certificate of Analysis."
+        },
+        "e": {
+          "title": "Delivery",
+          "text": "Supplied in bulk or 1,000 L IBC, to your schedule."
+        }
+      }
+    },
+    "toll": {
+      "title": "Toll Manufacturing",
+      "lead": "You supply the raw material. We convert it at our facility to your specification, with batch traceability and confidentiality.",
+      "provide": "Your raw material and specification",
+      "weProvide": "Processing, quality control, confidentiality",
+      "bestFor": "Companies that already source their own oil and want it converted reliably",
+      "step": {
+        "a": {
+          "title": "Your raw material",
+          "text": "You supply the vegetable oil or intermediate to be converted."
+        },
+        "b": {
+          "title": "Your specification",
+          "text": "We agree the process parameters and target quality with you."
+        },
+        "c": {
+          "title": "Production",
+          "text": "Processed on our lines, with full batch traceability."
+        },
+        "d": {
+          "title": "Confidentiality",
+          "text": "Your formulation and volumes are treated as confidential."
+        },
+        "e": {
+          "title": "Delivery",
+          "text": "Returned or shipped in bulk, IBC or your requested packaging."
+        }
+      }
+    },
+    "formulation": {
+      "title": "Custom Formulation",
+      "lead": "We develop the right ester-based formulation with you, from pilot batch to industrial scale.",
+      "provide": "Your application and performance targets",
+      "weProvide": "Formulation development, testing, scale-up",
+      "bestFor": "Products that need additives, blending or a property standard esters don't cover",
+      "step": {
+        "a": {
+          "title": "Consultation",
+          "text": "We discuss your application and the properties it needs."
+        },
+        "b": {
+          "title": "Formulation development",
+          "text": "We select the base ester and additives — surfactants, stabilisers, antioxidants."
+        },
+        "c": {
+          "title": "Lab testing",
+          "text": "Performance and compatibility are checked in our laboratory."
+        },
+        "d": {
+          "title": "Pilot batch",
+          "text": "A small batch validates the formulation before scale-up."
+        },
+        "e": {
+          "title": "Scale-up & supply",
+          "text": "Transferred to full production once the formulation is confirmed."
+        }
+      }
+    },
+    "pilot": {
+      "title": "Pilot & R&D",
+      "lead": "Test a formulation or a new feedstock at a smaller scale before committing to a full production run.",
+      "provide": "Your feedstock or formulation idea",
+      "weProvide": "Feedstock evaluation, formulation development, pilot-scale testing",
+      "bestFor": "New products, new feedstocks, or validating performance before full-scale production",
+      "step": {
+        "a": {
+          "title": "Feedstock evaluation",
+          "text": "We analyse your raw material and requirements."
+        },
+        "b": {
+          "title": "Formulation development",
+          "text": "Tailored blends and additives for your application."
+        },
+        "c": {
+          "title": "Pilot production",
+          "text": "A smaller batch on our production line for performance validation."
+        },
+        "d": {
+          "title": "Quality analysis",
+          "text": "In-house testing and fine-tuning of the result."
+        },
+        "e": {
+          "title": "Scale-up",
+          "text": "Once validated, the formulation transfers to full-scale manufacturing."
+        }
+      }
+    },
+    "closing": {
+      "title": "Not sure which model to choose?",
+      "text": "Tell us what you have and what you need — feedstock, specification or just an idea. We'll recommend the right way to work together."
+    }
+  },
+  "applications": {
+    "intro": {
+      "title": "One platform, many industries",
+      "lead": "Vegetable methyl esters and custom formulations serve as carriers, solvents and functional components across a range of industries. Choose your industry below to see what we typically adapt."
+    },
+    "agrochemicals": {
+      "title": "Agrochemicals",
+      "eyebrow": "Lead application",
+      "lead": "A renewable carrier and formulation component for crop-protection products.",
+      "text": "Vegetable methyl esters are used as carriers and co-solvents in agrochemical formulations — herbicides, insecticides, fungicides and growth regulators. As a formulation component in EC, EW and SC systems, they can improve the solubility and stability of active ingredients, while offering a renewable, biodegradable alternative to mineral-oil-based carriers.",
+      "point": {
+        "a": "Carrier for active ingredients",
+        "b": "Formulation component (EC, EW, SC systems)",
+        "c": "Improved solubility and stability",
+        "d": "Renewable, biodegradable profile",
+        "e": "Technical support for formulation development"
+      }
+    },
+    "coatings": {
+      "title": "Coatings, Paints & Inks",
+      "lead": "A bio-based solvent and reactive component.",
+      "text": "In coatings, paints, resins and inks, our esters work as a solvent or reactive component, offering a renewable alternative to some mineral-oil-based ingredients. We can adjust the feedstock and specification to match your formulation.",
+      "point": {
+        "a": "Solvent and reactive component",
+        "b": "Renewable alternative to mineral-oil-based ingredients",
+        "c": "Made to your formulation's specification"
+      }
+    },
+    "lubricants": {
+      "title": "Lubricants & Metalworking Fluids",
+      "lead": "A base component and performance additive.",
+      "text": "Vegetable methyl esters are used as a base fluid or performance additive in lubricants, and as a component in metalworking fluids for cutting, grinding and forming operations. Feedstock and additive package are selected to match the performance profile you need.",
+      "point": {
+        "a": "Base component and performance additive for lubricants",
+        "b": "Component for cutting, grinding and forming fluids",
+        "c": "Can be combined with additives via our Custom Formulation service"
+      },
+      "ctaLubricants": "Lubricants",
+      "ctaMetalworking": "Metalworking fluids"
+    },
+    "cleaners": {
+      "title": "Industrial Cleaners & Degreasers",
+      "lead": "A renewable base for degreasing and cleaning formulations.",
+      "text": "Used as a base or active component in industrial cleaning and degreasing formulations, offering a renewable alternative to some solvent-based ingredients.",
+      "point": {
+        "a": "Base or active component for degreasing formulations",
+        "b": "Renewable alternative to some solvent-based ingredients"
+      }
+    },
+    "polymers": {
+      "title": "Polymers & Plastics",
+      "lead": "A plasticiser and processing aid.",
+      "text": "In polymer and plastics processing, vegetable methyl esters can act as a plasticiser or processing aid, offering a bio-based alternative in formulations where that matters to your product or your customers.",
+      "point": {
+        "a": "Plasticiser and processing aid",
+        "b": "Bio-based alternative in polymer formulations"
+      }
+    },
+    "chemicals": {
+      "title": "Industrial Chemicals & Soil Stabilisation",
+      "lead": "An intermediate for further chemical processing.",
+      "text": "As an intermediate, vegetable methyl esters are used in a variety of downstream industrial chemical products. Esters and glycerin (a by-product of our process) are also used in soil-stabilisation applications. Tell us your target application and we'll confirm whether a standard ester or a custom formulation fits best.",
+      "point": {
+        "a": "Intermediate for downstream chemical products",
+        "b": "Glycerin by-product available for suitable applications",
+        "c": "Soil-stabilisation applications, on request"
+      },
+      "ctaChemicals": "Industrial chemicals",
+      "ctaSoil": "Soil stabilisation"
+    },
+    "closing": {
+      "title": "Don't see your industry?",
+      "text": "Our esters and custom formulations adapt to applications beyond this list. Tell us what you're trying to achieve and we'll tell you honestly whether we can help."
+    }
+  },
+  "technology": {
+    "intro": {
+      "title": "How we convert oil into ester",
+      "text": "Vegetable oil reacts with methanol in the presence of a catalyst (transesterification), producing methyl ester and glycerin as a by-product. Our process combines hydrodynamic cavitation with ultrasonic finishing to intensify that reaction: cavitation creates microbubbles and high mixing energy that bring the oil and methanol into closer, faster contact, and the ultrasonic stage further refines the mix before separation."
+    },
+    "flow": {
+      "title": "Process flow",
+      "a": {
+        "title": "Raw materials",
+        "text": "Vegetable oil, methanol and catalyst"
+      },
+      "b": {
+        "title": "Pre-treatment",
+        "text": "Filtration, dehydration and conditioning"
+      },
+      "c": {
+        "title": "Cavitation & ultrasound reactor",
+        "text": "Intensified reaction, high mass transfer"
+      },
+      "d": {
+        "title": "Phase separation",
+        "text": "Ester and glycerin are separated"
+      },
+      "e": {
+        "title": "Finished product",
+        "text": "Vegetable methyl ester, quality-checked"
+      }
+    },
+    "cards": {
+      "cavitation": {
+        "title": "Hydrodynamic Cavitation",
+        "text": "Creates microbubbles and high local mixing energy, improving contact between the oil and methanol and speeding up the reaction."
+      },
+      "ultrasound": {
+        "title": "Ultrasonic Finishing",
+        "text": "A second processing stage that further improves mixing and helps produce a consistent, homogeneous product."
+      },
+      "automation": {
+        "title": "Process Monitoring & Control",
+        "text": "Our production lines are monitored to keep conditions consistent from batch to batch, supporting repeatable quality."
+      }
+    },
+    "advantages": {
+      "title": "What this means for your product",
+      "a": "Intensified mixing and mass transfer between oil and methanol",
+      "b": "A repeatable process, batch to batch",
+      "c": "Flexible from pilot batches to full production runs",
+      "d": "Works with a range of vegetable-oil feedstocks"
+    },
+    "closing": {
+      "title": "Want the technical detail for your project?",
+      "text": "Tell us your feedstock and target specification, and our team will walk you through how the process applies to your product."
+    }
+  },
+  "quality": {
+    "approach": {
+      "title": "Our approach",
+      "text": "We apply quality control at every stage, from raw material to finished product. Every batch is analysed in our in-house laboratory using standardised test methods, and documented with a Certificate of Analysis before it leaves our facility."
+    },
+    "methods": {
+      "title": "What we test, and why",
+      "colParameter": "Parameter",
+      "colStandard": "Method",
+      "colMeaning": "What it tells you",
+      "row": {
+        "a": {
+          "param": "Ester content",
+          "standard": "EN 14103",
+          "meaning": "The purity of the methyl ester"
+        },
+        "b": {
+          "param": "Acid value",
+          "standard": "EN 14104",
+          "meaning": "Free fatty acid content, an indicator of stability"
+        },
+        "c": {
+          "param": "Density",
+          "standard": "EN ISO 12185",
+          "meaning": "Consistency for dosing and blending"
+        },
+        "d": {
+          "param": "Viscosity",
+          "standard": "EN ISO 3104",
+          "meaning": "Flow behaviour for handling and application"
+        },
+        "e": {
+          "param": "Water content",
+          "standard": "EN ISO 12937 (Karl Fischer)",
+          "meaning": "Dryness, relevant to storage stability"
+        },
+        "f": {
+          "param": "Flash point",
+          "standard": "EN ISO 3679",
+          "meaning": "Safe handling and transport classification"
+        },
+        "g": {
+          "param": "Colour",
+          "standard": "EN ISO 6271",
+          "meaning": "Visual consistency from batch to batch"
+        }
+      },
+      "note": "Additional parameters can be analysed on request, according to your specification."
+    },
+    "process": {
+      "title": "Our quality process",
+      "a": {
+        "title": "Raw material control",
+        "text": "Incoming oil and reagents are checked before production."
+      },
+      "b": {
+        "title": "In-process testing",
+        "text": "Key parameters are monitored during production."
+      },
+      "c": {
+        "title": "Final product analysis",
+        "text": "The finished batch is tested against your specification."
+      },
+      "d": {
+        "title": "Certificate of Analysis",
+        "text": "Results are documented for every batch."
+      },
+      "e": {
+        "title": "Batch release & delivery",
+        "text": "The batch is released and dispatched with its documentation."
+      }
+    },
+    "documents": {
+      "title": "Documentation",
+      "lead": "We can provide the following on request. TDS and SDS are prepared per product; get in touch to request them for your application.",
+      "coa": {
+        "title": "Certificate of Analysis",
+        "text": "Issued for every batch produced."
+      },
+      "sds": {
+        "title": "Safety Data Sheet",
+        "text": "Available on request, per product."
+      },
+      "tds": {
+        "title": "Technical Data Sheet",
+        "text": "Indicative properties, available on request."
+      },
+      "cta": "Request documentation"
+    },
+    "closing": {
+      "title": "Need a sample analysis or a specific test?",
+      "text": "Tell us your specification and which parameters matter for your application. Our lab team will confirm what we can test and document."
+    }
+  },
+  "facility": {
+    "stat": {
+      "a": {
+        "value": "60 t/day",
+        "label": "Production capacity (20 t per 8-hour shift)"
+      },
+      "b": {
+        "value": "2",
+        "label": "Independent production lines"
+      },
+      "c": {
+        "value": "4 × 15 t",
+        "label": "Process vessels for separation and formulation"
+      },
+      "d": {
+        "value": "In-house",
+        "label": "Laboratory for every batch"
+      }
+    },
+    "lines": {
+      "title": "Production lines",
+      "text": "Our facility operates two independent production lines with stainless-steel process equipment, allowing flexible campaigns and batch sizes from pilot to full scale.",
+      "point": {
+        "a": "Stainless-steel reactors and process lines",
+        "b": "Flexible batch sizes, pilot to full scale",
+        "c": "Automated process monitoring and control",
+        "d": "Consistent product quality, batch to batch"
+      }
+    },
+    "storage": {
+      "title": "Storage & handling",
+      "text": "Dedicated tanks keep raw materials and finished products separated and ready for dispatch, with an IBC filling station and bulk loading for road tankers.",
+      "point": {
+        "a": "Dedicated tanks for raw materials and finished products",
+        "b": "IBC filling station",
+        "c": "Bulk loading for road tankers",
+        "d": "Direct access to European transport routes"
+      }
+    },
+    "location": {
+      "title": "Where we are",
+      "lead": "Săcueni, Bihor County, Romania, near the Hungarian border.",
+      "text": "Our facility sits on the Bihor side of the Romania–Hungary border, giving us road access to both Romanian and Central European markets."
+    },
+    "packaging": {
+      "title": "Loading, packaging & terms",
+      "point": {
+        "a": "Bulk road tanker",
+        "b": "1,000 L IBC",
+        "c": "Drums or custom packaging, on request",
+        "d": "EXW, FCA or DAP — the Incoterms we typically work with",
+        "e": "Batch traceability and delivery documentation for every shipment"
+      }
+    },
+    "visit": {
+      "title": "Visit our facility",
+      "text": "We're glad to show you the site and discuss your project in person. Tell us when suits you and we'll arrange a visit.",
+      "cta": "Schedule a visit"
+    },
+    "closing": {
+      "title": "Planning a delivery?",
+      "text": "Tell us your delivery location, volume and preferred packaging, and we'll confirm logistics and lead time."
+    }
+  },
+  "about": {
+    "who": {
+      "title": "Who we are",
+      "text": "BIOCETAN is a Romanian company specialised in processing vegetable oils and producing vegetable methyl esters and custom liquid formulations. Our facility in Săcueni, Bihor County, combines modern process technology with a flexible manufacturing model. We work with industrial clients, formulators and distributors, offering made-to-order production, toll manufacturing and product-development support — from pilot batches to full-scale production."
+    },
+    "approach": {
+      "title": "Our approach",
+      "text": "We aim for a practical, efficient use of renewable resources. Combining hydrodynamic processing, careful separation and precise formulation, we help our partners develop products adapted to their markets and applications."
+    },
+    "values": {
+      "title": "What we work by",
+      "a": {
+        "title": "Sustainability",
+        "text": "Using renewable, plant-based resources."
+      },
+      "b": {
+        "title": "Quality",
+        "text": "Consistent, batch-verified results."
+      },
+      "c": {
+        "title": "Partnership",
+        "text": "Long-term collaboration, not one-off sales."
+      },
+      "d": {
+        "title": "European reach",
+        "text": "Local resources, regional and European markets."
+      }
+    },
+    "location": {
+      "title": "Where we are",
+      "text": "Săcueni, Bihor County, Romania — near the Hungarian border, with road access to Central and Western European markets.",
+      "cta": "See our facility and logistics"
+    },
+    "closing": {
+      "title": "Let's create value together",
+      "text": "Whether it's a standard ester, a toll-manufacturing project or a new formulation, our team is ready to discuss it with you."
+    }
   }
 }

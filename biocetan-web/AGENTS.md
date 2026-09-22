@@ -33,3 +33,5 @@ Marketing site for BIOCETAN S.R.L. Read `../IMPLEMENTATION_PLAN.md` first (scope
 - TypeScript is pinned to 6.x because `@astrojs/check` does not support 7.x yet.
 - Contact form: shared rules live in `src/lib/contact/` (used by browser and server). Change validation there, never in only one place. `npm test` must pass; the handler's order of checks is deliberate (see the docstring in `handler.ts`).
 - Legal pages are drafts; leave the `[TODO: …]` markers for the client to resolve, and never invent registration data or provider details.
+- Facility distances/coordinates (`src/config/logistics.ts`, `src/config/site.ts`) are computed (OSM geocoding + OSRM routing), not client-supplied — see those files' header comments before changing them, and re-derive rather than guess if they need updating.
+- A template-literal translation key built from two loop variables (e.g. `t(\`x.${id}.${letter}\`)`) makes TypeScript check every id×letter combination, not just the pairs that exist — resolve the strings in frontmatter per known id instead (see Applications.astro).

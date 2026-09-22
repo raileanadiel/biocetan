@@ -1,0 +1,136 @@
+---
+import PageHero from '../components/ui/PageHero.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import SubNav from '../components/ui/SubNav.astro';
+import Button from '../components/ui/Button.astro';
+import Icon, { type IconName } from '../components/ui/Icon.astro';
+import ProcessSteps from '../components/sections/ProcessSteps.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+import { useTranslations } from '../i18n';
+import { pathFor, type PageId } from '../i18n/routes';
+import type { Locale } from '../i18n/config';
+import type { ProductValue } from '../lib/contact/constants';
+
+interface Props {
+  locale: Locale;
+  pageId: PageId;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const contactHref = pathFor('contact', locale);
+// Made-to-Order isn't a distinct product/service value in the form (the visitor picks the
+// ester); its CTA goes to a plain quote request instead of forcing an inaccurate prefill.
+const quoteHref = (product?: ProductValue) =>
+  product ? `${contactHref}?product=${product}` : contactHref;
+
+const models = [
+  { id: 'madeToOrder', icon: 'leaf', product: undefined },
+  { id: 'toll', icon: 'factory', product: 'toll' },
+  { id: 'formulation', icon: 'flask', product: 'custom-formulation' },
+  { id: 'pilot', icon: 'search', product: 'pilot' },
+] as const satisfies { id: string; icon: IconName; product: ProductValue | undefined }[];
+
+const subnavItems = models.map((m) => ({ id: m.id, label: t(`services.nav.${m.id}`) }));
+
+const capabilities = (['a', 'b', 'c', 'd'] as const).map((key) => ({
+  value: t(`services.capabilities.${key}.value`),
+  label: t(`services.capabilities.${key}.label`),
+}));
+---
+
+<PageHero
+  locale={locale}
+  pageId="services"
+  title={t('pages.services.title')}
+  accent={t('pages.services.accent')}
+  lead={t('pages.services.lead')}
+>
+  <Fragment slot="actions">
+    <Button href={pathFor('contact', locale)} size="lg">
+      {t('cta.quote')}
+    </Button>
+  </Fragment>
+</PageHero>
+
+<SubNav items={subnavItems} />
+
+<Section>
+  <SectionHeading title={t('services.modelTable.title')} />
+  <div class="mt-10 overflow-x-auto rounded-lg border border-line">
+    <table class="w-full min-w-[640px] border-collapse text-left">
+      <caption class="sr-only">{t('services.modelTable.title')}</caption>
+      <thead>
+        <tr class="bg-mint-50 text-sm text-navy-900">
+          <th scope="col" class="p-4 font-bold">
+            {t('services.modelTable.colModel')}
+          </th>
+          <th scope="col" class="p-4 font-bold">
+            {t('services.modelTable.colProvide')}
+          </th>
+          <th scope="col" class="p-4 font-bold">
+            {t('services.modelTable.colWeProvide')}
+          </th>
+          <th scope="col" class="p-4 font-bold">
+            {t('services.modelTable.colBestFor')}
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-line text-sm">
+        {models.map((m) => (
+          <tr>
+            <th scope="row" class="flex items-center gap-2 p-4 font-semibold text-navy-900">
+              <Icon name={m.icon} class="size-5 text-green-700" />
+              <a href={`#${m.id}`} class="hover:underline">
+                {t(`services.nav.${m.id}`)}
+              </a>
+            </th>
+            <td class="p-4 text-muted">{t(`services.${m.id}.provide`)}</td>
+            <td class="p-4 text-muted">{t(`services.${m.id}.weProvide`)}</td>
+            <td class="p-4 text-muted">{t(`services.${m.id}.bestFor`)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Section>
+
+<Section tone="mint" compact>
+  <h2 class="sr-only">{t('services.capabilities.title')}</h2>
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {capabilities.map((c) => (
+      <li>
+        <p class="font-heading text-2xl font-extrabold text-navy-900">{c.value}</p>
+        <p class="text-sm text-muted">{c.label}</p>
+      </li>
+    ))}
+  </ul>
+</Section>
+
+{models.map((m, index) => (
+  <Section id={m.id} tone={index % 2 === 0 ? 'white' : 'mint'}>
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
+      <div>
+        <span class="flex size-12 items-center justify-center rounded-full bg-mint-100 text-green-700">
+          <Icon name={m.icon} class="size-6" />
+        </span>
+        <h2 class="mt-4 font-heading text-h2 font-extrabold tracking-tight text-navy-900 uppercase">
+          {t(`services.${m.id}.title`)}
+        </h2>
+        <p class="mt-3 max-w-md text-lead text-muted">{t(`services.${m.id}.lead`)}</p>
+        <p class="mt-6">
+          <Button href={quoteHref(m.product)}>{t('cta.quote')}</Button>
+        </p>
+      </div>
+      <ProcessSteps
+        steps={(['a', 'b', 'c', 'd', 'e'] as const).map((letter) => ({
+          title: t(`services.${m.id}.step.${letter}.title`),
+          text: t(`services.${m.id}.step.${letter}.text`),
+        }))}
+      />
+    </div>
+  </Section>
+))}
+
+<CtaBand locale={locale} title={t('services.closing.title')} text={t('services.closing.text')} />

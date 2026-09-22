@@ -1,0 +1,115 @@
+---
+import PageHero from '../components/ui/PageHero.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import ProcessSteps from '../components/sections/ProcessSteps.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+import { useTranslations } from '../i18n';
+import { pathFor, type PageId } from '../i18n/routes';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+  pageId: PageId;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const docsHref = `${pathFor('contact', locale)}?product=documentation`;
+
+const methods = (['a', 'b', 'c', 'd', 'e', 'f', 'g'] as const).map((k) => ({
+  param: t(`quality.methods.row.${k}.param`),
+  standard: t(`quality.methods.row.${k}.standard`),
+  meaning: t(`quality.methods.row.${k}.meaning`),
+}));
+
+const steps = (['a', 'b', 'c', 'd', 'e'] as const).map((k) => ({
+  title: t(`quality.process.${k}.title`),
+  text: t(`quality.process.${k}.text`),
+}));
+
+const documents = (['coa', 'sds', 'tds'] as const).map((k) => ({
+  title: t(`quality.documents.${k}.title`),
+  text: t(`quality.documents.${k}.text`),
+}));
+---
+
+<PageHero
+  locale={locale}
+  pageId="quality"
+  title={t('pages.quality.title')}
+  accent={t('pages.quality.accent')}
+  lead={t('pages.quality.lead')}
+>
+  <Fragment slot="actions">
+    <Button href={docsHref} size="lg">
+      {t('quality.documents.cta')}
+    </Button>
+  </Fragment>
+</PageHero>
+
+<Section>
+  <SectionHeading title={t('quality.approach.title')} lead={t('quality.approach.text')} />
+</Section>
+
+<Section tone="mint">
+  <SectionHeading title={t('quality.methods.title')} />
+  <div class="mt-8 overflow-x-auto rounded-lg border border-line bg-white">
+    <table class="w-full min-w-[560px] border-collapse text-left">
+      <thead>
+        <tr class="text-sm text-navy-900">
+          <th scope="col" class="p-4 font-bold">
+            {t('quality.methods.colParameter')}
+          </th>
+          <th scope="col" class="p-4 font-bold">
+            {t('quality.methods.colStandard')}
+          </th>
+          <th scope="col" class="p-4 font-bold">
+            {t('quality.methods.colMeaning')}
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-line text-sm">
+        {methods.map((row) => (
+          <tr>
+            <th scope="row" class="p-4 font-semibold text-navy-900">
+              {row.param}
+            </th>
+            <td class="p-4 font-mono text-muted">{row.standard}</td>
+            <td class="p-4 text-muted">{row.meaning}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-4 text-sm text-muted">{t('quality.methods.note')}</p>
+</Section>
+
+<Section>
+  <SectionHeading title={t('quality.process.title')} />
+  <div class="mt-12">
+    <ProcessSteps steps={steps} />
+  </div>
+</Section>
+
+<Section tone="navy">
+  <SectionHeading title={t('quality.documents.title')} lead={t('quality.documents.lead')} />
+  <div class="mt-8 grid gap-6 sm:grid-cols-3">
+    {documents.map((doc) => (
+      <div class="rounded-lg border border-white/15 bg-white/5 p-6">
+        <Icon name="file-text" class="size-7 text-green-300" />
+        <h3 class="mt-3 font-heading text-lg font-bold">{doc.title}</h3>
+        <p class="mt-1 text-sm text-white/80">{doc.text}</p>
+      </div>
+    ))}
+  </div>
+  <p class="mt-8">
+    <Button href={docsHref} variant="outline-light" icon="file-text">
+      {t('quality.documents.cta')}
+    </Button>
+  </p>
+</Section>
+
+<CtaBand locale={locale} title={t('quality.closing.title')} text={t('quality.closing.text')} />

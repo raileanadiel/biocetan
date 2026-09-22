@@ -1,0 +1,88 @@
+---
+/**
+ * Sticky in-page navigation for long pages (Products: RME | SFME | SME | Custom;
+ * Services: Made-to-Order | Toll | Formulation | Pilot — plan §4.3). Sits right under the
+ * main header; highlights the section currently in view via IntersectionObserver.
+ */
+interface Props {
+  items: { id: string; label: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav
+  data-subnav
+  class="sticky top-[4.5rem] z-40 border-b border-line bg-white/95 backdrop-blur nav:top-20"
+  aria-label="Section"
+>
+  <div class="container-x">
+    <ul class="scrollbar-none flex gap-1 overflow-x-auto">
+      {items.map((item, index) => (
+        <li class="shrink-0">
+          <a
+            href={`#${item.id}`}
+            data-subnav-link={item.id}
+            aria-current={index === 0 ? 'true' : undefined}
+            class:list={[
+              'inline-flex min-h-12 items-center border-b-2 px-3 text-sm font-semibold whitespace-nowrap transition-colors',
+              index === 0
+                ? 'border-green-600 text-navy-900'
+                : 'border-transparent text-muted hover:text-navy-900',
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  function initSubNav(nav: Element) {
+    const links = new Map(
+      [...nav.querySelectorAll<HTMLAnchorElement>('[data-subnav-link]')].map((a) => [
+        a.dataset.subnavLink!,
+        a,
+      ]),
+    );
+    const sections = [...links.keys()]
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (sections.length === 0) return;
+
+    const setActive = (id: string) => {
+      for (const [key, link] of links) {
+        const active = key === id;
+        link.classList.toggle('border-green-600', active);
+        link.classList.toggle('text-navy-900', active);
+        link.classList.toggle('border-transparent', !active);
+        link.classList.toggle('text-muted', !active);
+        if (active) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      }
+    };
+
+    const navHeight = (nav as HTMLElement).offsetHeight + 80; // header + subnav clearance
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length > 0) setActive(visible[0].target.id);
+      },
+      { rootMargin: `-${navHeight}px 0px -70% 0px` },
+    );
+    sections.forEach((el) => observer.observe(el));
+  }
+
+  document.querySelectorAll('[data-subnav]').forEach(initSubNav);
+</script>
+
+<style>
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+</style>

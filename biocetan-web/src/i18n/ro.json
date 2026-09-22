@@ -448,5 +448,591 @@
       "moreDetails": "Doriți să adăugați specificații sau fișiere?",
       "moreLink": "Folosiți formularul detaliat"
     }
+  },
+  "map": {
+    "load": "Încarcă harta interactivă",
+    "privacyNote": "Această hartă încarcă imagini de la OpenStreetMap. Nu se încarcă nimic până nu apăsați butonul de mai jos.",
+    "approxNote": "Locație la nivel de localitate; contactați-ne pentru indicații exacte."
+  },
+  "products": {
+    "nav": {
+      "rme": "RME",
+      "sfme": "SFME",
+      "sme": "SME",
+      "custom": "Esteri personalizați"
+    },
+    "intro": {
+      "title": "Alegeți esterul potrivit",
+      "lead": "RME, SFME și SME acoperă majoritatea aplicațiilor industriale. Dacă procesul dumneavoastră necesită o altă materie primă sau o proprietate specifică, serviciile noastre de esteri personalizați și formulare personalizată adaptează produsul la cerințele dumneavoastră."
+    },
+    "compare": {
+      "title": "Pe scurt",
+      "colProduct": "Produs",
+      "colFeedstock": "Materie primă",
+      "colBestFor": "Utilizat de obicei pentru",
+      "colPackaging": "Livrare",
+      "action": "Solicită ofertă",
+      "packagingValue": "Vrac · IBC de 1.000 L"
+    },
+    "specNote": {
+      "title": "Proprietăți confirmate pentru fiecare lot",
+      "text": "Valorile exacte pentru conținutul de ester, densitate, vâscozitate, indice de aciditate, conținut de apă, punct de inflamabilitate și culoare depind de materia primă și de specificația dumneavoastră. Le confirmăm pentru fiecare lot printr-un certificat de analiză și putem furniza o fișă tehnică orientativă înainte de comandă.",
+      "cta": "Solicitați o fișă tehnică"
+    },
+    "rme": {
+      "eyebrow": "RME",
+      "title": "Ester Metilic din Rapiță",
+      "lead": "Un ester regenerabil și versatil, cu proprietăți foarte bune la temperaturi scăzute.",
+      "overview": "RME este produs din ulei de rapiță prin procesul nostru de cavitație și finisare ultrasonică, fabricat conform specificației dumneavoastră, nu după o fișă tehnică fixă. Esterii din rapiță sunt cunoscuți pentru un comportament bun la temperaturi scăzute (curgere la rece) comparativ cu alți esteri vegetali, ceea ce face din RME o alegere frecventă acolo unde produsul trebuie să funcționeze în condiții mai reci.",
+      "feature": {
+        "a": "Origine vegetală, regenerabilă",
+        "b": "Proprietăți bune de curgere la rece",
+        "c": "Conținut scăzut de compuși aromatici",
+        "d": "Produs conform specificației dumneavoastră",
+        "e": "Disponibil în vrac sau în IBC de 1.000 L"
+      },
+      "bestFor": "Aplicații industriale care necesită o bună curgere la rece"
+    },
+    "sfme": {
+      "eyebrow": "SFME",
+      "title": "Ester Metilic din Floarea-Soarelui",
+      "lead": "Un ester regenerabil din ulei de floarea-soarelui, produs conform specificației dumneavoastră.",
+      "overview": "SFME este produs din ulei de floarea-soarelui pe aceeași platformă de proces ca RME. Este o bază versatilă pentru formulări industriale și, ca toți esterii noștri, este fabricat și verificat conform specificației dumneavoastră, nu după un singur grad fix.",
+      "feature": {
+        "a": "Origine vegetală, regenerabilă",
+        "b": "Conținut scăzut de compuși aromatici",
+        "c": "Calitate consecventă, verificată pe fiecare lot",
+        "d": "Produs conform specificației dumneavoastră",
+        "e": "Disponibil în vrac sau în IBC de 1.000 L"
+      },
+      "bestFor": "Formulări industriale și tehnice generale"
+    },
+    "sme": {
+      "eyebrow": "SME",
+      "title": "Ester Metilic din Soia",
+      "lead": "Un ester regenerabil din ulei de soia, pentru uz industrial și agrochimic.",
+      "overview": "SME este produs din ulei de soia și livrat pentru aplicații industriale, tehnice și de formulare agrochimică. La fel ca RME și SFME, îl fabricăm conform specificației dumneavoastră și verificăm fiecare lot în laboratorul propriu.",
+      "feature": {
+        "a": "Origine vegetală, regenerabilă",
+        "b": "Solvență bună pentru lucrări de formulare",
+        "c": "Calitate consecventă, verificată pe fiecare lot",
+        "d": "Produs conform specificației dumneavoastră",
+        "e": "Disponibil în vrac sau în IBC de 1.000 L"
+      },
+      "bestFor": "Formulări industriale, tehnice și agrochimice"
+    },
+    "custom": {
+      "eyebrow": "Esteri personalizați",
+      "title": "Alți Esteri Metilici Vegetali",
+      "lead": "Adaptați materiei dumneavoastră prime, concepuți pentru aplicația dumneavoastră.",
+      "overview": "Pe lângă RME, SFME și SME, producem esteri metilici din alte uleiuri vegetale la cerere, inclusiv uleiuri cu conținut ridicat de acid oleic și uleiuri speciale. Lucrăm împreună cu dumneavoastră pentru a alege materia primă, a defini specificația și, acolo unde este util, a dezvolta o formulare personalizată — de la lotul pilot până la producția la scară completă.",
+      "feedstock": {
+        "a": "Uleiuri cu conținut ridicat de acid oleic (de ex. floarea-soarelui sau rapiță high-oleic)",
+        "b": "Ulei de camelină",
+        "c": "Ulei de șofrănaș",
+        "d": "Ulei de in",
+        "e": "Ulei de ricin",
+        "f": "Alte uleiuri vegetale, la cerere"
+      },
+      "feedstockTitle": "Materii prime cu care putem lucra",
+      "cta": "Discutați despre materia primă"
+    },
+    "closing": {
+      "title": "Nu sunteți sigur care ester vi se potrivește?",
+      "text": "Spuneți-ne aplicația, proprietățile țintă și volumul dorit. Echipa noastră tehnică vă va recomanda un produs sau, dacă niciunul dintre esterii standard nu se potrivește, va propune o formulare personalizată."
+    }
+  },
+  "distances": {
+    "title": "Distanțe și timpi de deplasare",
+    "lead": "Distanțe rutiere aproximative de la Săcueni, calculate pe baza rețelei de drumuri (rutare OpenStreetMap, trafic normal). Pentru livrări cu termen critic, confirmați timpii exacți cu echipa noastră de logistică.",
+    "colDestination": "Destinație",
+    "colDistance": "Distanță",
+    "colTime": "Timp de deplasare",
+    "oradea": "Oradea",
+    "debrecen": "Debrecen (Ungaria)",
+    "bors": "Borș — punct de trecere a frontierei RO–HU",
+    "clujNapoca": "Cluj-Napoca",
+    "budapest": "Budapesta (Ungaria)",
+    "timisoara": "Timișoara",
+    "vienna": "Viena (Austria)"
+  },
+  "services": {
+    "nav": {
+      "madeToOrder": "Producție la comandă",
+      "toll": "Prelucrare la façon",
+      "formulation": "Formulare personalizată",
+      "pilot": "Pilot și C&D"
+    },
+    "modelTable": {
+      "title": "Ce model vi se potrivește?",
+      "colModel": "Model",
+      "colProvide": "Furnizați dumneavoastră",
+      "colWeProvide": "Furnizăm noi",
+      "colBestFor": "Potrivit pentru"
+    },
+    "capabilities": {
+      "title": "O singură platformă, patru moduri de colaborare",
+      "a": {
+        "value": "2",
+        "label": "Linii de producție independente"
+      },
+      "b": {
+        "value": "4 × 15 t",
+        "label": "Vase de proces pentru separare și formulare"
+      },
+      "c": {
+        "value": "10–60 t/zi",
+        "label": "Capacitate flexibilă în funcție de campanie"
+      },
+      "d": {
+        "value": "Laborator propriu",
+        "label": "Pentru fiecare lot"
+      }
+    },
+    "madeToOrder": {
+      "title": "Producție la comandă",
+      "lead": "Dumneavoastră definiți produsul și specificația. Noi procurăm uleiul vegetal și gestionăm întregul proces de producție.",
+      "provide": "Specificația dumneavoastră",
+      "weProvide": "Procurarea materiei prime, producție, control al calității, livrare",
+      "bestFor": "Cumpărători care doresc un produs finit fără să gestioneze procurarea materiei prime",
+      "step": {
+        "a": {
+          "title": "Specificația dumneavoastră",
+          "text": "Ne spuneți produsul, parametrii de calitate și aplicația dorită."
+        },
+        "b": {
+          "title": "Procurarea materiei prime",
+          "text": "Procurăm uleiul vegetal care corespunde cerinței dumneavoastră."
+        },
+        "c": {
+          "title": "Producție",
+          "text": "Fabricat pe liniile noastre dedicate, folosind procesarea prin cavitație și ultrasunete."
+        },
+        "d": {
+          "title": "Controlul calității",
+          "text": "Fiecare lot este analizat în laboratorul propriu și documentat printr-un certificat de analiză."
+        },
+        "e": {
+          "title": "Livrare",
+          "text": "Livrat în vrac sau în IBC de 1.000 L, conform programului dumneavoastră."
+        }
+      }
+    },
+    "toll": {
+      "title": "Prelucrare la façon",
+      "lead": "Dumneavoastră furnizați materia primă. Noi o transformăm în fabrica noastră conform specificației, cu trasabilitatea loturilor și confidențialitate.",
+      "provide": "Materia primă și specificația dumneavoastră",
+      "weProvide": "Procesare, control al calității, confidențialitate",
+      "bestFor": "Companii care își procură deja propriul ulei și doresc conversia lui în mod sigur",
+      "step": {
+        "a": {
+          "title": "Materia dumneavoastră primă",
+          "text": "Furnizați uleiul vegetal sau produsul intermediar de convertit."
+        },
+        "b": {
+          "title": "Specificația dumneavoastră",
+          "text": "Stabilim împreună parametrii de proces și calitatea țintă."
+        },
+        "c": {
+          "title": "Producție",
+          "text": "Procesat pe liniile noastre, cu trasabilitate completă a lotului."
+        },
+        "d": {
+          "title": "Confidențialitate",
+          "text": "Formularea și volumele dumneavoastră sunt tratate confidențial."
+        },
+        "e": {
+          "title": "Livrare",
+          "text": "Returnat sau expediat în vrac, în IBC sau în ambalajul solicitat."
+        }
+      }
+    },
+    "formulation": {
+      "title": "Formulare personalizată",
+      "lead": "Dezvoltăm împreună cu dumneavoastră formularea potrivită pe bază de esteri, de la lotul pilot până la scară industrială.",
+      "provide": "Aplicația și obiectivele de performanță",
+      "weProvide": "Dezvoltarea formulării, testare, scalare",
+      "bestFor": "Produse care necesită aditivi, amestecuri sau o proprietate pe care esterii standard nu o acoperă",
+      "step": {
+        "a": {
+          "title": "Consultare",
+          "text": "Discutăm aplicația dumneavoastră și proprietățile necesare."
+        },
+        "b": {
+          "title": "Dezvoltarea formulării",
+          "text": "Selectăm esterul de bază și aditivii — surfactanți, stabilizatori, antioxidanți."
+        },
+        "c": {
+          "title": "Testare în laborator",
+          "text": "Performanța și compatibilitatea sunt verificate în laboratorul nostru."
+        },
+        "d": {
+          "title": "Lot pilot",
+          "text": "Un lot mic validează formularea înainte de scalare."
+        },
+        "e": {
+          "title": "Scalare și livrare",
+          "text": "Transferată la producție completă odată ce formularea este confirmată."
+        }
+      }
+    },
+    "pilot": {
+      "title": "Pilot și C&D",
+      "lead": "Testați o formulare sau o materie primă nouă la scară mai mică înainte de a vă angaja într-o producție completă.",
+      "provide": "Materia primă sau ideea de formulare",
+      "weProvide": "Evaluarea materiei prime, dezvoltarea formulării, testare la scară pilot",
+      "bestFor": "Produse noi, materii prime noi sau validarea performanței înainte de producția la scară completă",
+      "step": {
+        "a": {
+          "title": "Evaluarea materiei prime",
+          "text": "Analizăm materia primă și cerințele dumneavoastră."
+        },
+        "b": {
+          "title": "Dezvoltarea formulării",
+          "text": "Amestecuri și aditivi adaptați aplicației dumneavoastră."
+        },
+        "c": {
+          "title": "Producție pilot",
+          "text": "Un lot mai mic pe linia noastră de producție, pentru validarea performanței."
+        },
+        "d": {
+          "title": "Analiza calității",
+          "text": "Testare în laborator propriu și optimizarea rezultatului."
+        },
+        "e": {
+          "title": "Scalare",
+          "text": "Odată validată, formularea trece la producția la scară completă."
+        }
+      }
+    },
+    "closing": {
+      "title": "Nu știți ce model să alegeți?",
+      "text": "Spuneți-ne ce aveți și de ce aveți nevoie — materie primă, specificație sau doar o idee. Vă vom recomanda modul potrivit de colaborare."
+    }
+  },
+  "applications": {
+    "intro": {
+      "title": "O singură platformă, multe industrii",
+      "lead": "Esterii metilici vegetali și formulările personalizate funcționează ca purtători, solvenți și componente funcționale în diverse industrii. Alegeți industria dumneavoastră mai jos pentru a vedea ce adaptăm de obicei."
+    },
+    "agrochemicals": {
+      "title": "Agrochimie",
+      "eyebrow": "Aplicație principală",
+      "lead": "Un purtător regenerabil și component de formulare pentru produse de protecția plantelor.",
+      "text": "Esterii metilici vegetali sunt folosiți ca purtători și co-solvenți în formulări agrochimice — erbicide, insecticide, fungicide și regulatori de creștere. Ca și component de formulare în sisteme EC, EW și SC, pot îmbunătăți solubilitatea și stabilitatea substanțelor active, oferind totodată o alternativă regenerabilă și biodegradabilă la purtătorii pe bază de ulei mineral.",
+      "point": {
+        "a": "Purtător pentru substanțe active",
+        "b": "Component de formulare (sisteme EC, EW, SC)",
+        "c": "Solubilitate și stabilitate îmbunătățite",
+        "d": "Profil regenerabil și biodegradabil",
+        "e": "Suport tehnic pentru dezvoltarea formulării"
+      }
+    },
+    "coatings": {
+      "title": "Vopsele, Lacuri și Cerneluri",
+      "lead": "Un solvent bio-based și component reactiv.",
+      "text": "În vopsele, lacuri, rășini și cerneluri, esterii noștri funcționează ca solvent sau component reactiv, oferind o alternativă regenerabilă la unele ingrediente pe bază de ulei mineral. Putem ajusta materia primă și specificația pentru a se potrivi formulării dumneavoastră.",
+      "point": {
+        "a": "Solvent și component reactiv",
+        "b": "Alternativă regenerabilă la ingredientele pe bază de ulei mineral",
+        "c": "Produs conform specificației formulării dumneavoastră"
+      }
+    },
+    "lubricants": {
+      "title": "Lubrifianți și Fluide de Prelucrare a Metalelor",
+      "lead": "Component de bază și aditiv de performanță.",
+      "text": "Esterii metilici vegetali sunt folosiți ca fluid de bază sau aditiv de performanță în lubrifianți și ca și component în fluidele de prelucrare a metalelor pentru operații de așchiere, rectificare și deformare. Materia primă și pachetul de aditivi sunt alese pentru a corespunde profilului de performanță dorit.",
+      "point": {
+        "a": "Component de bază și aditiv de performanță pentru lubrifianți",
+        "b": "Component pentru fluide de așchiere, rectificare și deformare",
+        "c": "Poate fi combinat cu aditivi prin serviciul nostru de formulare personalizată"
+      },
+      "ctaLubricants": "Lubrifianți",
+      "ctaMetalworking": "Fluide de prelucrare a metalelor"
+    },
+    "cleaners": {
+      "title": "Detergenți și Degresanți Industriali",
+      "lead": "O bază regenerabilă pentru formulări de degresare și curățare.",
+      "text": "Folosiți ca bază sau component activ în formulări industriale de curățare și degresare, oferind o alternativă regenerabilă la unele ingrediente pe bază de solvenți.",
+      "point": {
+        "a": "Bază sau component activ pentru formulări de degresare",
+        "b": "Alternativă regenerabilă la unele ingrediente pe bază de solvenți"
+      }
+    },
+    "polymers": {
+      "title": "Polimeri și Mase Plastice",
+      "lead": "Plastifiant și auxiliar de procesare.",
+      "text": "În procesarea polimerilor și a maselor plastice, esterii metilici vegetali pot acționa ca plastifiant sau auxiliar de procesare, oferind o alternativă bio-based în formulările unde acest lucru contează pentru produsul dumneavoastră sau pentru clienții dumneavoastră.",
+      "point": {
+        "a": "Plastifiant și auxiliar de procesare",
+        "b": "Alternativă bio-based în formulările de polimeri"
+      }
+    },
+    "chemicals": {
+      "title": "Produse Chimice Industriale și Stabilizarea Solului",
+      "lead": "Un intermediar pentru procesare chimică ulterioară.",
+      "text": "Ca intermediar, esterii metilici vegetali sunt folosiți într-o varietate de produse chimice industriale ulterioare. Esterii și glicerina (un subprodus al procesului nostru) sunt folosiți și în aplicații de stabilizare a solului. Spuneți-ne aplicația țintă și vă confirmăm dacă se potrivește un ester standard sau o formulare personalizată.",
+      "point": {
+        "a": "Intermediar pentru produse chimice ulterioare",
+        "b": "Glicerină disponibilă ca subprodus, pentru aplicații potrivite",
+        "c": "Aplicații de stabilizare a solului, la cerere"
+      },
+      "ctaChemicals": "Produse chimice industriale",
+      "ctaSoil": "Stabilizarea solului"
+    },
+    "closing": {
+      "title": "Nu găsiți industria dumneavoastră?",
+      "text": "Esterii și formulările noastre personalizate se adaptează și altor aplicații decât cele de mai sus. Spuneți-ne ce doriți să obțineți și vă spunem sincer dacă vă putem ajuta."
+    }
+  },
+  "technology": {
+    "intro": {
+      "title": "Cum transformăm uleiul în ester",
+      "text": "Uleiul vegetal reacționează cu metanolul în prezența unui catalizator (transesterificare), producând ester metilic și glicerină ca subprodus. Procesul nostru combină cavitația hidrodinamică cu finisarea ultrasonică pentru a intensifica această reacție: cavitația creează microbule și o energie de amestecare ridicată, care aduc uleiul și metanolul în contact mai strâns și mai rapid, iar etapa ultrasonică rafinează în continuare amestecul înainte de separare."
+    },
+    "flow": {
+      "title": "Fluxul procesului",
+      "a": {
+        "title": "Materii prime",
+        "text": "Ulei vegetal, metanol și catalizator"
+      },
+      "b": {
+        "title": "Pretratare",
+        "text": "Filtrare, deshidratare și condiționare"
+      },
+      "c": {
+        "title": "Reactor cu cavitație și ultrasunete",
+        "text": "Reacție intensificată, transfer de masă ridicat"
+      },
+      "d": {
+        "title": "Separarea fazelor",
+        "text": "Esterul și glicerina sunt separate"
+      },
+      "e": {
+        "title": "Produs finit",
+        "text": "Ester metilic vegetal, verificat calitativ"
+      }
+    },
+    "cards": {
+      "cavitation": {
+        "title": "Cavitație Hidrodinamică",
+        "text": "Creează microbule și o energie de amestecare locală ridicată, îmbunătățind contactul dintre ulei și metanol și accelerând reacția."
+      },
+      "ultrasound": {
+        "title": "Finisare Ultrasonică",
+        "text": "O a doua etapă de procesare care îmbunătățește în continuare amestecarea și contribuie la un produs consecvent, omogen."
+      },
+      "automation": {
+        "title": "Monitorizare și Control al Procesului",
+        "text": "Liniile noastre de producție sunt monitorizate pentru a menține condiții consecvente de la un lot la altul, susținând o calitate repetabilă."
+      }
+    },
+    "advantages": {
+      "title": "Ce înseamnă acest lucru pentru produsul dumneavoastră",
+      "a": "Amestecare și transfer de masă intensificate între ulei și metanol",
+      "b": "Un proces repetabil, de la un lot la altul",
+      "c": "Flexibil, de la loturi pilot la producție completă",
+      "d": "Funcționează cu o gamă variată de materii prime vegetale"
+    },
+    "closing": {
+      "title": "Doriți detalii tehnice pentru proiectul dumneavoastră?",
+      "text": "Spuneți-ne materia primă și specificația țintă, iar echipa noastră vă va explica cum se aplică procesul produsului dumneavoastră."
+    }
+  },
+  "quality": {
+    "approach": {
+      "title": "Abordarea noastră",
+      "text": "Aplicăm controlul calității în fiecare etapă, de la materia primă până la produsul finit. Fiecare lot este analizat în laboratorul nostru propriu, folosind metode de testare standardizate, și documentat printr-un certificat de analiză înainte de a părăsi fabrica."
+    },
+    "methods": {
+      "title": "Ce testăm și de ce",
+      "colParameter": "Parametru",
+      "colStandard": "Metodă",
+      "colMeaning": "Ce indică",
+      "row": {
+        "a": {
+          "param": "Conținut de ester",
+          "standard": "EN 14103",
+          "meaning": "Puritatea esterului metilic"
+        },
+        "b": {
+          "param": "Indice de aciditate",
+          "standard": "EN 14104",
+          "meaning": "Conținutul de acizi grași liberi, un indicator al stabilității"
+        },
+        "c": {
+          "param": "Densitate",
+          "standard": "EN ISO 12185",
+          "meaning": "Consecvență pentru dozare și amestecare"
+        },
+        "d": {
+          "param": "Vâscozitate",
+          "standard": "EN ISO 3104",
+          "meaning": "Comportamentul de curgere pentru manipulare și aplicare"
+        },
+        "e": {
+          "param": "Conținut de apă",
+          "standard": "EN ISO 12937 (Karl Fischer)",
+          "meaning": "Gradul de uscăciune, relevant pentru stabilitatea la depozitare"
+        },
+        "f": {
+          "param": "Punct de inflamabilitate",
+          "standard": "EN ISO 3679",
+          "meaning": "Clasificarea pentru manipulare și transport în siguranță"
+        },
+        "g": {
+          "param": "Culoare",
+          "standard": "EN ISO 6271",
+          "meaning": "Consecvență vizuală de la un lot la altul"
+        }
+      },
+      "note": "Parametri suplimentari pot fi analizați la cerere, conform specificației dumneavoastră."
+    },
+    "process": {
+      "title": "Procesul nostru de calitate",
+      "a": {
+        "title": "Controlul materiei prime",
+        "text": "Uleiul și reactivii primiți sunt verificați înainte de producție."
+      },
+      "b": {
+        "title": "Testare în timpul procesului",
+        "text": "Parametrii cheie sunt monitorizați pe parcursul producției."
+      },
+      "c": {
+        "title": "Analiza produsului final",
+        "text": "Lotul finit este testat conform specificației dumneavoastră."
+      },
+      "d": {
+        "title": "Certificat de analiză",
+        "text": "Rezultatele sunt documentate pentru fiecare lot."
+      },
+      "e": {
+        "title": "Eliberarea și livrarea lotului",
+        "text": "Lotul este eliberat și expediat împreună cu documentația sa."
+      }
+    },
+    "documents": {
+      "title": "Documentație",
+      "lead": "Putem furniza următoarele la cerere. Fișele tehnice (TDS) și de securitate (SDS) se pregătesc pentru fiecare produs; contactați-ne pentru a le solicita pentru aplicația dumneavoastră.",
+      "coa": {
+        "title": "Certificat de analiză",
+        "text": "Emis pentru fiecare lot produs."
+      },
+      "sds": {
+        "title": "Fișă cu date de securitate",
+        "text": "Disponibilă la cerere, pentru fiecare produs."
+      },
+      "tds": {
+        "title": "Fișă tehnică",
+        "text": "Proprietăți orientative, disponibile la cerere."
+      },
+      "cta": "Solicită documentația"
+    },
+    "closing": {
+      "title": "Aveți nevoie de o analiză de probă sau de un test specific?",
+      "text": "Spuneți-ne specificația dumneavoastră și ce parametri contează pentru aplicația dumneavoastră. Echipa noastră de laborator vă confirmă ce putem testa și documenta."
+    }
+  },
+  "facility": {
+    "stat": {
+      "a": {
+        "value": "60 t/zi",
+        "label": "Capacitate de producție (20 t pe tură de 8 ore)"
+      },
+      "b": {
+        "value": "2",
+        "label": "Linii de producție independente"
+      },
+      "c": {
+        "value": "4 × 15 t",
+        "label": "Vase de proces pentru separare și formulare"
+      },
+      "d": {
+        "value": "Laborator propriu",
+        "label": "Pentru fiecare lot"
+      }
+    },
+    "lines": {
+      "title": "Linii de producție",
+      "text": "Fabrica noastră operează două linii de producție independente, cu echipamente de proces din oțel inoxidabil, permițând campanii flexibile și dimensiuni de lot de la pilot la scară completă.",
+      "point": {
+        "a": "Reactoare și linii de proces din oțel inoxidabil",
+        "b": "Dimensiuni de lot flexibile, de la pilot la scară completă",
+        "c": "Monitorizare și control automatizat al procesului",
+        "d": "Calitate consecventă a produsului, de la un lot la altul"
+      }
+    },
+    "storage": {
+      "title": "Depozitare și manipulare",
+      "text": "Rezervoare dedicate păstrează materiile prime și produsele finite separate și pregătite pentru expediere, cu o stație de umplere IBC și încărcare în vrac pentru autocisterne.",
+      "point": {
+        "a": "Rezervoare dedicate pentru materii prime și produse finite",
+        "b": "Stație de umplere IBC",
+        "c": "Încărcare în vrac pentru autocisterne",
+        "d": "Acces direct la rutele de transport europene"
+      }
+    },
+    "location": {
+      "title": "Unde ne aflăm",
+      "lead": "Săcueni, județul Bihor, România, lângă granița cu Ungaria.",
+      "text": "Fabrica noastră se află pe partea din Bihor a graniței România–Ungaria, ceea ce ne oferă acces rutier atât la piețele românești, cât și la cele din Europa Centrală."
+    },
+    "packaging": {
+      "title": "Încărcare, ambalare și condiții de livrare",
+      "point": {
+        "a": "Autocisternă (vrac)",
+        "b": "IBC de 1.000 L",
+        "c": "Butoaie sau ambalaj personalizat, la cerere",
+        "d": "EXW, FCA sau DAP — condițiile Incoterms cu care lucrăm de obicei",
+        "e": "Trasabilitatea lotului și documentație de livrare pentru fiecare expediere"
+      }
+    },
+    "visit": {
+      "title": "Vizitați fabrica noastră",
+      "text": "Vă arătăm cu plăcere amplasamentul și discutăm proiectul dumneavoastră personal. Spuneți-ne când vă convine și organizăm o vizită.",
+      "cta": "Programează o vizită"
+    },
+    "closing": {
+      "title": "Planificați o livrare?",
+      "text": "Spuneți-ne locul de livrare, volumul și ambalajul preferat, și vă confirmăm logistica și termenul de livrare."
+    }
+  },
+  "about": {
+    "who": {
+      "title": "Cine suntem",
+      "text": "BIOCETAN este o companie românească specializată în procesarea uleiurilor vegetale și producția de esteri metilici vegetali și formulări lichide personalizate. Fabrica noastră din Săcueni, județul Bihor, combină tehnologia modernă de proces cu un model flexibil de producție. Lucrăm cu clienți industriali, formulatori și distribuitori, oferind producție la comandă, prelucrare la façon și suport pentru dezvoltarea produselor — de la loturi pilot până la producția la scară completă."
+    },
+    "approach": {
+      "title": "Abordarea noastră",
+      "text": "Urmărim o utilizare practică și eficientă a resurselor regenerabile. Combinând procesarea hidrodinamică, separarea atentă și formularea precisă, ne ajutăm partenerii să dezvolte produse adaptate piețelor și aplicațiilor lor."
+    },
+    "values": {
+      "title": "Principiile noastre de lucru",
+      "a": {
+        "title": "Sustenabilitate",
+        "text": "Folosirea resurselor regenerabile, de origine vegetală."
+      },
+      "b": {
+        "title": "Calitate",
+        "text": "Rezultate consecvente, verificate pe fiecare lot."
+      },
+      "c": {
+        "title": "Parteneriat",
+        "text": "Colaborare pe termen lung, nu vânzări ocazionale."
+      },
+      "d": {
+        "title": "Deschidere europeană",
+        "text": "Resurse locale, piețe regionale și europene."
+      }
+    },
+    "location": {
+      "title": "Unde ne aflăm",
+      "text": "Săcueni, județul Bihor, România — lângă granița cu Ungaria, cu acces rutier la piețele din Europa Centrală și de Vest.",
+      "cta": "Vedeți fabrica și logistica noastră"
+    },
+    "closing": {
+      "title": "Să creăm valoare împreună",
+      "text": "Fie că este vorba despre un ester standard, un proiect de prelucrare la façon sau o formulare nouă, echipa noastră este pregătită să discute cu dumneavoastră."
+    }
   }
 }

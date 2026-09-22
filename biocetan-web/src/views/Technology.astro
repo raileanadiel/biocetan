@@ -1,0 +1,99 @@
+---
+import PageHero from '../components/ui/PageHero.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import ProcessSteps from '../components/sections/ProcessSteps.astro';
+import Button from '../components/ui/Button.astro';
+import Icon, { type IconName } from '../components/ui/Icon.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+import { useTranslations } from '../i18n';
+import { pathFor, type PageId } from '../i18n/routes';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+  pageId: PageId;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const contactHref = pathFor('contact', locale);
+
+const flow = (['a', 'b', 'c', 'd', 'e'] as const).map((k) => ({
+  title: t(`technology.flow.${k}.title`),
+  text: t(`technology.flow.${k}.text`),
+}));
+
+const cardIcons: Record<'cavitation' | 'ultrasound' | 'automation', IconName> = {
+  cavitation: 'zap',
+  ultrasound: 'waves',
+  automation: 'settings',
+};
+const cards = (['cavitation', 'ultrasound', 'automation'] as const).map((k) => ({
+  icon: cardIcons[k],
+  title: t(`technology.cards.${k}.title`),
+  text: t(`technology.cards.${k}.text`),
+}));
+
+const advantages = (['a', 'b', 'c', 'd'] as const).map((k) => t(`technology.advantages.${k}`));
+---
+
+<PageHero
+  locale={locale}
+  pageId="technology"
+  title={t('pages.technology.title')}
+  lead={t('pages.technology.lead')}
+>
+  <Fragment slot="actions">
+    <Button href={contactHref} size="lg">
+      {t('cta.experts')}
+    </Button>
+  </Fragment>
+</PageHero>
+
+<Section>
+  <SectionHeading title={t('technology.intro.title')} />
+  <p class="mt-6 max-w-3xl text-lead text-muted">{t('technology.intro.text')}</p>
+</Section>
+
+<Section tone="mint">
+  <SectionHeading title={t('technology.flow.title')} />
+  <div class="mt-12">
+    <ProcessSteps steps={flow} />
+  </div>
+</Section>
+
+<Section>
+  <div class="grid gap-6 md:grid-cols-3">
+    {cards.map((card) => (
+      <article class="rounded-lg border border-line bg-white p-6">
+        <span class="flex size-12 items-center justify-center rounded-full bg-mint-100 text-green-700">
+          <Icon name={card.icon} class="size-6" />
+        </span>
+        <h3 class="mt-4 font-heading text-h3 font-bold text-navy-900">{card.title}</h3>
+        <p class="mt-2 text-muted">{card.text}</p>
+      </article>
+    ))}
+  </div>
+</Section>
+
+<Section tone="navy">
+  <SectionHeading title={t('technology.advantages.title')} />
+  <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+    {advantages.map((text) => (
+      <li class="flex items-start gap-3">
+        <Icon
+          name="check"
+          class="mt-0.5 size-5 shrink-0 rounded-full bg-green-400 p-1 text-navy-900"
+        />
+        <span class="text-white/90">{text}</span>
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<CtaBand
+  locale={locale}
+  title={t('technology.closing.title')}
+  text={t('technology.closing.text')}
+/>

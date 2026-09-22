@@ -1,0 +1,124 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../../config/site';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/config';
+
+/**
+ * Click-to-load OpenStreetMap embed (Leaflet, self-hosted JS/CSS — only the map *tiles* are
+ * third-party). Nothing loads from OpenStreetMap's tile server until the visitor clicks, so the
+ * page makes no third-party request before that (plan §7.5). Always shows a "View on Google
+ * Maps" link as a no-JS / accessible fallback, since a JS map is hard to use with a keyboard or
+ * screen reader.
+ */
+interface Props {
+  locale: Locale;
+  /** Fixed height so swapping the placeholder for the map causes no layout shift. */
+  heightClass?: string;
+}
+
+const { locale, heightClass = 'h-96' } = Astro.props;
+const t = useTranslations(locale);
+const geo = site.geo;
+---
+
+{geo && (
+  <div class="overflow-hidden rounded-lg border border-line">
+    <div
+      data-map-embed
+      data-lat={geo.lat}
+      data-lng={geo.lng}
+      data-map-label={`${site.legalName} — ${site.address.street}, ${site.address.city}`}
+      class:list={['relative bg-mint-100', heightClass]}
+    >
+      <div
+        data-map-placeholder
+        class="flex h-full flex-col items-center justify-center gap-3 p-6 text-center"
+      >
+        <Icon name="map-pin" class="size-9 text-green-700" />
+        <p class="max-w-xs text-sm text-muted">{t('map.privacyNote')}</p>
+        <button
+          type="button"
+          data-map-load
+          class="inline-flex min-h-11 items-center gap-2 rounded-md bg-navy-900 px-5 font-semibold text-white hover:bg-navy-800"
+        >
+          <Icon name="map-pin" class="size-4" />
+          {t('map.load')}
+        </button>
+      </div>
+    </div>
+    <div class="flex items-center justify-between gap-3 border-t border-line bg-white px-4 py-3 text-sm">
+      <span class="text-muted">{t('map.approxNote')}</span>
+      <a
+        href={site.mapsUrl}
+        target="_blank"
+        rel="noopener"
+        class="shrink-0 font-semibold text-green-700 underline-offset-4 hover:underline"
+      >
+        {t('contact.openMaps')}
+      </a>
+    </div>
+  </div>
+)}
+
+<script>
+  import type { Map as LeafletMap } from 'leaflet';
+
+  async function loadMap(container: HTMLElement) {
+    const placeholder = container.querySelector('[data-map-placeholder]');
+    const lat = Number(container.dataset.lat);
+    const lng = Number(container.dataset.lng);
+
+    // Vite `?url` imports give the built URLs for the marker images, so Leaflet's default icon
+    // (which normally expects an images/ folder next to leaflet.css) resolves correctly once bundled.
+    const [leafletModule, icon, icon2x, shadow] = await Promise.all([
+      import('leaflet'),
+      import('leaflet/dist/images/marker-icon.png?url'),
+      import('leaflet/dist/images/marker-icon-2x.png?url'),
+      import('leaflet/dist/images/marker-shadow.png?url'),
+      import('leaflet/dist/leaflet.css'),
+    ]);
+    // Leaflet ships as CommonJS (module.exports = L); depending on how the bundler interops
+    // that, the dynamic import either lands on .default or is spread onto the namespace itself.
+    // Support both so this doesn't silently break on a bundler/version change.
+    const L =
+      (leafletModule as unknown as { default?: typeof leafletModule }).default ?? leafletModule;
+    L.Icon.Default.mergeOptions({
+      iconUrl: icon.default,
+      iconRetinaUrl: icon2x.default,
+      shadowUrl: shadow.default,
+    });
+
+    placeholder?.remove();
+    const mapDiv = document.createElement('div');
+    mapDiv.className = 'h-full w-full';
+    mapDiv.setAttribute('role', 'img');
+    mapDiv.setAttribute('aria-label', container.dataset.mapLabel ?? 'Map');
+    container.append(mapDiv);
+
+    const map: LeafletMap = L.map(mapDiv, { scrollWheelZoom: false }).setView([lat, lng], 12);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+    }).addTo(map);
+    L.marker([lat, lng])
+      .addTo(map)
+      .bindPopup(container.dataset.mapLabel ?? '');
+
+    // Wheel-zoom is disabled by default (it fights page scroll); re-enable once the visitor
+    // deliberately interacts with the map itself.
+    map.on('focus', () => map.scrollWheelZoom.enable());
+    map.on('blur', () => map.scrollWheelZoom.disable());
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-map-embed]').forEach((container) => {
+    container.querySelector('[data-map-load]')?.addEventListener(
+      'click',
+      () => {
+        void loadMap(container);
+      },
+      { once: true },
+    );
+  });
+</script>
