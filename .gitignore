@@ -1,0 +1,4 @@
+# OS / editor cruft (project-specific ignores live in biocetan-web/.gitignore)
+.DS_Store
+*.swp
+.idea/

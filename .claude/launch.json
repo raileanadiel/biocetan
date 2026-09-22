@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "biocetan-web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "biocetan-web", "run", "dev", "--", "--port", "4321"],
+      "port": 4321
+    }
+  ]
+}
