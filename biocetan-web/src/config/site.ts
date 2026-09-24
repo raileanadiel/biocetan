@@ -7,6 +7,8 @@ export const site = {
   legalName: 'BIOCETAN S.R.L.',
   email: 'office@biocetan.ro',
   phone: { display: '+40 741 039 292', href: '+40741039292' },
+  /** Same number as `phone` — confirmed by the client for WhatsApp (2026-09-24). wa.me needs the number with no `+` or spaces. */
+  whatsappUrl: 'https://wa.me/40741039292',
   address: {
     street: 'Str. Letea Mare nr. 44',
     city: 'Săcueni',

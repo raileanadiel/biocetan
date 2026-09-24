@@ -61,6 +61,17 @@ const checklist = (['a', 'b', 'c', 'd', 'e'] as const).map((key) => t(`contact.c
             </a>
           </p>
           <p class="flex gap-3">
+            <Icon name="message-circle" class="mt-0.5 size-5 text-green-700" />
+            <a
+              href={site.whatsappUrl}
+              target="_blank"
+              rel="noopener"
+              class="font-semibold text-navy-900 underline-offset-4 hover:underline"
+            >
+              {t('contact.whatsapp')}
+            </a>
+          </p>
+          <p class="flex gap-3">
             <Icon name="clock" class="mt-0.5 size-5 text-green-700" />
             <span>{t('footer.hours')}</span>
           </p>

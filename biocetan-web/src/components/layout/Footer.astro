@@ -103,6 +103,17 @@ const stars = Array.from({ length: 12 }, (_, i) => {
           </a>
         </p>
         <p class="flex gap-3">
+          <Icon name="message-circle" class="mt-0.5 size-5 text-green-300" />
+          <a
+            href={site.whatsappUrl}
+            target="_blank"
+            rel="noopener"
+            class="underline-offset-4 hover:text-white hover:underline"
+          >
+            {t('footer.whatsapp')}
+          </a>
+        </p>
+        <p class="flex gap-3">
           <Icon name="clock" class="mt-0.5 size-5 text-green-300" />
           <span>{t('footer.hours')}</span>
         </p>

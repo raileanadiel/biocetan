@@ -50,7 +50,8 @@
     "cookies": "Cookies",
     "cui": "CUI",
     "regCom": "Reg. Com.",
-    "shareCapital": "Share capital"
+    "shareCapital": "Share capital",
+    "whatsapp": "WhatsApp"
   },
   "pages": {
     "home": {
@@ -265,7 +266,8 @@
       "e": "Your planned timing"
     },
     "visitTitle": "Visit our facility",
-    "visitText": "We are happy to show you the site. Choose “Site visit” in the form and tell us when it suits you."
+    "visitText": "We are happy to show you the site. Choose “Site visit” in the form and tell us when it suits you.",
+    "whatsapp": "WhatsApp"
   },
   "home": {
     "hero": {

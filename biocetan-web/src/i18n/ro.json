@@ -50,7 +50,8 @@
     "cookies": "Cookie-uri",
     "cui": "CUI",
     "regCom": "Reg. Com.",
-    "shareCapital": "Capital social"
+    "shareCapital": "Capital social",
+    "whatsapp": "WhatsApp"
   },
   "pages": {
     "home": {
@@ -265,7 +266,8 @@
       "e": "Termenul dorit"
     },
     "visitTitle": "Vizitați fabrica noastră",
-    "visitText": "Vă arătăm cu plăcere amplasamentul. Alegeți „Vizită la fabrică” în formular și spuneți-ne când vă convine."
+    "visitText": "Vă arătăm cu plăcere amplasamentul. Alegeți „Vizită la fabrică” în formular și spuneți-ne când vă convine.",
+    "whatsapp": "WhatsApp"
   },
   "home": {
     "hero": {

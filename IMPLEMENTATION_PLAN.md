@@ -427,17 +427,22 @@ Matches mockup at 375 / 768 / 1280 / 1920 px · content approved by client · al
 
 ## 11. Open questions for the client (priority order)
 
-**P0 — blocks build**
+**Answered 2026-09-24** (by the site owner; items 3/4/7/9/11 are pending a follow-up with their boss, who holds the actual data — a WhatsApp message listing exactly those was drafted for them):
 
-1. Confirm v1 scope: the 9-page structure (§4, recommended) vs the original 16 pages vs a single landing page.
-2. Vector logo + any brand guide; original photos/video; is a photo shoot possible?
-3. Legal data: CUI/VAT, Reg. Com. no., share capital, registered office.
-4. Certifications actually held (ISO 9001? 17025? others, e.g. sustainability schemes) — with certificates.
-5. Answers to §3.1 items 1–7 (waterless vs washing, batch vs continuous, pilot plant, conversion figure, SFME/SME claims, real spec values, distances).
-
-**P1 — needed before Phase 3** 6. Languages at launch (EN + RO recommended; HU when? DE later?) and who provides/approves translations. 7. Domain (biocetan.ro) registrar access, current email host, who receives leads, any CRM. 8. TDS / SDS / sample CoA PDFs; gated or open? 9. About content: founding year, story, team names/roles, ownership; any references/customers that can be named. 10. Response-time promise for the form; WhatsApp yes/no; visit scheduling policy. 11. Commercial facts for the site: real per-product values for the comparison table; MOQ, batch size, lead time, packaging sizes, Incoterms, sample policy; REACH/SDS status; feedstock origin & any non-GMO / sustainability certificates (these feed the FAQ).
-
-**P2 — nice to have** 12. Who edits content after launch, how often (decides CMS). 13. Budget / deadline; hosting cost preference. 14. Analytics preference (cookieless vs GA4).
+1. **Scope**: staying on the 9-page structure. No change.
+2. **Logo/photos**: none exist yet. Owner will arrange them; still a placeholder wordmark + no photography site-wide (§10).
+3. **Legal data** (CUI, Reg. Com., share capital): owner is asking their boss. Still blocks the footer/legal-page `[TODO]`s.
+4. **Certifications**: owner is asking their boss whether any are actually held. Until answered, the Quality page keeps making no certification claim (§3.2-8) — already the case.
+5. **§3.1 technical contradictions (items 1–7)**: owner asked me to resolve these editorially for now rather than escalate every one. Already done, conservatively, throughout Phase 3 (verified 2026-09-24 — no disputed phrase remains in any page or string): Technology omits the waterless/washing and continuous/batch wording and the >98% conversion figure entirely rather than picking a side (§3.1-1, -2, -4); Pilot & R&D describes pilot batches generically instead of citing the unverified "10–2,000 L reactors" (§3.1-3); SFME/SME feature lists drop the disputed oxidative-stability claim (§3.1-5); Products has no numeric property table, only a qualitative comparison, deferring real numbers to a per-batch CoA (§3.1-6); Facility & Logistics' distances are computed via OSM/OSRM routing, not the mockups' figures (§3.1-7). This still isn't a factual confirmation from someone technical at BIOCETAN — treat the current copy as a safe placeholder, not as verified.
+6. **Languages**: EN + RO only for now, as already built. No Hungarian yet.
+7. **Domain**: BIOCETAN owns biocetan.ro; owner needs to get registrar access from their boss (may have been sent by voice message and lost). Still needed before Phase 5 (DNS/SPF/DKIM/DMARC).
+8. **TDS/SDS/CoA**: on request only, not published openly. Matches the current "Request documentation" CTA — no change needed.
+9. **About content** (founding year, story, team, ownership): owner is asking their boss. About still has no team/story section.
+10. **Response promise & WhatsApp**: WhatsApp **yes**, using the boss's number, +40 741 039 292 (already the site's phone number) — added to the Contact page and footer (`wa.me` link, generic chat-bubble icon, not the trademarked WhatsApp logo). Response-time wording stays soft ("as soon as possible" / "shortly", already the copy) rather than a specific SLA. The contact email may move to a dedicated business address later ("poate chiar pe o adresă de business") — asked about in the WhatsApp draft; `office@biocetan.ro` stays the default until told otherwise.
+11. **Commercial facts** (real spec values, MOQ, batch size, lead time, packaging, Incoterms, sample policy, REACH/SDS status, feedstock certificates): owner is asking their boss. Still blocks a numeric Products comparison table and several FAQ answers (§7.1).
+12. **Content editing after launch**: the owner will edit it themselves, infrequently. **Decision: no CMS for v1** (plan §8.1's Keystatic/Decap option is dropped unless editing frequency increases) — infrequent edits go through a developer/AI-assisted code change instead.
+13. **Hosting**: owner confirms hosting is covered, no budget blocker. Proceeding with the recommended Cloudflare Pages setup (§8.1) unless a specific alternate host is named later.
+14. **Analytics**: owner asked for a recommendation. **Recommendation: Plausible** (hosted, paid, cookieless, GDPR-simple, five-minute setup) as the default; **self-hosted Umami** (free, cookieless) is the alternative if they'd rather not pay and can run a small extra service. Either keeps the site cookie-banner-free (§7.5). Not wired in yet — needs an account/instance before it can be added; Google Analytics was not recommended (cookie banner + more setup for a small B2B site).
 
 ---
 
