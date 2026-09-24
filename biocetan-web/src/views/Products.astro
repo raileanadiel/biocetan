@@ -4,7 +4,7 @@ import Section from '../components/ui/Section.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
 import SubNav from '../components/ui/SubNav.astro';
 import Button from '../components/ui/Button.astro';
-import Icon from '../components/ui/Icon.astro';
+import Icon, { type IconName } from '../components/ui/Icon.astro';
 import CtaBand from '../components/ui/CtaBand.astro';
 import { useTranslations } from '../i18n';
 import { pathFor, type PageId } from '../i18n/routes';
@@ -22,12 +22,94 @@ const quoteHref = (product: ProductValue) => `${pathFor('contact', locale)}?prod
 
 const products = ['rme', 'sfme', 'sme'] as const;
 
-const subnavItems = (['rme', 'sfme', 'sme', 'custom'] as const).map((id) => ({
+const subnavItems = (['rme', 'sfme', 'sme', 'custom', 'formulated'] as const).map((id) => ({
   id,
   label: t(`products.nav.${id}`),
 }));
 
 const customFeedstocks = ['a', 'b', 'c', 'd', 'e', 'f'] as const;
+
+// Resolved per known id (not from a loop variable) — see AGENTS.md on the cross-product pitfall.
+const formulatedProducts = [
+  {
+    id: 'agro-carrier' as const,
+    industry: 'agrochemicals' as const,
+    icon: 'sprout' as IconName,
+    name: t('products.formulated.agroCarrier.name'),
+    tagline: t('products.formulated.agroCarrier.tagline'),
+    overview: t('products.formulated.agroCarrier.overview'),
+    benefits: [
+      t('products.formulated.agroCarrier.benefit.a'),
+      t('products.formulated.agroCarrier.benefit.b'),
+      t('products.formulated.agroCarrier.benefit.c'),
+    ],
+  },
+  {
+    id: 'mwf-e' as const,
+    industry: 'metalworking' as const,
+    icon: 'settings' as IconName,
+    name: t('products.formulated.mwfE.name'),
+    tagline: t('products.formulated.mwfE.tagline'),
+    overview: t('products.formulated.mwfE.overview'),
+    benefits: [
+      t('products.formulated.mwfE.benefit.a'),
+      t('products.formulated.mwfE.benefit.b'),
+      t('products.formulated.mwfE.benefit.c'),
+    ],
+  },
+  {
+    id: 'road-clean' as const,
+    industry: 'cleaners' as const,
+    icon: 'droplet' as IconName,
+    name: t('products.formulated.roadClean.name'),
+    tagline: t('products.formulated.roadClean.tagline'),
+    overview: t('products.formulated.roadClean.overview'),
+    benefits: [
+      t('products.formulated.roadClean.benefit.a'),
+      t('products.formulated.roadClean.benefit.b'),
+      t('products.formulated.roadClean.benefit.c'),
+    ],
+  },
+  {
+    id: 'asphalt-release' as const,
+    industry: 'construction' as const,
+    icon: 'truck' as IconName,
+    name: t('products.formulated.asphaltRelease.name'),
+    tagline: t('products.formulated.asphaltRelease.tagline'),
+    overview: t('products.formulated.asphaltRelease.overview'),
+    benefits: [
+      t('products.formulated.asphaltRelease.benefit.a'),
+      t('products.formulated.asphaltRelease.benefit.b'),
+      t('products.formulated.asphaltRelease.benefit.c'),
+    ],
+  },
+  {
+    id: 'form-release' as const,
+    industry: 'construction' as const,
+    icon: 'building' as IconName,
+    name: t('products.formulated.formRelease.name'),
+    tagline: t('products.formulated.formRelease.tagline'),
+    overview: t('products.formulated.formRelease.overview'),
+    benefits: [
+      t('products.formulated.formRelease.benefit.a'),
+      t('products.formulated.formRelease.benefit.b'),
+      t('products.formulated.formRelease.benefit.c'),
+    ],
+  },
+  {
+    id: 'process-solvent' as const,
+    industry: 'chemicals' as const,
+    icon: 'flask' as IconName,
+    name: t('products.formulated.processSolvent.name'),
+    tagline: t('products.formulated.processSolvent.tagline'),
+    overview: t('products.formulated.processSolvent.overview'),
+    benefits: [
+      t('products.formulated.processSolvent.benefit.a'),
+      t('products.formulated.processSolvent.benefit.b'),
+      t('products.formulated.processSolvent.benefit.c'),
+    ],
+  },
+];
 ---
 
 <PageHero
@@ -159,6 +241,43 @@ const customFeedstocks = ['a', 'b', 'c', 'd', 'e', 'f'] as const;
       </ul>
     </div>
   </div>
+</Section>
+
+<Section id="formulated" tone="mint">
+  <SectionHeading
+    eyebrow={t('products.formulated.eyebrow')}
+    title={t('products.formulated.title')}
+    lead={t('products.formulated.lead')}
+  />
+  <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {formulatedProducts.map((p) => (
+      <div class="flex flex-col rounded-lg border border-line bg-white p-6">
+        <span class="flex size-11 items-center justify-center rounded-full bg-mint-100 text-green-700">
+          <Icon name={p.icon} class="size-5" />
+        </span>
+        <h3 class="mt-4 font-heading text-lg font-extrabold text-navy-900">{p.name}</h3>
+        <p class="mt-1 text-sm font-semibold text-green-700">{p.tagline}</p>
+        <p class="mt-3 text-sm text-muted">{p.overview}</p>
+        <ul class="mt-4 grid gap-2">
+          {p.benefits.map((benefit) => (
+            <li class="flex items-start gap-2 text-sm">
+              <Icon
+                name="check"
+                class="mt-0.5 size-4 shrink-0 rounded-full bg-green-600 p-0.5 text-white"
+              />
+              <span>{benefit}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6">
+          <Button href={quoteHref(p.id)} variant="outline" size="md" icon="arrow-right">
+            {t('products.compare.action')}
+          </Button>
+        </p>
+      </div>
+    ))}
+  </div>
+  <p class="mt-8 text-center text-sm text-muted">{t('products.formulated.packaging')}</p>
 </Section>
 
 <Section tone="navy">

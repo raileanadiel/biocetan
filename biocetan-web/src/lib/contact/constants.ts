@@ -9,6 +9,12 @@ export const PRODUCT_VALUES = [
   'sme',
   'custom-ester',
   'custom-formulation',
+  'agro-carrier',
+  'mwf-e',
+  'road-clean',
+  'asphalt-release',
+  'form-release',
+  'process-solvent',
   'toll',
   'pilot',
   'logistics',
@@ -26,6 +32,7 @@ export const INDUSTRY_VALUES = [
   'polymers',
   'chemicals',
   'soil',
+  'construction',
   'other',
 ] as const;
 

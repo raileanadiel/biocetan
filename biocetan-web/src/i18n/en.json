@@ -188,6 +188,12 @@
         "sme": "SME (soybean methyl ester)",
         "custom-ester": "Custom vegetable methyl ester",
         "custom-formulation": "Custom formulation",
+        "agro-carrier": "BIOCETAN Agro Carrier (agrochemical carrier)",
+        "mwf-e": "BIOCETAN MWF-E (metalworking fluid)",
+        "road-clean": "BIOCETAN Road Clean (cleaning solution)",
+        "asphalt-release": "BIOCETAN Asphalt Release (release agent)",
+        "form-release": "BIOCETAN Form Release (release agent)",
+        "process-solvent": "BIOCETAN Process Solvent (industrial solvent)",
         "toll": "Toll manufacturing",
         "pilot": "Pilot batch / R&D",
         "logistics": "Logistics / packaging",
@@ -204,6 +210,7 @@
         "polymers": "Polymers & plastics",
         "chemicals": "Industrial chemicals",
         "soil": "Soil stabilisation",
+        "construction": "Construction & infrastructure",
         "other": "Other"
       },
       "unit": {
@@ -461,7 +468,8 @@
       "rme": "RME",
       "sfme": "SFME",
       "sme": "SME",
-      "custom": "Custom Esters"
+      "custom": "Custom Esters",
+      "formulated": "Formulated Products"
     },
     "intro": {
       "title": "Choose your ester",
@@ -542,6 +550,72 @@
     "closing": {
       "title": "Not sure which ester fits?",
       "text": "Tell us your application, target properties and volume. Our technical team will recommend a product or, if none of the standard esters fit, propose a custom formulation."
+    },
+    "formulated": {
+      "eyebrow": "READY-MADE FORMULATIONS",
+      "title": "Our formulated product range",
+      "lead": "Alongside RME, SFME, SME and fully custom formulations, we offer a standard range of ester-based formulated products for specific applications — from agrochemical carriers to construction release agents.",
+      "packaging": "Available in 200 L drums and 1000 L IBC tanks.",
+      "agroCarrier": {
+        "name": "BIOCETAN Agro Carrier",
+        "tagline": "Vegetable ester carrier for agrochemical formulation",
+        "overview": "A bio-based formulation of vegetable methyl esters and selected functional components, used as a carrier and co-solvent in agrochemical formulations — herbicides, insecticides, fungicides and plant-nutrition products.",
+        "benefit": {
+          "a": "Excellent carrier and co-solvent properties",
+          "b": "Good penetration and coverage, compatible with a wide range of active ingredients",
+          "c": "Biodegradable, lower environmental impact than conventional solvents"
+        }
+      },
+      "mwfE": {
+        "name": "BIOCETAN MWF-E",
+        "tagline": "Ester-based metalworking fluid",
+        "overview": "A high-performance metalworking fluid based on vegetable methyl esters, designed for machining, forming and grinding operations, providing lubricity, cooling and corrosion protection.",
+        "benefit": {
+          "a": "Excellent lubricity and cooling performance",
+          "b": "Helps extend tool life and improves surface finish",
+          "c": "Corrosion protection with a biodegradable formulation"
+        }
+      },
+      "roadClean": {
+        "name": "BIOCETAN Road Clean",
+        "tagline": "Heavy-duty bio-based cleaning solution",
+        "overview": "A bio-based cleaning solution for the effective removal of asphalt, bitumen, oils, greases and other tough contaminants from vehicles, equipment, tools and industrial surfaces.",
+        "benefit": {
+          "a": "Effectively removes asphalt, bitumen, oils and grease",
+          "b": "Fast and easy to use, suitable for industrial and professional use",
+          "c": "Biodegradable, lower environmental impact than conventional hydrocarbon solvents"
+        }
+      },
+      "asphaltRelease": {
+        "name": "BIOCETAN Asphalt Release",
+        "tagline": "Bio-based release agent for asphalt equipment & transport",
+        "overview": "A bio-based release agent that prevents adhesion of bitumen and asphalt to trucks, pavers, rollers and other road-construction equipment, for smoother operation and easier cleaning.",
+        "benefit": {
+          "a": "Prevents adhesion of asphalt and bitumen",
+          "b": "Reduces cleaning time and costs, helps extend equipment lifetime",
+          "c": "Biodegradable formulation"
+        }
+      },
+      "formRelease": {
+        "name": "BIOCETAN Form Release",
+        "tagline": "Bio-based release agent for concrete & moulds",
+        "overview": "A bio-based release agent for easy and reliable release of concrete from formwork and moulds, giving an excellent surface finish and reducing cleaning effort — suitable for steel, plywood, plastic and composite moulds.",
+        "benefit": {
+          "a": "Reliable, easy release from formwork with excellent surface finish",
+          "b": "Helps extend formwork life and reduces cleaning time",
+          "c": "Biodegradable formulation, low odour"
+        }
+      },
+      "processSolvent": {
+        "name": "BIOCETAN Process Solvent",
+        "tagline": "Industrial solvent & degreasing agent",
+        "overview": "A vegetable-ester-based solvent for industrial cleaning and process use, offering a biodegradable alternative to conventional hydrocarbon solvents across a wide range of applications.",
+        "benefit": {
+          "a": "High solvency power for effective degreasing and cleaning",
+          "b": "Biodegradable alternative to hydrocarbon solvents",
+          "c": "Suited to a wide range of industrial applications"
+        }
+      }
     }
   },
   "distances": {
@@ -785,6 +859,17 @@
     "closing": {
       "title": "Don't see your industry?",
       "text": "Our esters and custom formulations adapt to applications beyond this list. Tell us what you're trying to achieve and we'll tell you honestly whether we can help."
+    },
+    "construction": {
+      "title": "Construction & Infrastructure",
+      "lead": "Bio-based release and cleaning solutions for concrete, asphalt and road-building equipment.",
+      "text": "Vegetable-ester formulations serve as release agents for concrete and asphalt work, and as cleaning solutions for the equipment involved, offering a biodegradable alternative to conventional mineral-oil-based products used on construction sites and road-building equipment.",
+      "point": {
+        "a": "Reliable, easy release from concrete formwork and moulds",
+        "b": "Prevents asphalt and bitumen adhesion on paving and compaction equipment",
+        "c": "Removes asphalt, bitumen, oil and grease from vehicles and tools",
+        "d": "Biodegradable formulation, lower environmental impact than mineral-oil alternatives"
+      }
     }
   },
   "technology": {

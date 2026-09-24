@@ -188,6 +188,12 @@
         "sme": "SME (ester metilic din soia)",
         "custom-ester": "Ester metilic vegetal personalizat",
         "custom-formulation": "Formulare personalizată",
+        "agro-carrier": "BIOCETAN Agro Carrier (purtător pentru agrochimie)",
+        "mwf-e": "BIOCETAN MWF-E (fluid de prelucrare metale)",
+        "road-clean": "BIOCETAN Road Clean (soluție de curățare)",
+        "asphalt-release": "BIOCETAN Asphalt Release (agent antiaderent)",
+        "form-release": "BIOCETAN Form Release (agent de decofrare)",
+        "process-solvent": "BIOCETAN Process Solvent (solvent industrial)",
         "toll": "Prelucrare la façon",
         "pilot": "Lot pilot / C&D",
         "logistics": "Logistică / ambalare",
@@ -204,6 +210,7 @@
         "polymers": "Polimeri și mase plastice",
         "chemicals": "Produse chimice industriale",
         "soil": "Stabilizarea solului",
+        "construction": "Construcții și infrastructură",
         "other": "Altele"
       },
       "unit": {
@@ -461,7 +468,8 @@
       "rme": "RME",
       "sfme": "SFME",
       "sme": "SME",
-      "custom": "Esteri personalizați"
+      "custom": "Esteri personalizați",
+      "formulated": "Produse formulate"
     },
     "intro": {
       "title": "Alegeți esterul potrivit",
@@ -542,6 +550,72 @@
     "closing": {
       "title": "Nu sunteți sigur care ester vi se potrivește?",
       "text": "Spuneți-ne aplicația, proprietățile țintă și volumul dorit. Echipa noastră tehnică vă va recomanda un produs sau, dacă niciunul dintre esterii standard nu se potrivește, va propune o formulare personalizată."
+    },
+    "formulated": {
+      "eyebrow": "FORMULĂRI GATA DE UTILIZARE",
+      "title": "Gama noastră de produse formulate",
+      "lead": "Pe lângă RME, SFME, SME și formulările complet personalizate, oferim o gamă standard de produse formulate pe bază de esteri, pentru aplicații specifice — de la purtători pentru agrochimie până la agenți de decofrare pentru construcții.",
+      "packaging": "Disponibile în butoaie de 200 L și cisterne IBC de 1000 L.",
+      "agroCarrier": {
+        "name": "BIOCETAN Agro Carrier",
+        "tagline": "Purtător pe bază de esteri vegetali pentru formulări agrochimice",
+        "overview": "O formulare pe bază de esteri metilici vegetali și componente funcționale selectate, utilizată ca purtător și co-solvent în formulări agrochimice — erbicide, insecticide, fungicide și produse de nutriție a plantelor.",
+        "benefit": {
+          "a": "Proprietăți excelente de purtător și co-solvent",
+          "b": "Penetrare și acoperire bune, compatibil cu o gamă largă de substanțe active",
+          "c": "Biodegradabil, impact redus asupra mediului față de solvenții convenționali"
+        }
+      },
+      "mwfE": {
+        "name": "BIOCETAN MWF-E",
+        "tagline": "Fluid de prelucrare a metalelor pe bază de esteri",
+        "overview": "Un fluid de prelucrare a metalelor de înaltă performanță, pe bază de esteri metilici vegetali, conceput pentru operații de așchiere, deformare și rectificare, oferind lubrifiere, răcire și protecție anticorozivă.",
+        "benefit": {
+          "a": "Performanțe excelente de lubrifiere și răcire",
+          "b": "Contribuie la prelungirea duratei de viață a sculelor și îmbunătățește finisajul suprafeței",
+          "c": "Protecție anticorozivă, formulare biodegradabilă"
+        }
+      },
+      "roadClean": {
+        "name": "BIOCETAN Road Clean",
+        "tagline": "Soluție de curățare de mare capacitate, pe bază de esteri vegetali",
+        "overview": "O soluție de curățare pe bază de esteri vegetali pentru îndepărtarea eficientă a asfaltului, bitumului, uleiurilor, grăsimilor și a altor reziduuri dificile de pe vehicule, echipamente, unelte și suprafețe industriale.",
+        "benefit": {
+          "a": "Îndepărtează eficient asfaltul, bitumul, uleiurile și grăsimile",
+          "b": "Utilizare rapidă și simplă, potrivită pentru uz industrial și profesional",
+          "c": "Biodegradabilă, impact redus asupra mediului față de solvenții hidrocarburici convenționali"
+        }
+      },
+      "asphaltRelease": {
+        "name": "BIOCETAN Asphalt Release",
+        "tagline": "Agent antiaderent pe bază de esteri vegetali pentru echipamente de asfaltare și transport",
+        "overview": "Un agent antiaderent pe bază de esteri vegetali, care previne aderența bitumului și asfaltului pe camioane, repartizoare, compactoare și alte utilaje de construcții rutiere, pentru o operare mai fluidă și o curățare mai ușoară.",
+        "benefit": {
+          "a": "Previne aderența asfaltului și bitumului",
+          "b": "Reduce timpul și costurile de curățare, contribuie la prelungirea duratei de viață a echipamentelor",
+          "c": "Formulare biodegradabilă"
+        }
+      },
+      "formRelease": {
+        "name": "BIOCETAN Form Release",
+        "tagline": "Agent de decofrare pe bază de esteri vegetali pentru beton și forme",
+        "overview": "Un agent de decofrare pe bază de esteri vegetali, pentru o desprindere ușoară și fiabilă a betonului din cofraje și forme, cu un finisaj excelent al suprafeței și un efort redus de curățare — potrivit pentru forme din oțel, placaj, plastic și materiale compozite.",
+        "benefit": {
+          "a": "Decofrare fiabilă și ușoară, cu finisaj excelent al suprafeței",
+          "b": "Contribuie la prelungirea duratei de viață a cofrajelor și reduce timpul de curățare",
+          "c": "Formulare biodegradabilă, cu miros redus"
+        }
+      },
+      "processSolvent": {
+        "name": "BIOCETAN Process Solvent",
+        "tagline": "Solvent industrial și agent de degresare",
+        "overview": "Un solvent pe bază de esteri vegetali pentru curățare industrială și uz de proces, oferind o alternativă biodegradabilă la solvenții hidrocarburici convenționali, pentru o gamă largă de aplicații.",
+        "benefit": {
+          "a": "Putere mare de dizolvare pentru degresare și curățare eficiente",
+          "b": "Alternativă biodegradabilă la solvenții hidrocarburici",
+          "c": "Potrivit pentru o gamă largă de aplicații industriale"
+        }
+      }
     }
   },
   "distances": {
@@ -785,6 +859,17 @@
     "closing": {
       "title": "Nu găsiți industria dumneavoastră?",
       "text": "Esterii și formulările noastre personalizate se adaptează și altor aplicații decât cele de mai sus. Spuneți-ne ce doriți să obțineți și vă spunem sincer dacă vă putem ajuta."
+    },
+    "construction": {
+      "title": "Construcții și infrastructură",
+      "lead": "Soluții pe bază de esteri vegetali pentru decofrare, antiaderență și curățare în lucrările de beton, asfalt și echipamente rutiere.",
+      "text": "Formulările pe bază de esteri vegetali sunt folosite ca agenți de decofrare pentru beton și asfalt și ca soluții de curățare pentru echipamentele implicate, oferind o alternativă biodegradabilă la produsele convenționale pe bază de uleiuri minerale utilizate pe șantiere și la utilajele de construcții rutiere.",
+      "point": {
+        "a": "Decofrare fiabilă și ușoară din cofraje și forme de beton",
+        "b": "Previne aderența asfaltului și bitumului pe utilajele de asfaltare și compactare",
+        "c": "Îndepărtează asfaltul, bitumul, uleiul și grăsimile de pe vehicule și unelte",
+        "d": "Formulare biodegradabilă, impact redus asupra mediului față de alternativele pe bază de ulei mineral"
+      }
     }
   },
   "technology": {
