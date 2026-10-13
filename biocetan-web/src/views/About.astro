@@ -5,9 +5,12 @@ import SectionHeading from '../components/ui/SectionHeading.astro';
 import Button from '../components/ui/Button.astro';
 import Icon from '../components/ui/Icon.astro';
 import CtaBand from '../components/ui/CtaBand.astro';
+import Photo from '../components/ui/Photo.astro';
 import { useTranslations } from '../i18n';
 import { pathFor, type PageId } from '../i18n/routes';
 import type { Locale } from '../i18n/config';
+import exteriorOffice from '../assets/photos/exterior-office.jpg';
+import exteriorMain from '../assets/photos/exterior-main.jpg';
 
 interface Props {
   locale: Locale;
@@ -28,6 +31,7 @@ const values = (['a', 'b', 'c', 'd'] as const).map((k) => ({
   pageId="about"
   title={t('pages.about.title')}
   lead={t('pages.about.lead')}
+  image={exteriorOffice}
 >
   <Fragment slot="actions">
     <Button href={pathFor('contact', locale)} size="lg">
@@ -37,8 +41,18 @@ const values = (['a', 'b', 'c', 'd'] as const).map((k) => ({
 </PageHero>
 
 <Section>
-  <SectionHeading title={t('about.who.title')} />
-  <p class="mt-6 max-w-3xl text-lead text-muted">{t('about.who.text')}</p>
+  <div class="grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <SectionHeading title={t('about.who.title')} />
+      <p class="mt-6 text-lead text-muted">{t('about.who.text')}</p>
+    </div>
+    <Photo
+      src={exteriorMain}
+      alt={t('photos.exteriorMain.alt')}
+      caption={t('photos.exteriorMain.caption')}
+      frame="aspect-[4/3]"
+    />
+  </div>
 </Section>
 
 <Section tone="mint">

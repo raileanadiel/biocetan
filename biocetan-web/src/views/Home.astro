@@ -5,6 +5,7 @@ import SectionHeading from '../components/ui/SectionHeading.astro';
 import Button from '../components/ui/Button.astro';
 import Icon, { type IconName } from '../components/ui/Icon.astro';
 import ScriptTagline from '../components/ui/ScriptTagline.astro';
+import Photo from '../components/ui/Photo.astro';
 import ProcessSteps from '../components/sections/ProcessSteps.astro';
 import Faq from '../components/sections/Faq.astro';
 import ContactForm from '../components/forms/ContactForm.astro';
@@ -12,6 +13,8 @@ import { site } from '../config/site';
 import { useTranslations } from '../i18n';
 import { pathFor, type PageId } from '../i18n/routes';
 import type { Locale } from '../i18n/config';
+import exteriorMain from '../assets/photos/exterior-main.jpg';
+import exteriorOffice from '../assets/photos/exterior-office.jpg';
 
 interface Props {
   locale: Locale;
@@ -103,6 +106,8 @@ const faq = (['1', '2', '3', '4', '5', '6', '7', '8'] as const).map((n) => ({
   title={t('pages.home.title')}
   accent={t('pages.home.accent')}
   lead={t('pages.home.lead')}
+  image={exteriorMain}
+  imageFocus="object-[75%_40%]"
 >
   <Fragment slot="actions">
     <Button href={contactHref} size="lg">
@@ -113,7 +118,7 @@ const faq = (['1', '2', '3', '4', '5', '6', '7', '8'] as const).map((n) => ({
     </Button>
   </Fragment>
   <div slot="aside" class="ml-auto max-w-sm">
-    <ul class="space-y-3 rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-sm">
+    <ul class="space-y-3 rounded-xl border border-white/20 bg-navy-900/75 p-6 backdrop-blur-sm">
       {heroPoints.map((key) => (
         <li class="flex items-start gap-3 font-semibold">
           <Icon name="check" class="mt-0.5 size-5 rounded-full bg-green-400 p-1 text-navy-900" />
@@ -238,17 +243,10 @@ const faq = (['1', '2', '3', '4', '5', '6', '7', '8'] as const).map((n) => ({
 </Section>
 
 <Section tone="mint" id="location">
-  <div class="grid items-start gap-10 lg:grid-cols-2">
+  <div class="grid items-center gap-10 lg:grid-cols-2">
     <div>
       <SectionHeading title={t('home.location.title')} lead={t('home.location.text')} />
-      <p class="mt-8">
-        <Button href={href('facility')} icon="map-pin">
-          {t('home.location.cta')}
-        </Button>
-      </p>
-    </div>
-    <div>
-      <h3 class="font-heading text-lg font-bold text-navy-900">
+      <h3 class="mt-8 font-heading text-lg font-bold text-navy-900">
         {t('home.location.marketsTitle')}
       </h3>
       <ul class="mt-4 flex flex-wrap gap-2">
@@ -258,7 +256,18 @@ const faq = (['1', '2', '3', '4', '5', '6', '7', '8'] as const).map((n) => ({
           </li>
         ))}
       </ul>
+      <p class="mt-8">
+        <Button href={href('facility')} icon="map-pin">
+          {t('home.location.cta')}
+        </Button>
+      </p>
     </div>
+    <Photo
+      src={exteriorOffice}
+      alt={t('photos.exteriorOffice.alt')}
+      caption={t('photos.exteriorOffice.caption')}
+      frame="aspect-[4/3]"
+    />
   </div>
 </Section>
 

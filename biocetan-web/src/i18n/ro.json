@@ -1082,6 +1082,10 @@
     "closing": {
       "title": "Planificați o livrare?",
       "text": "Spuneți-ne locul de livrare, volumul și ambalajul preferat, și vă confirmăm logistica și termenul de livrare."
+    },
+    "gallery": {
+      "title": "Fabrica noastră în imagini",
+      "lead": "Fotografii de pe platforma noastră de producție din Săcueni. Selectați o fotografie pentru a o vedea la dimensiune completă."
     }
   },
   "about": {
@@ -1120,6 +1124,57 @@
     "closing": {
       "title": "Să creăm valoare împreună",
       "text": "Fie că este vorba despre un ester standard, un proiect de prelucrare la façon sau o formulare nouă, echipa noastră este pregătită să discute cu dumneavoastră."
+    }
+  },
+  "photos": {
+    "viewFull": "se deschide la dimensiune completă într-o filă nouă",
+    "exteriorMain": {
+      "alt": "Platforma BIOCETAN din Săcueni: clădirea albastră de birouri cu sigla companiei și parcul de rezervoare în spate",
+      "caption": "Platforma noastră din Săcueni, județul Bihor"
+    },
+    "exteriorOffice": {
+      "alt": "Clădirile de birouri și producție lângă un rezervor vertical mare de stocare, pe platforma BIOCETAN",
+      "caption": "Clădirile de birouri și producție"
+    },
+    "exteriorNight": {
+      "alt": "Platforma BIOCETAN noaptea, cu clădirea de birouri și rezervoarele de stocare iluminate",
+      "caption": "Platforma pe timp de noapte"
+    },
+    "tankFarm": {
+      "alt": "Rezervoare orizontale de stocare și un rezervor vertical mare, într-o cuvă de retenție",
+      "caption": "Parcul de rezervoare, cu cuvă de retenție"
+    },
+    "tankFarmPiping": {
+      "alt": "Conducte de transfer din oțel inoxidabil și un filtru în linie între rezervoarele exterioare",
+      "caption": "Conducte de transfer între rezervoare"
+    },
+    "productionHall": {
+      "alt": "Hala de producție cu vase de proces din oțel inoxidabil, carcasă de filtru, pompe și conducte",
+      "caption": "Hala de producție"
+    },
+    "processVessel": {
+      "alt": "Vas de proces din oțel inoxidabil cu manta, gură de vizitare și scară de acces",
+      "caption": "Vas de proces din oțel inoxidabil"
+    },
+    "settlingTanks": {
+      "alt": "Un vas de proces orizontal și două rezervoare verticale cu fund conic, în hala de producție",
+      "caption": "Vase de proces și rezervoare cu fund conic"
+    },
+    "settlingTankCone": {
+      "alt": "Rezervor înalt din oțel inoxidabil cu fund conic, pe o structură metalică verde",
+      "caption": "Rezervor cu fund conic"
+    },
+    "ultrasonicUnits": {
+      "alt": "Două unități de procesare cu ultrasunete în linie, cu pompe de alimentare, montate pe cadre metalice verzi",
+      "caption": "Unități de procesare cu ultrasunete în hala de producție"
+    },
+    "labTitration": {
+      "alt": "Masă de laborator cu o probă de culoare chihlimbarie, o balanță analitică și sticlărie pentru titrare",
+      "caption": "Analiza probelor în laboratorul propriu"
+    },
+    "labDensity": {
+      "alt": "Densimetru de sticlă într-un recipient cu probă",
+      "caption": "Verificări de rutină ale probelor în laborator"
     }
   }
 }

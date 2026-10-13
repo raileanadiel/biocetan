@@ -6,9 +6,11 @@ import ProcessSteps from '../components/sections/ProcessSteps.astro';
 import Button from '../components/ui/Button.astro';
 import Icon, { type IconName } from '../components/ui/Icon.astro';
 import CtaBand from '../components/ui/CtaBand.astro';
+import Photo from '../components/ui/Photo.astro';
 import { useTranslations } from '../i18n';
 import { pathFor, type PageId } from '../i18n/routes';
 import type { Locale } from '../i18n/config';
+import ultrasonicUnits from '../assets/photos/ultrasonic-units.jpg';
 
 interface Props {
   locale: Locale;
@@ -43,6 +45,8 @@ const advantages = (['a', 'b', 'c', 'd'] as const).map((k) => t(`technology.adva
   pageId="technology"
   title={t('pages.technology.title')}
   lead={t('pages.technology.lead')}
+  image={ultrasonicUnits}
+  imageFocus="object-[50%_75%]"
 >
   <Fragment slot="actions">
     <Button href={contactHref} size="lg">
@@ -52,8 +56,17 @@ const advantages = (['a', 'b', 'c', 'd'] as const).map((k) => t(`technology.adva
 </PageHero>
 
 <Section>
-  <SectionHeading title={t('technology.intro.title')} />
-  <p class="mt-6 max-w-3xl text-lead text-muted">{t('technology.intro.text')}</p>
+  <div class="grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <SectionHeading title={t('technology.intro.title')} />
+      <p class="mt-6 text-lead text-muted">{t('technology.intro.text')}</p>
+    </div>
+    <Photo
+      src={ultrasonicUnits}
+      alt={t('photos.ultrasonicUnits.alt')}
+      caption={t('photos.ultrasonicUnits.caption')}
+    />
+  </div>
 </Section>
 
 <Section tone="mint">

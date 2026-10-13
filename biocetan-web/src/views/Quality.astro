@@ -6,9 +6,12 @@ import ProcessSteps from '../components/sections/ProcessSteps.astro';
 import Button from '../components/ui/Button.astro';
 import Icon from '../components/ui/Icon.astro';
 import CtaBand from '../components/ui/CtaBand.astro';
+import Photo from '../components/ui/Photo.astro';
 import { useTranslations } from '../i18n';
 import { pathFor, type PageId } from '../i18n/routes';
 import type { Locale } from '../i18n/config';
+import labTitration from '../assets/photos/lab-titration.jpg';
+import labDensity from '../assets/photos/lab-density.jpg';
 
 interface Props {
   locale: Locale;
@@ -42,6 +45,7 @@ const documents = (['coa', 'sds', 'tds'] as const).map((k) => ({
   title={t('pages.quality.title')}
   accent={t('pages.quality.accent')}
   lead={t('pages.quality.lead')}
+  image={labTitration}
 >
   <Fragment slot="actions">
     <Button href={docsHref} size="lg">
@@ -52,6 +56,24 @@ const documents = (['coa', 'sds', 'tds'] as const).map((k) => ({
 
 <Section>
   <SectionHeading title={t('quality.approach.title')} lead={t('quality.approach.text')} />
+  <!-- 16fr/9fr makes a 4:3 and a 3:4 frame the same height. -->
+  <div class="mt-10 grid gap-6 sm:grid-cols-[16fr_9fr]">
+    <Photo
+      src={labTitration}
+      alt={t('photos.labTitration.alt')}
+      caption={t('photos.labTitration.caption')}
+      frame="aspect-[4/3]"
+      sizes="(min-width: 1280px) 760px, (min-width: 640px) 62vw, 100vw"
+    />
+    <Photo
+      src={labDensity}
+      alt={t('photos.labDensity.alt')}
+      caption={t('photos.labDensity.caption')}
+      frame="aspect-[3/4]"
+      focus="object-[30%_50%]"
+      sizes="(min-width: 1280px) 430px, (min-width: 640px) 36vw, 100vw"
+    />
+  </div>
 </Section>
 
 <Section tone="mint">

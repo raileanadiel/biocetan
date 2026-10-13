@@ -5,12 +5,21 @@ import SectionHeading from '../components/ui/SectionHeading.astro';
 import Button from '../components/ui/Button.astro';
 import Icon from '../components/ui/Icon.astro';
 import MapEmbed from '../components/ui/MapEmbed.astro';
+import Photo from '../components/ui/Photo.astro';
 import CtaBand from '../components/ui/CtaBand.astro';
 import { site } from '../config/site';
 import { routes, formatDuration } from '../config/logistics';
 import { useTranslations } from '../i18n';
 import { pathFor, type PageId } from '../i18n/routes';
 import type { Locale } from '../i18n/config';
+import tankFarmPiping from '../assets/photos/tank-farm-piping.jpg';
+import productionHall from '../assets/photos/production-hall.jpg';
+import tankFarm from '../assets/photos/tank-farm.jpg';
+import processVessel from '../assets/photos/process-vessel.jpg';
+import settlingTanks from '../assets/photos/settling-tanks.jpg';
+import settlingTankCone from '../assets/photos/settling-tank-cone.jpg';
+import exteriorMain from '../assets/photos/exterior-main.jpg';
+import exteriorNight from '../assets/photos/exterior-night.jpg';
 
 interface Props {
   locale: Locale;
@@ -30,6 +39,45 @@ const stats = (['a', 'b', 'c', 'd'] as const).map((k) => ({
 
 const linePoints = (['a', 'b', 'c', 'd'] as const).map((k) => t(`facility.lines.point.${k}`));
 const storagePoints = (['a', 'b', 'c', 'd'] as const).map((k) => t(`facility.storage.point.${k}`));
+const gallery = [
+  {
+    src: processVessel,
+    focus: 'object-center',
+    alt: t('photos.processVessel.alt'),
+    caption: t('photos.processVessel.caption'),
+  },
+  {
+    src: settlingTanks,
+    focus: 'object-center',
+    alt: t('photos.settlingTanks.alt'),
+    caption: t('photos.settlingTanks.caption'),
+  },
+  {
+    src: settlingTankCone,
+    focus: 'object-[50%_75%]',
+    alt: t('photos.settlingTankCone.alt'),
+    caption: t('photos.settlingTankCone.caption'),
+  },
+  {
+    src: tankFarmPiping,
+    focus: 'object-[50%_55%]',
+    alt: t('photos.tankFarmPiping.alt'),
+    caption: t('photos.tankFarmPiping.caption'),
+  },
+  {
+    src: exteriorMain,
+    focus: 'object-center',
+    alt: t('photos.exteriorMain.alt'),
+    caption: t('photos.exteriorMain.caption'),
+  },
+  {
+    src: exteriorNight,
+    focus: 'object-center',
+    alt: t('photos.exteriorNight.alt'),
+    caption: t('photos.exteriorNight.caption'),
+  },
+];
+
 const packagingPoints = (['a', 'b', 'c', 'd', 'e'] as const).map((k) =>
   t(`facility.packaging.point.${k}`),
 );
@@ -41,6 +89,8 @@ const packagingPoints = (['a', 'b', 'c', 'd', 'e'] as const).map((k) =>
   title={t('pages.facility.title')}
   accent={t('pages.facility.accent')}
   lead={t('pages.facility.lead')}
+  image={tankFarmPiping}
+  imageFocus="object-[50%_35%]"
 >
   <Fragment slot="actions">
     <Button href={visitHref} size="lg" icon="calendar">
@@ -65,6 +115,13 @@ const packagingPoints = (['a', 'b', 'c', 'd', 'e'] as const).map((k) =>
 
 <Section>
   <SectionHeading title={t('facility.lines.title')} lead={t('facility.lines.text')} />
+  <Photo
+    src={productionHall}
+    alt={t('photos.productionHall.alt')}
+    caption={t('photos.productionHall.caption')}
+    sizes="(min-width: 1280px) 1200px, 100vw"
+    class="mt-8"
+  />
   <ul class="mt-8 grid gap-4 sm:grid-cols-2">
     {linePoints.map((point) => (
       <li class="flex items-start gap-3 rounded-lg border border-line bg-white p-4">
@@ -79,18 +136,29 @@ const packagingPoints = (['a', 'b', 'c', 'd', 'e'] as const).map((k) =>
 </Section>
 
 <Section tone="mint">
-  <SectionHeading title={t('facility.storage.title')} lead={t('facility.storage.text')} />
-  <ul class="mt-8 grid gap-4 sm:grid-cols-2">
-    {storagePoints.map((point) => (
-      <li class="flex items-start gap-3 rounded-lg border border-line bg-white p-4">
-        <Icon
-          name="check"
-          class="mt-0.5 size-5 shrink-0 rounded-full bg-green-600 p-1 text-white"
-        />
-        <span>{point}</span>
-      </li>
-    ))}
-  </ul>
+  <div class="grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <SectionHeading title={t('facility.storage.title')} lead={t('facility.storage.text')} />
+      <ul class="mt-8 grid gap-4">
+        {storagePoints.map((point) => (
+          <li class="flex items-start gap-3 rounded-lg border border-line bg-white p-4">
+            <Icon
+              name="check"
+              class="mt-0.5 size-5 shrink-0 rounded-full bg-green-600 p-1 text-white"
+            />
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <Photo
+      src={tankFarm}
+      alt={t('photos.tankFarm.alt')}
+      caption={t('photos.tankFarm.caption')}
+      frame="aspect-[4/5]"
+      focus="object-[50%_60%]"
+    />
+  </div>
 </Section>
 
 <Section id="location">
@@ -132,6 +200,26 @@ const packagingPoints = (['a', 'b', 'c', 'd', 'e'] as const).map((k) =>
       <p class="border-t border-line bg-white p-4 text-sm text-muted">{t('distances.lead')}</p>
     </div>
   </div>
+</Section>
+
+<Section tone="mint" id="gallery">
+  <SectionHeading title={t('facility.gallery.title')} lead={t('facility.gallery.lead')} />
+  <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {gallery.map((photo) => (
+      <li>
+        <Photo
+          src={photo.src}
+          alt={photo.alt}
+          caption={photo.caption}
+          frame="aspect-[4/3]"
+          focus={photo.focus}
+          sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
+          zoom
+          zoomLabel={t('photos.viewFull')}
+        />
+      </li>
+    ))}
+  </ul>
 </Section>
 
 <Section tone="navy">

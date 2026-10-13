@@ -1,4 +1,6 @@
 ---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Breadcrumb from './Breadcrumb.astro';
 import type { Locale } from '../../i18n/config';
 import type { PageId } from '../../i18n/routes';
@@ -7,8 +9,10 @@ import type { PageId } from '../../i18n/routes';
  * Inner-page hero: navy band, breadcrumb, two-tone H1 (white + green accent), lead, actions.
  * Slots: default (extra content under the lead), `actions` (buttons), `aside` (right-hand
  * panel, e.g. the badge list from the mockups; hidden below lg).
- * No photo yet — real photography is a client dependency (plan §10). Add a background
- * image here once it exists.
+ * `image` adds a decorative background photo under a navy overlay. The overlay is ≥ 90 %
+ * opaque wherever body/eyebrow text sits, which keeps WCAG AA even over a pure-white pixel;
+ * don't lighten it without re-checking contrast. Below lg the overlay hides most of the photo,
+ * so `sizes` asks for half resolution there to keep the mobile LCP light.
  */
 interface Props {
   locale: Locale;
@@ -18,18 +22,48 @@ interface Props {
   accent?: string;
   eyebrow?: string;
   lead?: string;
+  image?: ImageMetadata;
+  /** Literal Tailwind object-position class for the background photo. */
+  imageFocus?: string;
 }
 
-const { locale, pageId, title, accent, eyebrow, lead } = Astro.props;
+const {
+  locale,
+  pageId,
+  title,
+  accent,
+  eyebrow,
+  lead,
+  image,
+  imageFocus = 'object-center',
+} = Astro.props;
 const isHome = pageId === 'home';
 const hasAside = Astro.slots.has('aside');
 const hasActions = Astro.slots.has('actions');
 ---
 
 <div class="on-dark relative overflow-hidden bg-navy-900 text-white [background-image:radial-gradient(60rem_30rem_at_85%_-10%,rgb(114_175_51/0.22),transparent_60%),radial-gradient(40rem_24rem_at_-10%_110%,rgb(29_79_196/0.22),transparent_60%)]">
+  {image && (
+    <>
+      <Picture
+        src={image}
+        alt=""
+        formats={['avif', 'webp']}
+        widths={[480, 960, image.width]}
+        sizes="(min-width: 1024px) 100vw, 50vw"
+        quality={35}
+        priority
+        class:list={['absolute inset-0 size-full object-cover', imageFocus]}
+      />
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 bg-navy-900/90 lg:bg-transparent lg:bg-linear-to-r lg:from-navy-900 lg:from-20% lg:via-navy-900/90 lg:via-55% lg:to-navy-900/60"
+      />
+    </>
+  )}
   <div
     class:list={[
-      'container-x grid gap-10 py-10 md:py-14 lg:py-20',
+      'relative container-x grid gap-10 py-10 md:py-14 lg:py-20',
       hasAside && 'lg:grid-cols-[1.25fr_0.75fr]',
     ]}
   >

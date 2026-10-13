@@ -4,10 +4,12 @@ import Section from '../components/ui/Section.astro';
 import Button from '../components/ui/Button.astro';
 import Icon from '../components/ui/Icon.astro';
 import ContactForm from '../components/forms/ContactForm.astro';
+import Photo from '../components/ui/Photo.astro';
 import { site } from '../config/site';
 import { useTranslations } from '../i18n';
 import type { PageId } from '../i18n/routes';
 import type { Locale } from '../i18n/config';
+import exteriorMain from '../assets/photos/exterior-main.jpg';
 
 interface Props {
   locale: Locale;
@@ -101,9 +103,17 @@ const checklist = (['a', 'b', 'c', 'd', 'e'] as const).map((key) => t(`contact.c
         </ul>
       </section>
 
-      <section class="rounded-lg bg-navy-900 p-6 text-white on-dark">
-        <h2 class="font-heading text-h3 font-bold">{t('contact.visitTitle')}</h2>
-        <p class="mt-2 text-white/85">{t('contact.visitText')}</p>
+      <section class="overflow-hidden rounded-lg bg-navy-900 text-white on-dark">
+        <Photo
+          src={exteriorMain}
+          alt={t('photos.exteriorMain.alt')}
+          frame="aspect-[16/9] rounded-none!"
+          sizes="(min-width: 1024px) 460px, 100vw"
+        />
+        <div class="p-6">
+          <h2 class="font-heading text-h3 font-bold">{t('contact.visitTitle')}</h2>
+          <p class="mt-2 text-white/85">{t('contact.visitText')}</p>
+        </div>
       </section>
     </div>
 

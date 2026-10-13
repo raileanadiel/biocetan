@@ -1082,6 +1082,10 @@
     "closing": {
       "title": "Planning a delivery?",
       "text": "Tell us your delivery location, volume and preferred packaging, and we'll confirm logistics and lead time."
+    },
+    "gallery": {
+      "title": "Our facility in pictures",
+      "lead": "Photos from our production site in Săcueni. Select a photo to see it full size."
     }
   },
   "about": {
@@ -1120,6 +1124,57 @@
     "closing": {
       "title": "Let's create value together",
       "text": "Whether it's a standard ester, a toll-manufacturing project or a new formulation, our team is ready to discuss it with you."
+    }
+  },
+  "photos": {
+    "viewFull": "opens full size in a new tab",
+    "exteriorMain": {
+      "alt": "The BIOCETAN site in Săcueni: blue office building with the company logo, with the tank farm behind it",
+      "caption": "Our site in Săcueni, Bihor County"
+    },
+    "exteriorOffice": {
+      "alt": "Office and production buildings next to a large vertical storage tank on the BIOCETAN site",
+      "caption": "Office and production buildings"
+    },
+    "exteriorNight": {
+      "alt": "The BIOCETAN site at night, with the office building and floodlit storage tanks",
+      "caption": "The site at night"
+    },
+    "tankFarm": {
+      "alt": "Horizontal storage tanks and a large vertical tank inside a bunded containment area",
+      "caption": "Tank farm with bunded containment"
+    },
+    "tankFarmPiping": {
+      "alt": "Stainless-steel transfer piping and an inline filter between outdoor storage tanks",
+      "caption": "Transfer piping between storage tanks"
+    },
+    "productionHall": {
+      "alt": "Production hall with stainless-steel process vessels, a filter housing, pumps and piping",
+      "caption": "Production hall"
+    },
+    "processVessel": {
+      "alt": "Stainless-steel process vessel with a dimple jacket, inspection manway and access ladder",
+      "caption": "Stainless-steel process vessel"
+    },
+    "settlingTanks": {
+      "alt": "A horizontal process vessel and two cone-bottom vertical tanks in the production hall",
+      "caption": "Process vessels and cone-bottom tanks"
+    },
+    "settlingTankCone": {
+      "alt": "Tall cone-bottom stainless-steel tank on a green steel support frame",
+      "caption": "Cone-bottom tank"
+    },
+    "ultrasonicUnits": {
+      "alt": "Two inline ultrasonic processing units with feed pumps, mounted on green steel frames",
+      "caption": "Ultrasonic processing units in our production hall"
+    },
+    "labTitration": {
+      "alt": "Laboratory bench with a bottled amber sample, an analytical balance and titration glassware",
+      "caption": "Sample analysis in our in-house laboratory"
+    },
+    "labDensity": {
+      "alt": "Glass hydrometer floating in a sample container",
+      "caption": "Routine sample checks in the laboratory"
     }
   }
 }

@@ -4,7 +4,7 @@ Marketing site for BIOCETAN S.R.L. (vegetable methyl esters, Săcueni, Romania).
 Astro 7 · Tailwind CSS 4 · TypeScript · static output · EN + RO (HU-ready). Map: Leaflet + OpenStreetMap (self-hosted, click-to-load, no API key).
 
 The plan, page specs and open client questions live in [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md).
-**Status: Phases 1–3 done.** All 9 pages have real content (EN + RO): Home, Products, Services, Applications, Technology, Quality, Facility & Logistics, About, Contact (+ 3 draft legal pages). Next up is Phase 4 (localisation polish / Hungarian) and Phase 5 (hardening & launch) — see the plan's roadmap.
+**Status: Phases 1–3 done.** All 9 pages have real content (EN + RO): Home, Products, Services, Applications, Technology, Quality, Facility & Logistics, About, Contact (+ 3 draft legal pages), with 12 edited photos of the real facility (`src/assets/photos/`). Next up is Phase 4 (localisation polish / Hungarian) and Phase 5 (hardening & launch) — see the plan's roadmap.
 
 ## Commands
 
