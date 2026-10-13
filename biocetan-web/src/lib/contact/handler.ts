@@ -83,7 +83,9 @@ async function verifyTurnstile(
       method: 'POST',
       body: new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY ?? '', response: token }),
     });
-    const data = (await response.json()) as { success?: boolean };
+    const data = (await response.json()) as { success?: boolean; 'error-codes'?: string[] };
+    // e.g. invalid-input-secret (wrong secret configured) vs timeout-or-duplicate (visitor side).
+    if (data.success !== true) console.warn('turnstile: rejected', data['error-codes']);
     return data.success === true;
   } catch (error) {
     console.error('turnstile: verification request failed', error);

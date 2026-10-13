@@ -97,13 +97,15 @@ The function fails closed: if a required secret is missing it returns an error i
 
 `biocetan.ro` is already a Cloudflare zone (nameservers moved from romarg, 2026-09-29). Everything below happens in that Cloudflare account; secrets are typed into the dashboard by the owner, never committed.
 
-1. **Inbox for `office@biocetan.ro`** — the site shows it and leads are sent to it, but the mailbox doesn't exist yet. Quickest: biocetan.ro → Email → **Email Routing** → route `office@biocetan.ro` to an existing mailbox (free, receive-only). A real mailbox for replying from that address can come later; its provider's MX records then replace Email Routing's.
-2. **Resend** → add domain `biocetan.ro` (region EU) → add the DNS records it lists (DKIM TXT plus SPF/MX on the `send` subdomain) in Cloudflare DNS → wait for _Verified_ → create an API key restricted to sending from this domain.
+Steps 1–7 were done on 2026-10-13; the project runs at `https://biocetan.pages.dev` (still `noindex`).
+
+1. **Inbox for `office@biocetan.ro`**: Google Workspace mailbox. DNS: MX `smtp.google.com`, SPF `v=spf1 include:_spf.google.com ~all`, DKIM `google._domainkey`. Leads arrive here and are answered from here; the website itself never logs into this mailbox.
+2. **Resend** (sends the site's automatic emails: lead notification + auto-reply): domain `biocetan.ro`, region EU (Ireland), click/open tracking off. DNS: TXT `resend._domainkey`, CNAME `send` and `rsend` (DNS only; they serve the bounce MX/SPF on `send.biocetan.ro`, so they don't touch Google's records). API key `biocetan-website`, _Sending access_ restricted to `biocetan.ro`. Added by hand, not via Resend's "Auto configure" (that grants OAuth access to the Cloudflare account).
 3. **DMARC**: TXT record `_dmarc` = `v=DMARC1; p=none; rua=mailto:office@biocetan.ro` (move to `p=quarantine` after a few weeks of clean reports).
-4. **Turnstile** → Add widget → hostnames `biocetan.ro`, `www.biocetan.ro` → mode _Managed_ → note the site key and secret key.
-5. **KV** → create a namespace, e.g. `biocetan-leads`.
-6. **Pages project**: Workers & Pages → Create → Pages → Connect to Git → `raileanadiel/biocetan`; production branch `main`; root directory `biocetan-web`; build command `npm run build:prod`; output directory `dist`.
-7. **Settings → Variables and Secrets**, _Production_: `NODE_VERSION=22`, `PUBLIC_ALLOW_INDEXING=true`, `SITE_URL=https://www.biocetan.ro`, `PUBLIC_TURNSTILE_SITE_KEY`, `CONTACT_FROM=BIOCETAN Website <no-reply@biocetan.ro>`, `CONTACT_TO=office@biocetan.ro`; as **secrets**: `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`. _Preview_: the same **without** `PUBLIC_ALLOW_INDEXING`. **Bindings**: KV namespace `LEADS` → the namespace from step 5 (both environments). `PUBLIC_*` values are baked in at build time — redeploy after changing them.
+4. **Turnstile** widget "BIOCETAN website", mode _Managed_, hostnames `biocetan.ro` (covers `www`) and `biocetan.pages.dev`.
+5. **KV** namespace `biocetan-leads`, jurisdiction **EU** (leads are personal data).
+6. **Pages project** `biocetan`: Connect to Git → `raileanadiel/biocetan`; production branch `main`; root directory `biocetan-web`; build command `npm run build:prod`; output directory `dist`.
+7. **Settings → Variables and Secrets**, _Production_: `NODE_VERSION=22`, `SITE_URL=https://www.biocetan.ro`, `PUBLIC_TURNSTILE_SITE_KEY`, `CONTACT_FROM=BIOCETAN Website <no-reply@biocetan.ro>`, `CONTACT_TO=office@biocetan.ro`; as **secrets**: `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`. **Bindings**: KV namespace `LEADS` → `biocetan-leads`. `PUBLIC_ALLOW_INDEXING=true` is added only at launch (step 11). `PUBLIC_*` values are baked in at build time, so redeploy after changing them.
 8. **Custom domains** (Pages project): add `www.biocetan.ro` and `biocetan.ro`. Then Rules → **Redirect Rules**: `biocetan.ro/*` → `https://www.biocetan.ro/${1}`, 301, keep query string (canonical URLs use `www`).
 9. **SSL/TLS**: encryption mode _Full (strict)_, _Always Use HTTPS_ on.
 10. **WAF rate limiting** for `POST /api/contact` per IP (the free plan only allows short counting windows — use the longest available). Turnstile + honeypot remain the main bot protection.
@@ -127,7 +129,7 @@ Sent mails are printed by the mock instead of being delivered.
 - Logo: text wordmark in `components/layout/Logo.astro` + placeholder `public/favicon.svg`
 - Legal registration data (CUI, Reg. Com., share capital) → `config/site.ts`
 - Geo coordinates in `config/site.ts` and the distances in `config/logistics.ts` are **computed** (OpenStreetMap geocoding + OSRM routing), not client-supplied — good enough to ship, but replace with exact figures if the client provides them (see the files' header comments)
-- Certifications, TDS/SDS/CoA PDFs. No analytics at launch (the legal pages say so; update them if Plausible/Umami is added). Email provider: Resend
+- Certifications, TDS/SDS/CoA PDFs. No analytics at launch (the legal pages say so; update them if Plausible/Umami is added). Email: Google Workspace (inbox) + Resend (the site's automatic emails)
 - Legal texts are drafts; 6 `[TODO: …]` markers remain (CUI/Reg. Com., transfer safeguards, jurisdiction) for the company's jurist, who should review all three pages
 - Romanian strings (UI, all page copy, legal) are AI-written first drafts and need review by a native speaker
 - No numeric product-spec table on `/products/` (ester content, density, viscosity…) — the client mockups' numbers were flagged as unreliable (plan §3.1-6) and no real values have been supplied yet; specs are deferred to a per-batch CoA / on-request TDS
