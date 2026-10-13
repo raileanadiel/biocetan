@@ -1,4 +1,4 @@
-_Last updated: 21 September 2026._ **Draft: pending legal review.**
+_Last updated: 13 October 2026._ **Draft: pending legal review.**
 
 ## 1. Who we are
 
@@ -16,12 +16,12 @@ BIOCETAN S.R.L. ("BIOCETAN", "we") is the controller of the personal data descri
 
 **Bot protection.** When you start filling in a form, Cloudflare Turnstile checks that the request comes from a person and not an automated program. This is used only for security.
 
-**Analytics.** [TODO: confirm the analytics tool, or remove this paragraph if none is used.]
+**Analytics.** We do not currently use any analytics or visitor-measurement tool. If we add one, we will update this policy first.
 
 ## 3. Who receives your data
 
 - **Cloudflare, Inc.**: website hosting, content delivery and Turnstile bot protection.
-- **Resend**: sends the notification email to our team and the confirmation email to you. [TODO: confirm the email provider before launch.]
+- **Resend**: sends the notification email to our team and the confirmation email to you.
 - **Our team at BIOCETAN**, who read and answer your request.
 
 We do not sell your data and we do not use it for advertising.

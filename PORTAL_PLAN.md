@@ -236,12 +236,14 @@ Estimări brute pentru un dezvoltator (eu, cu tine la testare), **fără** timpu
 
 Am pus implicit varianta din paranteză; o schimbăm dacă răspunsul e altul.
 
-**P0 — trebuie înainte de P1:**
+**P0 — răspunse (2026-10-13):**
 
-1. **Transportul**: camioane proprii, transportator contractat sau clientul ridică marfa (EXW)? _(implicit: toate trei posibile, alese per livrare)_
-2. **Unități și monede**: prețuri pe litru, kg sau tonă? EUR și RON? _(implicit: unitatea se alege pe fiecare linie de ofertă; EUR + RON)_
-3. **Contract-cadru / CGV**: există deja? Aveți avocat care le poate redacta sau valida? _(blochează P3)_
-4. **Subdomeniul**: `portal.biocetan.ro` sau altul (ex. `client.biocetan.ro`)? _(implicit: `portal`)_
+1. **Transportul** se stabilește la fiecare contract, nu există o regulă fixă. → Fiecare ofertă/comandă are câmpuri pentru **modul de transport** (camion propriu / transportator / ridicare de către client) și **Incoterm**. Livrarea preia aceste valori; transportatorul și camionul se completează la expediere.
+2. **Unitățile și prețul** se negociază și depind de cantitate; **moneda** depinde de țara clientului. → Fiecare linie de ofertă are unitatea ei (L, kg, t) și prețul ei; moneda se alege pe ofertă (implicit din țara clientului: RON pentru România, EUR în rest, modificabilă). Nu există listă de prețuri fixă în platformă.
+3. **Contract-cadru / CGV**: le redactează **juristul companiei**. → P3 așteaptă textele de la jurist (le cerem din timp, ca să nu blocheze).
+4. **Subdomeniul** `portal.biocetan.ro`: confirmat, **cu login integrat și toate măsurile de siguranță** (§6.2). Site-ul public primește un buton „Cont client" care duce la pagina de login a portalului.
+
+Ordinea confirmată: **întâi lansăm site-ul public, apoi construim portalul.**
 
 **Se pot lămuri pe parcurs:**
 

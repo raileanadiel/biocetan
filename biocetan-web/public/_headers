@@ -1,10 +1,13 @@
 # Cloudflare Pages response headers.
-# TODO Phase 5: add a Content-Security-Policy and Strict-Transport-Security once the production domain is final.
+# The Content-Security-Policy is emitted per page as a <meta> by Astro (security.csp in astro.config.mjs).
+# HSTS without includeSubDomains/preload for now; add them once every biocetan.ro subdomain is HTTPS-only.
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000
+  Cross-Origin-Opener-Policy: same-origin
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable

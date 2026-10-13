@@ -405,6 +405,16 @@ Deviations from this plan:
 - Pilot & R&D describes pilot batches generically rather than citing the mockup's "10–2,000 L reactors" (§3.1-3, unverified — the plan's own suggested fallback).
 - Technology page omits the waterless/washing and continuous/batch wording entirely (§3.1-1, -2) rather than picking a side, and omits the >98% conversion figure (§3.1-4).
 
+**Phase 5 progress (2026-10-13)** — decision: launch the public site first, then build the client portal ([`PORTAL_PLAN.md`](PORTAL_PLAN.md)). Done in code:
+
+- **CSP**: Astro `security.csp` emits a per-page policy with hashes for every inline script/style; the only third parties allowed are Turnstile and OpenStreetMap tiles. **HSTS** (1 year, no `includeSubDomains` yet) and **COOP** added to `public/_headers`. Verified on the real Pages runtime (`wrangler pages dev`): zero console errors or CSP violations on every page, map loads tiles + marker, Turnstile issues a token, a full form submission produces both emails.
+- **Link previews**: `og:image` (site photo, 1025×537, 1.91:1) + `twitter:card`; **Organization JSON-LD** on the home page (adds `vatID` automatically once the CUI is set in `config/site.ts`).
+- **Legal placeholders 12 → 6**: no analytics at launch (privacy + cookie pages now say so — update them before adding Plausible/Umami); email provider = Resend. Remaining 6 need the boss/jurist: CUI + Reg. Com. (2), transfer safeguards (2), jurisdiction wording (2). The jurist should review all three legal pages.
+- **Quality claims softened** (per §11 Q5, owner's standing instruction): "every batch is analysed in-house using standardised methods" → "every batch is checked in our in-house laboratory and documented with a CoA"; the methods column is now "Reference method", with a note that parameters and test methods are agreed per specification; FAQ a5 no longer claims each listed test is run in-house. Restore stronger wording only once §11 Q16's question is answered.
+- **Deploy checklist** rewritten in `biocetan-web/README.md` for the actual Cloudflare setup, including the missing `office@biocetan.ro` inbox (Email Routing as the quick fix).
+
+Still open before launch: the 6 legal placeholders; owner-side Cloudflare/Resend setup (README §Deploy); real logo (placeholder wordmark is shippable); cross-browser pass on real devices; client UAT.
+
 ### Definition of done (per page)
 
 Matches mockup at 375 / 768 / 1280 / 1920 px · content approved by client · alt text + meta in every locale · axe: 0 serious issues · Lighthouse targets · analytics events firing · no console errors.

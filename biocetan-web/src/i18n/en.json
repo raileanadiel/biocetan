@@ -94,7 +94,7 @@
       "accent": "You can trust.",
       "lead": "In-house laboratory analysis and batch documentation to meet your specification.",
       "metaTitle": "Quality Control and Laboratory Analysis",
-      "metaDescription": "In-house laboratory analysis, standardised methods and batch documentation for BIOCETAN vegetable methyl esters."
+      "metaDescription": "In-house laboratory checks, reference test methods and batch documentation for BIOCETAN vegetable methyl esters."
     },
     "facility": {
       "title": "Facility & Logistics",
@@ -403,7 +403,7 @@
     },
     "quality": {
       "title": "Quality in every batch",
-      "lead": "Every batch is analysed in our in-house laboratory, and a certificate of analysis is provided for each batch.",
+      "lead": "Every batch is checked in our in-house laboratory, and a certificate of analysis is provided for each batch.",
       "params": {
         "a": "Ester content",
         "b": "Acid value",
@@ -443,7 +443,7 @@
       "q4": "How is the product supplied?",
       "a4": "In bulk by road tanker or in 1,000 L IBCs. Other packaging can be arranged on request.",
       "q5": "Which analyses do you carry out, and which documents do you provide?",
-      "a5": "Each batch is analysed in our in-house laboratory: ester content, acid value, water content, density, viscosity, flash point, colour and other parameters as your specification requires. A certificate of analysis is provided for each batch, and safety and technical data sheets are available on request.",
+      "a5": "Every batch is checked in our in-house laboratory and comes with a certificate of analysis. Typical parameters include ester content, acid value, water content, density, viscosity, flash point and colour; which ones are certified, and by which method, is agreed as part of your specification. Safety and technical data sheets are available on request.",
       "q6": "Can you develop a custom formulation?",
       "a6": "Yes. We blend vegetable methyl esters with additives to your specification, test them in our laboratory and scale up from pilot batches to industrial production.",
       "q7": "Where are you located and which markets do you supply?",
@@ -929,12 +929,12 @@
   "quality": {
     "approach": {
       "title": "Our approach",
-      "text": "We apply quality control at every stage, from raw material to finished product. Every batch is analysed in our in-house laboratory using standardised test methods, and documented with a Certificate of Analysis before it leaves our facility."
+      "text": "We apply quality control at every stage, from raw material to finished product. Every batch is checked in our in-house laboratory and documented with a Certificate of Analysis before it leaves our facility."
     },
     "methods": {
-      "title": "What we test, and why",
+      "title": "Key parameters, and why they matter",
       "colParameter": "Parameter",
-      "colStandard": "Method",
+      "colStandard": "Reference method",
       "colMeaning": "What it tells you",
       "row": {
         "a": {
@@ -973,7 +973,7 @@
           "meaning": "Visual consistency from batch to batch"
         }
       },
-      "note": "Additional parameters can be analysed on request, according to your specification."
+      "note": "The standards listed are the reference methods for each parameter. Which parameters appear on your Certificate of Analysis, and how each one is tested, is agreed with you as part of your specification."
     },
     "process": {
       "title": "Our quality process",

@@ -1,4 +1,4 @@
-_Ultima actualizare: 21 septembrie 2026._ **Ciornă: în așteptarea verificării juridice.**
+_Ultima actualizare: 13 octombrie 2026._ **Ciornă: în așteptarea verificării juridice.**
 
 ## Ce sunt cookie-urile
 
@@ -10,7 +10,7 @@ Nu folosim cookie-uri publicitare sau de urmărire. Acest site nu afișează un 
 
 - **Limbă și navigare:** fără cookie-uri. Limba face parte din adresa paginii.
 - **Protecție împotriva boturilor (Cloudflare Turnstile):** se încarcă doar când începeți să completați un formular. Poate stoca date tehnice în browser pentru a deosebi persoanele de programele automate. Este folosită exclusiv pentru securitate.
-- **Analiză a traficului:** [TODO: confirmați instrumentul de analiză. Dacă nu folosește cookie-uri (de exemplu Plausible sau Umami), menționați aici. Dacă folosește cookie-uri, este necesar un banner de consimțământ înainte de lansare.]
+- **Analiză a traficului:** niciuna. În prezent nu măsurăm și nu urmărim vizitele.
 
 ## Gestionarea cookie-urilor
 

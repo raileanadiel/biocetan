@@ -94,7 +94,7 @@
       "accent": "în care puteți avea încredere.",
       "lead": "Analize în laboratorul propriu și documentație pentru fiecare lot, conform specificației dumneavoastră.",
       "metaTitle": "Controlul calității și analize de laborator",
-      "metaDescription": "Analize în laborator propriu, metode standardizate și documentație pentru fiecare lot de esteri metilici vegetali BIOCETAN."
+      "metaDescription": "Verificări în laborator propriu, metode de referință și documentație pentru fiecare lot de esteri metilici vegetali BIOCETAN."
     },
     "facility": {
       "title": "Facilități și logistică",
@@ -403,7 +403,7 @@
     },
     "quality": {
       "title": "Calitate în fiecare lot",
-      "lead": "Fiecare lot este analizat în laboratorul nostru propriu, iar pentru fiecare lot se furnizează un certificat de analiză.",
+      "lead": "Fiecare lot este verificat în laboratorul nostru propriu, iar pentru fiecare lot se furnizează un certificat de analiză.",
       "params": {
         "a": "Conținut de ester",
         "b": "Indice de aciditate",
@@ -443,7 +443,7 @@
       "q4": "Cum se livrează produsul?",
       "a4": "În vrac, în autocisterne, sau în IBC de 1.000 L. Alte tipuri de ambalare pot fi organizate la cerere.",
       "q5": "Ce analize efectuați și ce documente furnizați?",
-      "a5": "Fiecare lot este analizat în laboratorul nostru propriu: conținut de ester, indice de aciditate, conținut de apă, densitate, vâscozitate, punct de inflamabilitate, culoare și alți parametri, conform specificației dumneavoastră. Pentru fiecare lot se furnizează un certificat de analiză, iar fișele de securitate și fișele tehnice sunt disponibile la cerere.",
+      "a5": "Fiecare lot este verificat în laboratorul nostru propriu și însoțit de un certificat de analiză. Parametrii uzuali includ conținutul de ester, indicele de aciditate, conținutul de apă, densitatea, vâscozitatea, punctul de inflamabilitate și culoarea; care dintre ei se certifică și prin ce metodă se stabilește ca parte a specificației dumneavoastră. Fișele de securitate și fișele tehnice sunt disponibile la cerere.",
       "q6": "Puteți dezvolta o formulare personalizată?",
       "a6": "Da. Combinăm esteri metilici vegetali cu aditivi conform specificației dumneavoastră, îi testăm în laboratorul nostru și scalăm de la loturi pilot la producție industrială.",
       "q7": "Unde vă aflați și pe ce piețe livrați?",
@@ -929,12 +929,12 @@
   "quality": {
     "approach": {
       "title": "Abordarea noastră",
-      "text": "Aplicăm controlul calității în fiecare etapă, de la materia primă până la produsul finit. Fiecare lot este analizat în laboratorul nostru propriu, folosind metode de testare standardizate, și documentat printr-un certificat de analiză înainte de a părăsi fabrica."
+      "text": "Aplicăm controlul calității în fiecare etapă, de la materia primă până la produsul finit. Fiecare lot este verificat în laboratorul nostru propriu și documentat printr-un certificat de analiză înainte de a părăsi fabrica."
     },
     "methods": {
-      "title": "Ce testăm și de ce",
+      "title": "Parametri-cheie și de ce contează",
       "colParameter": "Parametru",
-      "colStandard": "Metodă",
+      "colStandard": "Metodă de referință",
       "colMeaning": "Ce indică",
       "row": {
         "a": {
@@ -973,7 +973,7 @@
           "meaning": "Consecvență vizuală de la un lot la altul"
         }
       },
-      "note": "Parametri suplimentari pot fi analizați la cerere, conform specificației dumneavoastră."
+      "note": "Standardele indicate sunt metodele de referință pentru fiecare parametru. Ce parametri apar pe certificatul de analiză și cum este testat fiecare se stabilesc împreună cu dumneavoastră, ca parte a specificației."
     },
     "process": {
       "title": "Procesul nostru de calitate",

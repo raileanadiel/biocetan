@@ -1,4 +1,4 @@
-_Last updated: 21 September 2026._ **Draft: pending legal review.**
+_Last updated: 13 October 2026._ **Draft: pending legal review.**
 
 ## What cookies are
 
@@ -10,7 +10,7 @@ We do not use advertising or tracking cookies. This website does not show a cook
 
 - **Language and navigation:** no cookies. The language is part of the page address.
 - **Bot protection (Cloudflare Turnstile):** loaded only when you start filling in a form. It may store technical data in your browser to tell people from automated programs. It is used only for security.
-- **Analytics:** [TODO: confirm the analytics tool. If it is cookieless (for example Plausible or Umami), say so here. If it uses cookies, a consent banner is required before launch.]
+- **Analytics:** none. We do not currently measure or track visits.
 
 ## Managing cookies
 

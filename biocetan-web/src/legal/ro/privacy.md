@@ -1,4 +1,4 @@
-_Ultima actualizare: 21 septembrie 2026._ **Ciornă: în așteptarea verificării juridice.**
+_Ultima actualizare: 13 octombrie 2026._ **Ciornă: în așteptarea verificării juridice.**
 
 ## 1. Cine suntem
 
@@ -16,12 +16,12 @@ BIOCETAN S.R.L. („BIOCETAN”, „noi”) este operatorul datelor cu caracter 
 
 **Protecție împotriva boturilor.** Când începeți să completați un formular, Cloudflare Turnstile verifică dacă solicitarea provine de la o persoană și nu de la un program automat. Această verificare este folosită exclusiv pentru securitate.
 
-**Analiză a traficului.** [TODO: confirmați instrumentul de analiză sau eliminați acest paragraf dacă nu se folosește niciunul.]
+**Analiză a traficului.** În prezent nu folosim niciun instrument de analiză sau de măsurare a vizitatorilor. Dacă vom adăuga unul, vom actualiza mai întâi această politică.
 
 ## 3. Cine primește datele dumneavoastră
 
 - **Cloudflare, Inc.**: găzduirea site-ului, livrarea conținutului și protecția Turnstile.
-- **Resend**: trimite e-mailul de notificare către echipa noastră și e-mailul de confirmare către dumneavoastră. [TODO: confirmați furnizorul de e-mail înainte de lansare.]
+- **Resend**: trimite e-mailul de notificare către echipa noastră și e-mailul de confirmare către dumneavoastră.
 - **Echipa BIOCETAN**, care citește și răspunde solicitării dumneavoastră.
 
 Nu vindem datele dumneavoastră și nu le folosim în scopuri publicitare.
