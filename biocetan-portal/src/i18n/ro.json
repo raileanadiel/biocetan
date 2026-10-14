@@ -1,0 +1,216 @@
+{
+  "meta": {
+    "portalName": "Portal clienți",
+    "titleSuffix": "Portal BIOCETAN"
+  },
+  "common": {
+    "save": "Salvează",
+    "cancel": "Renunță",
+    "back": "Înapoi",
+    "logout": "Ieșire",
+    "language": "Limbă",
+    "skipToContent": "Sari la conținut",
+    "required": "obligatoriu",
+    "optional": "opțional",
+    "yes": "Da",
+    "no": "Nu",
+    "never": "niciodată",
+    "contactUs": "Aveți nevoie de ajutor? Scrieți la office@biocetan.ro sau sunați la +40 741 039 292."
+  },
+  "nav": {
+    "home": "Acasă",
+    "dashboard": "Panou",
+    "clients": "Clienți",
+    "admins": "Administratori",
+    "mainLabel": "Navigare principală"
+  },
+  "login": {
+    "title": "Autentificare",
+    "lead": "Acces pentru clienții BIOCETAN. Conturile se creează pe bază de invitație.",
+    "email": "Email",
+    "password": "Parolă",
+    "submit": "Intră în cont",
+    "forgot": "Ați uitat parola?",
+    "noAccount": "Nu aveți încă un cont? Cereți persoanei de contact de la BIOCETAN să vă invite.",
+    "loggedOut": "Ați ieșit din cont.",
+    "passwordChanged": "Parola a fost schimbată. Autentificați-vă cu parola nouă.",
+    "inviteAccepted": "Contul este gata. Autentificați-vă pentru a continua.",
+    "sessionExpired": "Sesiunea a expirat. Autentificați-vă din nou."
+  },
+  "forgot": {
+    "title": "Resetare parolă",
+    "lead": "Introduceți adresa de email a contului. Dacă există, vă trimitem un link pentru a alege o parolă nouă.",
+    "submit": "Trimite linkul",
+    "sent": "Dacă există un cont pentru această adresă, v-am trimis un link. Este valabil 1 oră. Verificați și dosarul Spam.",
+    "backToLogin": "Înapoi la autentificare"
+  },
+  "reset": {
+    "title": "Alegeți o parolă nouă",
+    "submit": "Schimbă parola"
+  },
+  "invite": {
+    "title": "Activați-vă contul",
+    "lead": "Bun venit, {name}. Alegeți o parolă pentru a activa contul ({email}).",
+    "submit": "Activează contul"
+  },
+  "password": {
+    "new": "Parolă nouă",
+    "confirm": "Repetați parola",
+    "hint": "Cel puțin 12 caractere. O propoziție scurtă, ușor de ținut minte, merge foarte bine."
+  },
+  "link": {
+    "invalidTitle": "Acest link nu mai funcționează",
+    "invalidBody": "A expirat, a fost deja folosit sau s-a trimis unul mai nou. Cereți o nouă resetare a parolei sau o nouă invitație de la persoana de contact BIOCETAN."
+  },
+  "mfa": {
+    "title": "Verificare în doi pași",
+    "lead": "Introduceți codul de 6 cifre din aplicația de autentificare.",
+    "code": "Cod",
+    "submit": "Verifică",
+    "recoveryHint": "Ați pierdut telefonul? Introduceți unul dintre codurile de recuperare.",
+    "setupTitle": "Activați verificarea în doi pași",
+    "setupLead": "Conturile de administrator sunt protejate de un al doilea pas: un cod dintr-o aplicație de pe telefon, pe lângă parolă.",
+    "step1": "Instalați pe telefon o aplicație de autentificare (Google Authenticator, Microsoft Authenticator, 1Password…).",
+    "step2": "În aplicație, adăugați un cont și scanați acest cod QR.",
+    "step3": "Introduceți codul de 6 cifre afișat de aplicație.",
+    "manualKey": "Nu puteți scana? Introduceți această cheie în aplicație",
+    "qrAlt": "Cod QR pentru aplicația de autentificare",
+    "confirm": "Activează",
+    "recoveryTitle": "Salvați codurile de recuperare",
+    "recoveryLead": "Dacă pierdeți telefonul, fiecare cod vă permite să intrați o singură dată. Păstrați-le într-un loc sigur (manager de parole sau tipărite). Sunt afișate doar acum.",
+    "recoveryDone": "Le-am salvat, continuă"
+  },
+  "client": {
+    "welcome": "Bun venit, {name}",
+    "companyLine": "Sunteți autentificat pentru {company}.",
+    "emptyTitle": "Portalul vostru este în pregătire",
+    "emptyBody": "În curând veți găsi aici ofertele, comenzile, livrările, documentele și discuția cu echipa noastră. Până atunci nu aveți nimic de făcut.",
+    "offers": "Oferte",
+    "orders": "Comenzi",
+    "messages": "Mesaje",
+    "nothingYet": "Nimic deocamdată"
+  },
+  "admin": {
+    "dashboardTitle": "Panou",
+    "statClients": "Firme-client",
+    "statActiveUsers": "Utilizatori-client activi",
+    "statPendingInvites": "Invitații în așteptare",
+    "recentActivity": "Activitate recentă",
+    "noActivity": "Nicio activitate încă.",
+    "clientsTitle": "Clienți",
+    "newClient": "Client nou",
+    "noClients": "Niciun client încă. Creați primul client.",
+    "colName": "Nume",
+    "colCountry": "Țară",
+    "colUsers": "Utilizatori",
+    "colStatus": "Status",
+    "colEmail": "Email",
+    "colLastLogin": "Ultima autentificare",
+    "colRole": "Rol",
+    "colWhen": "Când",
+    "colWho": "Cine",
+    "colWhat": "Ce",
+    "newClientTitle": "Firmă-client nouă",
+    "companyName": "Numele firmei",
+    "vatId": "CUI / cod TVA",
+    "regCom": "Nr. Registrul Comerțului",
+    "country": "Țară",
+    "selectCountry": "Alegeți…",
+    "internalNotes": "Note interne",
+    "internalNotesHint": "Vizibile doar administratorilor BIOCETAN.",
+    "createCompany": "Creează firma",
+    "companyCreated": "Firma a fost creată. Acum invitați primul utilizator.",
+    "usersTitle": "Utilizatori",
+    "noUsers": "Niciun utilizator încă.",
+    "inviteTitle": "Invitați un utilizator",
+    "inviteAdminTitle": "Invitați un administrator",
+    "inviteAdminLead": "Administratorii au acces complet la toți clienții. La prima autentificare trebuie să activeze verificarea în doi pași.",
+    "name": "Nume complet",
+    "email": "Email",
+    "phone": "Telefon",
+    "userLanguage": "Limba pentru emailuri și portal",
+    "sendInvite": "Trimite invitația",
+    "inviteSent": "Invitația a fost trimisă la {email}. Linkul este valabil 72 de ore.",
+    "resendInvite": "Retrimite invitația",
+    "disable": "Dezactivează",
+    "enable": "Reactivează",
+    "userDisabled": "Utilizatorul a fost dezactivat și deconectat de peste tot.",
+    "userEnabled": "Utilizatorul a fost reactivat.",
+    "activityTitle": "Activitate",
+    "adminsTitle": "Administratori",
+    "you": "dvs.",
+    "detailsTitle": "Datele firmei"
+  },
+  "status": {
+    "invited": "Invitat",
+    "active": "Activ",
+    "disabled": "Dezactivat",
+    "inactive": "Inactiv"
+  },
+  "role": {
+    "admin": "Administrator",
+    "client": "Client"
+  },
+  "audit": {
+    "company__created": "Firmă creată",
+    "user__invited": "Utilizator invitat",
+    "user__invitation_sent": "Invitație trimisă",
+    "user__invitation_mail_failed": "Emailul de invitație nu a plecat",
+    "user__invite_accepted": "Invitație acceptată",
+    "user__disabled": "Utilizator dezactivat",
+    "user__enabled": "Utilizator reactivat",
+    "auth__login": "Autentificare",
+    "auth__login_failed": "Autentificare eșuată",
+    "auth__logout": "Ieșire din cont",
+    "auth__reset_requested": "Resetare parolă cerută",
+    "auth__reset_mail_failed": "Emailul de resetare nu a plecat",
+    "auth__password_reset": "Parolă schimbată",
+    "auth__mfa_enabled": "Verificarea în doi pași activată",
+    "auth__mfa_failed": "Cod de verificare greșit",
+    "auth__recovery_code_used": "Cod de recuperare folosit",
+    "other": "Alt eveniment"
+  },
+  "errors": {
+    "required": "Câmpul este obligatoriu.",
+    "invalidEmail": "Introduceți o adresă de email validă.",
+    "passwordTooShort": "Folosiți cel puțin 12 caractere.",
+    "passwordTooLong": "Folosiți cel mult 128 de caractere.",
+    "passwordCommon": "Parola este prea ușor de ghicit. Alegeți alta.",
+    "passwordContainsEmail": "Nu folosiți adresa de email în parolă.",
+    "passwordMismatch": "Cele două parole nu coincid.",
+    "invalidCredentials": "Email sau parolă greșite.",
+    "throttled": "Prea multe încercări. Așteptați 15 minute și încercați din nou.",
+    "invalidToken": "Acest link nu mai funcționează.",
+    "emailTaken": "Există deja un utilizator cu acest email.",
+    "invalidCode": "Cod greșit sau expirat. Încercați codul curent.",
+    "mailFailed": "Emailul nu a putut fi trimis. Încercați din nou în câteva minute.",
+    "forbidden": "Nu aveți acces la această pagină.",
+    "notFound": "Nu a fost găsit.",
+    "invalidInput": "Verificați câmpurile marcate.",
+    "weakPassword": "Alegeți o parolă mai puternică.",
+    "generic": "A apărut o eroare. Încercați din nou."
+  },
+  "email": {
+    "greeting": "Bună ziua, {name},",
+    "linkFallback": "Dacă butonul nu funcționează, copiați această adresă în browser:",
+    "notYou": "Dacă nu vă așteptați la acest email, îl puteți ignora.",
+    "invite": {
+      "subject": "Contul dvs. în portalul de clienți BIOCETAN",
+      "body": "{inviter} v-a creat un cont în portalul de clienți BIOCETAN, unde veți găsi ofertele, comenzile, livrările și documentele și unde ne puteți scrie direct.",
+      "button": "Setați parola",
+      "expiry": "Linkul este valabil 72 de ore și funcționează o singură dată."
+    },
+    "reset": {
+      "subject": "Resetarea parolei pentru portalul BIOCETAN",
+      "body": "Am primit o cerere de resetare a parolei pentru contul dvs. din portalul BIOCETAN.",
+      "button": "Alegeți o parolă nouă",
+      "expiry": "Linkul este valabil 1 oră și funcționează o singură dată.",
+      "ignore": "Dacă nu ați cerut acest lucru, ignorați emailul: parola rămâne aceeași."
+    }
+  },
+  "notFound": {
+    "title": "Pagina nu a fost găsită",
+    "body": "Pagina nu există sau nu aveți acces la ea.",
+    "home": "Mergi la pagina de start"
+  }
+}

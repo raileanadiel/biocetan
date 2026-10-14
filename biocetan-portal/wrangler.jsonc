@@ -1,0 +1,26 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "biocetan-portal",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": { "binding": "ASSETS", "directory": "./dist" },
+  "observability": { "enabled": true },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "biocetan-portal",
+      // Replace with the real id after `wrangler d1 create biocetan-portal --location weur`
+      // (README "Deploy"). Local development and tests ignore it.
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations",
+    },
+  ],
+  "vars": {
+    // Overridden per environment; secrets (RESEND_API_KEY, TOTP_ENC_KEY) live in .dev.vars
+    // locally and in the dashboard in production, never here.
+    "PORTAL_URL": "http://localhost:4321",
+    "MAIL_FROM": "BIOCETAN Portal <no-reply@biocetan.ro>",
+    "RESEND_API_URL": "https://api.resend.com",
+  },
+}

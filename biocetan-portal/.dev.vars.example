@@ -1,0 +1,7 @@
+# Copy to .dev.vars for local development. Never commit .dev.vars.
+PORTAL_URL=http://localhost:4321
+# scripts/mock-resend.mjs listens here and prints mails instead of sending them
+RESEND_API_URL=http://localhost:8899
+RESEND_API_KEY=re_local_mock
+# 32 random bytes, base64url: node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
+TOTP_ENC_KEY=

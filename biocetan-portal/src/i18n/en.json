@@ -1,0 +1,216 @@
+{
+  "meta": {
+    "portalName": "Client Portal",
+    "titleSuffix": "BIOCETAN Portal"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "logout": "Log out",
+    "language": "Language",
+    "skipToContent": "Skip to content",
+    "required": "required",
+    "optional": "optional",
+    "yes": "Yes",
+    "no": "No",
+    "never": "never",
+    "contactUs": "Need help? Write to office@biocetan.ro or call +40 741 039 292."
+  },
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "admins": "Admins",
+    "mainLabel": "Main navigation"
+  },
+  "login": {
+    "title": "Log in",
+    "lead": "Access for BIOCETAN clients. Accounts are created by invitation.",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Log in",
+    "forgot": "Forgot your password?",
+    "noAccount": "No account yet? Ask your BIOCETAN contact to invite you.",
+    "loggedOut": "You have been logged out.",
+    "passwordChanged": "Your password has been changed. Log in with the new one.",
+    "inviteAccepted": "Your account is ready. Log in to continue.",
+    "sessionExpired": "Your session has expired. Please log in again."
+  },
+  "forgot": {
+    "title": "Reset your password",
+    "lead": "Enter the email address of your account. If it exists, we will send you a link to choose a new password.",
+    "submit": "Send the link",
+    "sent": "If an account exists for that address, we have sent a link to it. It is valid for 1 hour. Check your Spam folder too.",
+    "backToLogin": "Back to log in"
+  },
+  "reset": {
+    "title": "Choose a new password",
+    "submit": "Change password"
+  },
+  "invite": {
+    "title": "Set up your account",
+    "lead": "Welcome, {name}. Choose a password to activate your account ({email}).",
+    "submit": "Activate account"
+  },
+  "password": {
+    "new": "New password",
+    "confirm": "Repeat the password",
+    "hint": "At least 12 characters. A short sentence you can remember works well."
+  },
+  "link": {
+    "invalidTitle": "This link no longer works",
+    "invalidBody": "It has expired, has already been used, or a newer one was sent. Request a new password reset, or ask your BIOCETAN contact for a new invitation."
+  },
+  "mfa": {
+    "title": "Two-step verification",
+    "lead": "Enter the 6-digit code from your authenticator app.",
+    "code": "Code",
+    "submit": "Verify",
+    "recoveryHint": "Lost your phone? Enter one of your recovery codes instead.",
+    "setupTitle": "Set up two-step verification",
+    "setupLead": "Administrator accounts are protected by a second step: a code from an app on your phone, in addition to your password.",
+    "step1": "Install an authenticator app on your phone (Google Authenticator, Microsoft Authenticator, 1Password…).",
+    "step2": "In the app, add an account and scan this QR code.",
+    "step3": "Enter the 6-digit code the app shows.",
+    "manualKey": "Can't scan? Enter this key in the app",
+    "qrAlt": "QR code for the authenticator app",
+    "confirm": "Turn on",
+    "recoveryTitle": "Save your recovery codes",
+    "recoveryLead": "If you lose your phone, each of these codes lets you log in once. Store them somewhere safe (a password manager, or printed). They are shown only now.",
+    "recoveryDone": "I have saved them, continue"
+  },
+  "client": {
+    "welcome": "Welcome, {name}",
+    "companyLine": "You are logged in for {company}.",
+    "emptyTitle": "Your portal is being set up",
+    "emptyBody": "Soon you will find your offers, orders, deliveries, documents and the conversation with our team here. Until then, nothing to do.",
+    "offers": "Offers",
+    "orders": "Orders",
+    "messages": "Messages",
+    "nothingYet": "Nothing yet"
+  },
+  "admin": {
+    "dashboardTitle": "Dashboard",
+    "statClients": "Client companies",
+    "statActiveUsers": "Active client users",
+    "statPendingInvites": "Pending invitations",
+    "recentActivity": "Recent activity",
+    "noActivity": "No activity yet.",
+    "clientsTitle": "Clients",
+    "newClient": "New client",
+    "noClients": "No clients yet. Create the first one.",
+    "colName": "Name",
+    "colCountry": "Country",
+    "colUsers": "Users",
+    "colStatus": "Status",
+    "colEmail": "Email",
+    "colLastLogin": "Last login",
+    "colRole": "Role",
+    "colWhen": "When",
+    "colWho": "Who",
+    "colWhat": "What",
+    "newClientTitle": "New client company",
+    "companyName": "Company name",
+    "vatId": "CUI / VAT number",
+    "regCom": "Trade register no.",
+    "country": "Country",
+    "selectCountry": "Select…",
+    "internalNotes": "Internal notes",
+    "internalNotesHint": "Visible only to BIOCETAN admins.",
+    "createCompany": "Create company",
+    "companyCreated": "Company created. Now invite its first user.",
+    "usersTitle": "Users",
+    "noUsers": "No users yet.",
+    "inviteTitle": "Invite a user",
+    "inviteAdminTitle": "Invite an admin",
+    "inviteAdminLead": "Admins have full access to every client. They must set up two-step verification at first login.",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "userLanguage": "Language for emails and the portal",
+    "sendInvite": "Send invitation",
+    "inviteSent": "Invitation sent to {email}. The link is valid for 72 hours.",
+    "resendInvite": "Resend invitation",
+    "disable": "Disable",
+    "enable": "Re-enable",
+    "userDisabled": "User disabled and logged out everywhere.",
+    "userEnabled": "User re-enabled.",
+    "activityTitle": "Activity",
+    "adminsTitle": "Admins",
+    "you": "you",
+    "detailsTitle": "Company details"
+  },
+  "status": {
+    "invited": "Invited",
+    "active": "Active",
+    "disabled": "Disabled",
+    "inactive": "Inactive"
+  },
+  "role": {
+    "admin": "Admin",
+    "client": "Client"
+  },
+  "audit": {
+    "company__created": "Company created",
+    "user__invited": "User invited",
+    "user__invitation_sent": "Invitation sent",
+    "user__invitation_mail_failed": "Invitation email failed",
+    "user__invite_accepted": "Invitation accepted",
+    "user__disabled": "User disabled",
+    "user__enabled": "User re-enabled",
+    "auth__login": "Logged in",
+    "auth__login_failed": "Failed login",
+    "auth__logout": "Logged out",
+    "auth__reset_requested": "Password reset requested",
+    "auth__reset_mail_failed": "Password reset email failed",
+    "auth__password_reset": "Password changed",
+    "auth__mfa_enabled": "Two-step verification turned on",
+    "auth__mfa_failed": "Wrong verification code",
+    "auth__recovery_code_used": "Recovery code used",
+    "other": "Other event"
+  },
+  "errors": {
+    "required": "This field is required.",
+    "invalidEmail": "Enter a valid email address.",
+    "passwordTooShort": "Use at least 12 characters.",
+    "passwordTooLong": "Use at most 128 characters.",
+    "passwordCommon": "This password is too easy to guess. Choose another.",
+    "passwordContainsEmail": "Don't use your email address in the password.",
+    "passwordMismatch": "The two passwords don't match.",
+    "invalidCredentials": "Wrong email or password.",
+    "throttled": "Too many attempts. Wait 15 minutes and try again.",
+    "invalidToken": "This link no longer works.",
+    "emailTaken": "A user with this email already exists.",
+    "invalidCode": "Wrong or expired code. Try the current one.",
+    "mailFailed": "The email could not be sent. Try again in a few minutes.",
+    "forbidden": "You don't have access to this.",
+    "notFound": "Not found.",
+    "invalidInput": "Check the highlighted fields.",
+    "weakPassword": "Choose a stronger password.",
+    "generic": "Something went wrong. Try again."
+  },
+  "email": {
+    "greeting": "Hello {name},",
+    "linkFallback": "If the button doesn't work, copy this address into your browser:",
+    "notYou": "If you weren't expecting this email, you can ignore it.",
+    "invite": {
+      "subject": "Your BIOCETAN client portal account",
+      "body": "{inviter} has created an account for you on the BIOCETAN client portal, where you will find offers, orders, deliveries and documents, and can write to our team.",
+      "button": "Set your password",
+      "expiry": "The link is valid for 72 hours and works once."
+    },
+    "reset": {
+      "subject": "Reset your BIOCETAN portal password",
+      "body": "We received a request to reset the password of your BIOCETAN portal account.",
+      "button": "Choose a new password",
+      "expiry": "The link is valid for 1 hour and works once.",
+      "ignore": "If you didn't ask for this, ignore this email: your password stays the same."
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page doesn't exist or you don't have access to it.",
+    "home": "Go to the start page"
+  }
+}
