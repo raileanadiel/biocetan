@@ -1,0 +1,98 @@
+---
+import AppLayout from '../../../layouts/AppLayout.astro';
+import Alert from '../../../components/Alert.astro';
+import Button from '../../../components/Button.astro';
+import Field from '../../../components/Field.astro';
+import { createCompany, parseCompanyForm } from '../../../server/accounts';
+import { countryOptions, type FieldErrors } from '../../../server/validation';
+import { errorCode, field, readForm } from '../../../server/web';
+
+const { auth, deps, t, locale } = Astro.locals;
+let errors: FieldErrors = {};
+let failure: string | null = null;
+const values = { name: '', vatId: '', regCom: '', country: 'RO', internalNotes: '' };
+
+const form = await readForm(Astro.request);
+if (form) {
+  for (const key of Object.keys(values) as (keyof typeof values)[]) values[key] = field(form, key);
+  const parsed = parseCompanyForm(form);
+  errors = parsed.errors;
+  if (parsed.value) {
+    try {
+      const company = await createCompany(deps, auth!.viewer, parsed.value);
+      return Astro.redirect(`/admin/companies/${company.id}?n=companyCreated`);
+    } catch (e) {
+      failure = errorCode(e);
+    }
+  }
+}
+const countries = countryOptions(locale);
+---
+
+<AppLayout title={t('admin.newClientTitle')}>
+  <p class="text-sm">
+    <a href="/admin/companies" class="link">
+      ← {t('admin.clientsTitle')}
+    </a>
+  </p>
+  <h1 class="mt-2 text-h2 font-bold">{t('admin.newClientTitle')}</h1>
+  <form method="post" class="card mt-6 max-w-2xl space-y-5" novalidate>
+    {(failure || Object.keys(errors).length > 0) && (
+      <Alert variant="error">{t(failure ? 'errors.generic' : 'errors.invalidInput')}</Alert>
+    )}
+    <Field
+      label={t('admin.companyName')}
+      name="name"
+      value={values.name}
+      error={errors.name}
+      maxlength={200}
+      autofocus
+    />
+    <div class="grid gap-5 sm:grid-cols-2">
+      <Field label={t('admin.vatId')} name="vatId" value={values.vatId} optional maxlength={40} />
+      <Field
+        label={t('admin.regCom')}
+        name="regCom"
+        value={values.regCom}
+        optional
+        maxlength={40}
+      />
+    </div>
+    <Field label={t('admin.country')} name="country" error={errors.country}>
+      <select
+        id="f-country"
+        name="country"
+        class="field-control"
+        required
+        aria-invalid={errors.country ? 'true' : undefined}
+      >
+        {countries.map((c) => (
+          <option value={c.code} selected={c.code === values.country}>
+            {c.name}
+          </option>
+        ))}
+      </select>
+    </Field>
+    <Field
+      label={t('admin.internalNotes')}
+      name="internalNotes"
+      optional
+      hint={t('admin.internalNotesHint')}
+    >
+      <textarea
+        id="f-internalNotes"
+        name="internalNotes"
+        rows="3"
+        maxlength="5000"
+        class="field-control"
+        aria-describedby="f-internalNotes-hint"
+      >{values.internalNotes}</textarea>
+    </Field>
+    <div class="flex gap-3">
+      <Button>{t('admin.createCompany')}</Button>
+      <Button href="/admin/companies" variant="outline">
+        {t('common.cancel')}
+      </Button>
+    </div>
+  </form>
+</AppLayout>

@@ -24,7 +24,7 @@ export function base32Encode(bytes: Uint8Array): string {
   return output;
 }
 
-export function base32Decode(input: string): Uint8Array {
+export function base32Decode(input: string): Uint8Array<ArrayBuffer> {
   const clean = input.toUpperCase().replace(/[\s=-]/g, '');
   let bits = 0;
   let value = 0;

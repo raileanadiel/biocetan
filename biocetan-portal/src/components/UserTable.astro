@@ -1,0 +1,72 @@
+---
+import StatusBadge from './StatusBadge.astro';
+import Button from './Button.astro';
+import type { User } from '../server/db/schema';
+import { formatDateTime } from '../server/web';
+
+interface Props {
+  users: User[];
+  /** The admin looking at the list: they can't disable themselves. */
+  selfId: string;
+}
+const { users, selfId } = Astro.props;
+const { t, locale } = Astro.locals;
+---
+
+{users.length === 0 ? (
+  <p class="text-sm text-muted">{t('admin.noUsers')}</p>
+) : (
+  <div class="overflow-x-auto">
+    <table class="table-base">
+      <thead>
+        <tr>
+          <th scope="col">{t('admin.colName')}</th>
+          <th scope="col">{t('admin.colEmail')}</th>
+          <th scope="col">{t('admin.colStatus')}</th>
+          <th scope="col">{t('admin.colLastLogin')}</th>
+          <th scope="col">
+            <span class="sr-only">{t('admin.colStatus')}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {users.map((user) => (
+          <tr>
+            <td>
+              {user.name}
+              {user.id === selfId && <span class="text-muted"> ({t('admin.you')})</span>}
+            </td>
+            <td class="whitespace-nowrap">{user.email}</td>
+            <td>
+              <StatusBadge status={user.status} />
+            </td>
+            <td class="whitespace-nowrap text-muted">
+              {formatDateTime(user.lastLoginAt, locale) ?? t('common.never')}
+            </td>
+            <td>
+              {user.id !== selfId && (
+                <form method="post" class="flex flex-wrap justify-end gap-2">
+                  <input type="hidden" name="userId" value={user.id} />
+                  {user.status === 'invited' && (
+                    <Button size="sm" variant="outline" name="intent" value="resend">
+                      {t('admin.resendInvite')}
+                    </Button>
+                  )}
+                  {user.status === 'disabled' ? (
+                    <Button size="sm" variant="outline" name="intent" value="enable">
+                      {t('admin.enable')}
+                    </Button>
+                  ) : (
+                    <Button size="sm" variant="danger" name="intent" value="disable">
+                      {t('admin.disable')}
+                    </Button>
+                  )}
+                </form>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}

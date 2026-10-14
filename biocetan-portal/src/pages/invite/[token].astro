@@ -1,0 +1,51 @@
+---
+import AuthLayout from '../../layouts/AuthLayout.astro';
+import Button from '../../components/Button.astro';
+import NewPasswordFields from '../../components/NewPasswordFields.astro';
+import { acceptInvite, checkLink } from '../../server/auth/flows';
+import { PortalError } from '../../server/context';
+import { useTranslations } from '../../i18n';
+import { errorCode, field, readForm } from '../../server/web';
+
+const { deps } = Astro.locals;
+const token = Astro.params.token ?? '';
+const user = await checkLink(deps, token, 'invite');
+// The admin chose the invitee's language; use it unless they switch explicitly.
+if (user && !Astro.url.searchParams.has('lang') && !Astro.cookies.has('portal_lang')) {
+  Astro.locals.locale = user.locale;
+  Astro.locals.t = useTranslations(user.locale);
+}
+const { t } = Astro.locals;
+let error: string | undefined;
+
+const form = user ? await readForm(Astro.request) : null;
+if (user && form) {
+  const password = field(form, 'password');
+  if (password !== field(form, 'confirm')) {
+    error = 'passwordMismatch';
+  } else {
+    try {
+      const activated = await acceptInvite(deps, token, password);
+      return Astro.redirect(`/login?n=inviteAccepted&lang=${activated.locale}`);
+    } catch (e) {
+      error = e instanceof PortalError && e.code === 'weakPassword' ? e.message : errorCode(e);
+    }
+  }
+}
+---
+
+{user ? (
+  <AuthLayout title={t('invite.title')}>
+    <p class="mb-6 text-sm text-muted">
+      {t('invite.lead', { name: user.name, email: user.email })}
+    </p>
+    <form method="post" class="space-y-4" novalidate>
+      <NewPasswordFields email={user.email} error={error} />
+      <Button class="w-full">{t('invite.submit')}</Button>
+    </form>
+  </AuthLayout>
+) : (
+  <AuthLayout title={t('link.invalidTitle')}>
+    <p class="text-sm text-muted">{t('link.invalidBody')}</p>
+  </AuthLayout>
+)}

@@ -322,3 +322,19 @@ describe('admin-only actions', () => {
     expect(await validateSession(deps, token)).toBeNull();
   });
 });
+
+describe('client with 2FA turned on', () => {
+  it('is only half logged in until the code is entered', async () => {
+    const { deps } = makeDeps();
+    const admin = await seedAdmin(deps);
+    const client = await seedCompanyWithClient(deps, admin.viewer, 'Agro SRL', 'maria@agro.ro');
+    await deps.db
+      .update(users)
+      .set({ totpEnabledAt: new Date(deps.now()) })
+      .where(eq(users.id, client.user.id));
+    const withMfa = (await deps.db.select().from(users).where(eq(users.id, client.user.id)).get())!;
+    expect((await login(deps, 'maria@agro.ro', PASSWORD)).mfa).toBe('required');
+    const { token } = await createSession(deps, withMfa, { mfaVerified: false });
+    expect((await validateSession(deps, token))?.fullyAuthenticated).toBe(false);
+  });
+});

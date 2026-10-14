@@ -1,0 +1,30 @@
+---
+import AppLayout from '../layouts/AppLayout.astro';
+import { getCompany } from '../server/accounts';
+import type { TranslationKey } from '../i18n';
+
+// Admins are redirected to /admin by the middleware; this is the client's home.
+const { auth, deps, t } = Astro.locals;
+const viewer = auth!.viewer;
+const company = viewer.companyId ? await getCompany(deps, viewer, viewer.companyId) : null;
+const panels: TranslationKey[] = ['client.offers', 'client.orders', 'client.messages'];
+---
+
+<AppLayout title={t('nav.home')}>
+  <h1 class="text-h2 font-bold">{t('client.welcome', { name: viewer.name })}</h1>
+  {company && <p class="mt-1 text-muted">{t('client.companyLine', { company: company.name })}</p>}
+
+  <section class="card mt-8 max-w-2xl">
+    <h2 class="text-h3 font-bold">{t('client.emptyTitle')}</h2>
+    <p class="mt-2 text-muted">{t('client.emptyBody')}</p>
+  </section>
+
+  <div class="mt-6 grid gap-4 sm:grid-cols-3">
+    {panels.map((key) => (
+      <section class="card">
+        <h2 class="text-base font-bold">{t(key)}</h2>
+        <p class="mt-2 text-sm text-muted">{t('client.nothingYet')}</p>
+      </section>
+    ))}
+  </div>
+</AppLayout>

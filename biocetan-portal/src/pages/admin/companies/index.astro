@@ -1,0 +1,52 @@
+---
+import AppLayout from '../../../layouts/AppLayout.astro';
+import Button from '../../../components/Button.astro';
+import StatusBadge from '../../../components/StatusBadge.astro';
+import { listCompanies } from '../../../server/accounts';
+
+const { auth, deps, t, locale } = Astro.locals;
+const rows = await listCompanies(deps, auth!.viewer);
+const countryName = new Intl.DisplayNames([locale], { type: 'region' });
+---
+
+<AppLayout title={t('admin.clientsTitle')}>
+  <div class="flex flex-wrap items-center justify-between gap-4">
+    <h1 class="text-h2 font-bold">{t('admin.clientsTitle')}</h1>
+    <Button href="/admin/companies/new">{t('admin.newClient')}</Button>
+  </div>
+  <section class="card mt-6">
+    {rows.length === 0 ? (
+      <p class="text-sm text-muted">{t('admin.noClients')}</p>
+    ) : (
+      <div class="overflow-x-auto">
+        <table class="table-base">
+          <thead>
+            <tr>
+              <th scope="col">{t('admin.colName')}</th>
+              <th scope="col">{t('admin.colCountry')}</th>
+              <th scope="col">{t('admin.colUsers')}</th>
+              <th scope="col">{t('admin.colStatus')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(({ company, userCount }) => (
+              <tr>
+                <td>
+                  <a href={`/admin/companies/${company.id}`} class="link">
+                    {company.name}
+                  </a>
+                  {company.vatId && <span class="ml-2 text-muted">{company.vatId}</span>}
+                </td>
+                <td>{countryName.of(company.country)}</td>
+                <td>{userCount}</td>
+                <td>
+                  <StatusBadge status={company.status} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+  </section>
+</AppLayout>

@@ -1,0 +1,68 @@
+---
+/** Logged-in pages: header with navigation for the viewer's role, then the page. */
+import BaseLayout from './BaseLayout.astro';
+import Logo from '../components/Logo.astro';
+import type { TranslationKey } from '../i18n';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+const { auth, t } = Astro.locals;
+const viewer = auth!.viewer;
+const path = Astro.url.pathname;
+
+const items: { href: string; label: TranslationKey; match: (p: string) => boolean }[] =
+  viewer.role === 'admin'
+    ? [
+        { href: '/admin', label: 'nav.dashboard', match: (p) => p === '/admin' },
+        {
+          href: '/admin/companies',
+          label: 'nav.clients',
+          match: (p) => p.startsWith('/admin/companies'),
+        },
+        { href: '/admin/admins', label: 'nav.admins', match: (p) => p.startsWith('/admin/admins') },
+      ]
+    : [{ href: '/', label: 'nav.home', match: (p) => p === '/' }];
+---
+
+<BaseLayout title={title}>
+  <header class="border-b border-line bg-white">
+    <div class="container-x flex min-h-16 flex-wrap items-center gap-x-8 gap-y-2 py-3">
+      <a href={viewer.role === 'admin' ? '/admin' : '/'} class="shrink-0">
+        <Logo />
+      </a>
+      <nav aria-label={t('nav.mainLabel')} class="order-3 w-full sm:order-none sm:w-auto">
+        <ul class="flex gap-1">
+          {items.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={item.match(path) ? 'page' : undefined}
+                class:list={[
+                  'inline-flex min-h-10 items-center rounded-md px-3 text-sm font-semibold',
+                  item.match(path)
+                    ? 'bg-mint-100 text-navy-900'
+                    : 'text-muted hover:bg-mint-50 hover:text-navy-900',
+                ]}
+              >
+                {t(item.label)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class="ml-auto flex items-center gap-4 text-sm">
+        <span class="hidden text-muted sm:inline">{viewer.name}</span>
+        <form method="post" action="/logout">
+          <button type="submit" class="link">
+            {t('common.logout')}
+          </button>
+        </form>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="container-x py-8">
+    <slot />
+  </main>
+</BaseLayout>

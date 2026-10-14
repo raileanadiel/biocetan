@@ -1,0 +1,55 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import type { TranslationKey } from '../i18n';
+
+/**
+ * Label + input + hint + error, wired for screen readers (aria-describedby, aria-invalid).
+ * `error` is an error code from the server (`errors.<code>`). Pass a <select> or <textarea> in
+ * the default slot to replace the input.
+ */
+interface Props extends HTMLAttributes<'input'> {
+  label: string;
+  name: string;
+  error?: string | undefined;
+  hint?: string;
+  optional?: boolean;
+}
+
+const { label, name, error, hint, optional = false, id = `f-${name}`, ...rest } = Astro.props;
+const { t } = Astro.locals;
+const hintId = hint ? `${id}-hint` : undefined;
+const errorId = error ? `${id}-error` : undefined;
+const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+const hasSlot = Astro.slots.has('default');
+const errorText = error ? t(`errors.${error}` as TranslationKey) : undefined;
+---
+
+<div>
+  <label for={id} class="field-label">
+    {label}
+    {optional && <span class="font-normal text-muted"> ({t('common.optional')})</span>}
+  </label>
+  {hasSlot ? (
+    <slot />
+  ) : (
+    <input
+      id={id}
+      name={name}
+      class="field-control"
+      aria-invalid={error ? 'true' : undefined}
+      aria-describedby={describedBy}
+      required={!optional}
+      {...rest}
+    />
+  )}
+  {hint && (
+    <p id={hintId} class="field-hint">
+      {hint}
+    </p>
+  )}
+  {errorText && (
+    <p id={errorId} class="field-error">
+      {errorText}
+    </p>
+  )}
+</div>

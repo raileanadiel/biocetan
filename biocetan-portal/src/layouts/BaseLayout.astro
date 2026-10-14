@@ -1,0 +1,33 @@
+---
+import '@fontsource-variable/montserrat';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  bodyClass?: string;
+}
+const { title, bodyClass } = Astro.props;
+const { locale, t } = Astro.locals;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#002746" />
+    <title>{`${title} | ${t('meta.titleSuffix')}`}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body class:list={['min-h-dvh bg-mint-50', bodyClass]}>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-navy-900 focus:px-4 focus:py-3 focus:font-semibold focus:text-white"
+    >
+      {t('common.skipToContent')}
+    </a>
+    <slot />
+  </body>
+</html>

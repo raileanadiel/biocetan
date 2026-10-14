@@ -1,0 +1,100 @@
+---
+import AppLayout from '../../../layouts/AppLayout.astro';
+import ActivityTable from '../../../components/ActivityTable.astro';
+import Alert from '../../../components/Alert.astro';
+import InviteForm from '../../../components/InviteForm.astro';
+import StatusBadge from '../../../components/StatusBadge.astro';
+import UserTable from '../../../components/UserTable.astro';
+import type { TranslationKey } from '../../../i18n';
+import { activity, getCompany, listCompanyUsers } from '../../../server/accounts';
+import { handleUserAction, type ActionResult } from '../../../server/user-actions';
+import { noticeKey, readForm } from '../../../server/web';
+
+const { auth, deps, t, locale } = Astro.locals;
+const viewer = auth!.viewer;
+const company = await getCompany(deps, viewer, Astro.params.id ?? '');
+if (!company) return Astro.rewrite('/404');
+
+let result: ActionResult | null = null;
+const form = await readForm(Astro.request);
+if (form) {
+  result = await handleUserAction(deps, viewer, form, { role: 'client', companyId: company.id });
+}
+
+const [members, history] = await Promise.all([
+  listCompanyUsers(deps, viewer, company.id),
+  activity(deps, viewer, { companyId: company.id, limit: 30 }),
+]);
+const redirectNotice = noticeKey(Astro.url);
+const countryName = new Intl.DisplayNames([locale], { type: 'region' }).of(company.country);
+const details: [TranslationKey, string | null | undefined][] = [
+  ['admin.vatId', company.vatId],
+  ['admin.regCom', company.regCom],
+  ['admin.country', countryName],
+];
+---
+
+<AppLayout title={company.name}>
+  <p class="text-sm">
+    <a href="/admin/companies" class="link">
+      ← {t('admin.clientsTitle')}
+    </a>
+  </p>
+  <div class="mt-2 flex flex-wrap items-center gap-3">
+    <h1 class="text-h2 font-bold">{company.name}</h1>
+    <StatusBadge status={company.status} />
+  </div>
+
+  <div class="mt-4 space-y-3">
+    {redirectNotice && !result && <Alert variant="success">{t(redirectNotice)}</Alert>}
+    {result?.notice && <Alert variant="success">{t(result.notice.key, result.notice.vars)}</Alert>}
+    {result?.failure && (
+      <Alert variant="error">
+        {t(
+          (['emailTaken', 'mailFailed', 'notFound', 'forbidden'].includes(result.failure)
+            ? `errors.${result.failure}`
+            : 'errors.generic') as TranslationKey,
+        )}
+      </Alert>
+    )}
+  </div>
+
+  <div class="mt-6 grid gap-6 lg:grid-cols-[1fr_2fr]">
+    <section class="card">
+      <h2 class="mb-4 text-h3 font-bold">{t('admin.detailsTitle')}</h2>
+      <dl class="space-y-3 text-sm">
+        {details.map(([label, value]) => (
+          <div>
+            <dt class="font-semibold text-navy-900">{t(label)}</dt>
+            <dd class="text-ink">{value || '—'}</dd>
+          </div>
+        ))}
+        {company.internalNotes && (
+          <div>
+            <dt class="font-semibold text-navy-900">{t('admin.internalNotes')}</dt>
+            <dd class="whitespace-pre-line text-ink">{company.internalNotes}</dd>
+          </div>
+        )}
+      </dl>
+    </section>
+
+    <div class="space-y-6">
+      <section class="card">
+        <h2 class="mb-4 text-h3 font-bold">{t('admin.usersTitle')}</h2>
+        <UserTable users={members} selfId={viewer.userId} />
+      </section>
+      <section class="card">
+        <h2 class="mb-4 text-h3 font-bold">{t('admin.inviteTitle')}</h2>
+        <InviteForm
+          errors={result?.errors ?? {}}
+          values={result?.values ?? { name: '', email: '', phone: '', locale: 'ro' }}
+        />
+      </section>
+    </div>
+  </div>
+
+  <section class="card mt-6">
+    <h2 class="mb-4 text-h3 font-bold">{t('admin.activityTitle')}</h2>
+    <ActivityTable entries={history} />
+  </section>
+</AppLayout>

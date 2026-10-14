@@ -1,0 +1,43 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+/** Renders <a> when `href` is set, otherwise <button> (type submit by default). */
+interface Props extends HTMLAttributes<'button'> {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'outline' | 'danger';
+  size?: 'sm' | 'md';
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  type = 'submit',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const variants = {
+  primary: 'bg-green-600 text-white hover:bg-green-700',
+  secondary: 'bg-navy-900 text-white hover:bg-navy-800',
+  outline: 'border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white',
+  danger: 'border-2 border-danger text-danger hover:bg-danger hover:text-white',
+} as const;
+const sizes = { sm: 'min-h-9 px-3 text-sm', md: 'min-h-11 px-5 text-[0.9375rem]' } as const;
+const classes = [
+  'inline-flex items-center justify-center gap-2 rounded-md font-semibold whitespace-nowrap transition-colors',
+  sizes[size],
+  variants[variant],
+  className,
+];
+---
+
+{href ? (
+  <a href={href} class:list={classes}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class:list={classes} {...rest}>
+    <slot />
+  </button>
+)}

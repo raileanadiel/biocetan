@@ -1,0 +1,46 @@
+---
+import AuthLayout from '../../layouts/AuthLayout.astro';
+import Button from '../../components/Button.astro';
+import NewPasswordFields from '../../components/NewPasswordFields.astro';
+import { checkLink, completePasswordReset } from '../../server/auth/flows';
+import { PortalError } from '../../server/context';
+import { errorCode, field, readForm } from '../../server/web';
+
+const { deps, t } = Astro.locals;
+const token = Astro.params.token ?? '';
+const user = await checkLink(deps, token, 'reset');
+let error: string | undefined;
+
+const form = user ? await readForm(Astro.request) : null;
+if (user && form) {
+  const password = field(form, 'password');
+  if (password !== field(form, 'confirm')) {
+    error = 'passwordMismatch';
+  } else {
+    try {
+      const updated = await completePasswordReset(deps, token, password);
+      return Astro.redirect(`/login?n=passwordChanged&lang=${updated.locale}`);
+    } catch (e) {
+      error = e instanceof PortalError && e.code === 'weakPassword' ? e.message : errorCode(e);
+    }
+  }
+}
+---
+
+{user ? (
+  <AuthLayout title={t('reset.title')}>
+    <form method="post" class="mt-4 space-y-4" novalidate>
+      <NewPasswordFields email={user.email} error={error} />
+      <Button class="w-full">{t('reset.submit')}</Button>
+    </form>
+  </AuthLayout>
+) : (
+  <AuthLayout title={t('link.invalidTitle')}>
+    <p class="text-sm text-muted">{t('link.invalidBody')}</p>
+    <p class="mt-5 text-sm">
+      <a href="/forgot" class="link">
+        {t('forgot.title')}
+      </a>
+    </p>
+  </AuthLayout>
+)}

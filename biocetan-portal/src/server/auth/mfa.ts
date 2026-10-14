@@ -60,17 +60,15 @@ export async function confirmTotpSetup(deps: Deps, user: User, code: string): Pr
       .set({ totpEnabledAt: now, totpLastStep: step, updatedAt: now })
       .where(eq(users.id, user.id)),
     deps.db.delete(recoveryCodes).where(eq(recoveryCodes.userId, user.id)),
-    deps.db
-      .insert(recoveryCodes)
-      .values(
-        await Promise.all(
-          codes.map(async (c) => ({
-            userId: user.id,
-            codeHash: await sha256Hex(normalizeRecovery(c)),
-            createdAt: now,
-          })),
-        ),
+    deps.db.insert(recoveryCodes).values(
+      await Promise.all(
+        codes.map(async (c) => ({
+          userId: user.id,
+          codeHash: await sha256Hex(normalizeRecovery(c)),
+          createdAt: now,
+        })),
       ),
+    ),
     auditInsert(deps, {
       actor: { userId: user.id },
       action: 'auth.mfa_enabled',

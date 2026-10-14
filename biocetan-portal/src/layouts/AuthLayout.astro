@@ -1,0 +1,41 @@
+---
+/** Logged-out pages (login, reset, invitation, 2FA): one centred card. */
+import BaseLayout from './BaseLayout.astro';
+import Logo from '../components/Logo.astro';
+
+interface Props {
+  title: string;
+  /** Hide the language switch when the user's own setting applies (2FA pages). */
+  showLanguage?: boolean;
+}
+const { title, showLanguage = true } = Astro.props;
+const { locale, t } = Astro.locals;
+const other = locale === 'ro' ? 'en' : 'ro';
+const switchHref = `${Astro.url.pathname}?lang=${other}`;
+---
+
+<BaseLayout title={title}>
+  <main id="main" class="flex min-h-dvh flex-col items-center justify-center px-4 py-10">
+    <div class="w-full max-w-md">
+      <div class="mb-6 flex items-center justify-between">
+        <Logo />
+        {showLanguage && (
+          <a
+            href={switchHref}
+            class="link text-sm"
+            hreflang={other}
+            lang={other}
+            aria-label={other === 'ro' ? 'Română' : 'English'}
+          >
+            {other.toUpperCase()}
+          </a>
+        )}
+      </div>
+      <div class="card">
+        <h1 class="mb-2 text-h3 font-bold">{title}</h1>
+        <slot />
+      </div>
+      <p class="mt-6 text-center text-sm text-muted">{t('common.contactUs')}</p>
+    </div>
+  </main>
+</BaseLayout>

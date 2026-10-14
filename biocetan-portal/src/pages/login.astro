@@ -1,0 +1,71 @@
+---
+import AuthLayout from '../layouts/AuthLayout.astro';
+import Alert from '../components/Alert.astro';
+import Button from '../components/Button.astro';
+import Field from '../components/Field.astro';
+import { login } from '../server/auth/flows';
+import { errorCode, field, homeFor, noticeKey, readForm, safeNext, signIn } from '../server/web';
+
+const { deps, t } = Astro.locals;
+const next = safeNext(Astro.url.searchParams.get('next'), '');
+let error: string | null = null;
+let email = '';
+
+const form = await readForm(Astro.request);
+if (form) {
+  email = field(form, 'email');
+  try {
+    const { user, mfa } = await login(deps, email, field(form, 'password'));
+    await signIn(deps, Astro.cookies, user, mfa === 'none');
+    if (mfa === 'setupRequired') return Astro.redirect('/2fa/setup');
+    const target = next || homeFor(user.role);
+    if (mfa === 'required') return Astro.redirect(`/2fa?next=${encodeURIComponent(target)}`);
+    return Astro.redirect(target);
+  } catch (e) {
+    error = errorCode(e);
+  }
+}
+const notice = noticeKey(Astro.url);
+---
+
+<AuthLayout title={t('login.title')}>
+  <p class="mb-6 text-sm text-muted">{t('login.lead')}</p>
+  {notice && !error && (
+    <div class="mb-5">
+      <Alert variant="success">{t(notice)}</Alert>
+    </div>
+  )}
+  {error && (
+    <div class="mb-5">
+      <Alert variant="error">
+        {t(error === 'throttled' ? 'errors.throttled' : 'errors.invalidCredentials')}
+      </Alert>
+    </div>
+  )}
+  <form method="post" class="space-y-4" novalidate>
+    <Field
+      label={t('login.email')}
+      name="email"
+      type="email"
+      autocomplete="username"
+      inputmode="email"
+      value={email}
+      autofocus
+    />
+    <Field
+      label={t('login.password')}
+      name="password"
+      type="password"
+      autocomplete="current-password"
+    />
+    <Button class="w-full">{t('login.submit')}</Button>
+  </form>
+  <div class="mt-5 space-y-2 text-sm">
+    <p>
+      <a href="/forgot" class="link">
+        {t('login.forgot')}
+      </a>
+    </p>
+    <p class="text-muted">{t('login.noAccount')}</p>
+  </div>
+</AuthLayout>

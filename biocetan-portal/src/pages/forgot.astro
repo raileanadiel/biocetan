@@ -1,0 +1,52 @@
+---
+import AuthLayout from '../layouts/AuthLayout.astro';
+import Alert from '../components/Alert.astro';
+import Button from '../components/Button.astro';
+import Field from '../components/Field.astro';
+import { requestPasswordReset } from '../server/auth/flows';
+import { field, readForm } from '../server/web';
+import { isValidEmail, normalizeEmail } from '../server/validation';
+
+const { deps, t } = Astro.locals;
+let sent = false;
+let error: string | undefined;
+
+const form = await readForm(Astro.request);
+if (form) {
+  const email = normalizeEmail(field(form, 'email'));
+  if (!isValidEmail(email)) {
+    error = 'invalidEmail';
+  } else {
+    // Same outcome whether or not the account exists (see requestPasswordReset).
+    await requestPasswordReset(deps, email);
+    sent = true;
+  }
+}
+---
+
+<AuthLayout title={t('forgot.title')}>
+  {sent ? (
+    <Alert variant="success">{t('forgot.sent')}</Alert>
+  ) : (
+    <>
+      <p class="mb-6 text-sm text-muted">{t('forgot.lead')}</p>
+      <form method="post" class="space-y-4" novalidate>
+        <Field
+          label={t('login.email')}
+          name="email"
+          type="email"
+          autocomplete="username"
+          inputmode="email"
+          error={error}
+          autofocus
+        />
+        <Button class="w-full">{t('forgot.submit')}</Button>
+      </form>
+    </>
+  )}
+  <p class="mt-5 text-sm">
+    <a href="/login" class="link">
+      {t('forgot.backToLogin')}
+    </a>
+  </p>
+</AuthLayout>

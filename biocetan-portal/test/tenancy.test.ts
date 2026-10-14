@@ -6,7 +6,8 @@
 import { eq, sql } from 'drizzle-orm';
 import { describe, expect, it } from 'vitest';
 import {
-  companyActivity,
+  activity,
+  dashboardStats,
   createCompany,
   getCompany,
   getUser,
@@ -59,7 +60,8 @@ describe('client of company A', () => {
     await expectForbidden(listCompanies(deps, a.viewer));
     await expectForbidden(listAdmins(deps, a.viewer));
     await expectForbidden(getUser(deps, a.viewer, b.user.id));
-    await expectForbidden(companyActivity(deps, a.viewer, b.companyId));
+    await expectForbidden(activity(deps, a.viewer, { companyId: b.companyId }));
+    await expectForbidden(dashboardStats(deps, a.viewer));
     await expectForbidden(setUserDisabled(deps, a.viewer, b.user.id, true));
     await expectForbidden(
       createCompany(deps, a.viewer, {
@@ -93,7 +95,7 @@ describe('client of company A', () => {
 describe('admin', () => {
   it('sees every company and its users', async () => {
     const { deps, admin, a, b } = await setup();
-    expect((await listCompanies(deps, admin.viewer)).map((c) => c.name)).toEqual([
+    expect((await listCompanies(deps, admin.viewer)).map((c) => c.company.name)).toEqual([
       'Alpha SRL',
       'Beta SRL',
     ]);
@@ -122,7 +124,7 @@ describe('admin', () => {
 
   it("reads one company's history without the other's", async () => {
     const { deps, admin, a } = await setup();
-    const entries = await companyActivity(deps, admin.viewer, a.companyId);
+    const entries = await activity(deps, admin.viewer, { companyId: a.companyId });
     expect(entries.length).toBeGreaterThan(0);
     expect(entries.every((e) => e.companyId === a.companyId)).toBe(true);
   });
@@ -165,5 +167,26 @@ describe('database guarantees (triggers)', () => {
     expect((await getCompany(deps, admin.viewer, a.companyId))?.internalNotes).toBe(
       'secret note about Alpha SRL',
     );
+  });
+});
+
+describe('admin dashboard numbers', () => {
+  it('counts companies, active client users and pending invitations', async () => {
+    const { deps, admin, a } = await setup();
+    await inviteUser(deps, admin.viewer, {
+      email: 'pending@alpha.ro',
+      name: 'Pending',
+      phone: null,
+      locale: 'ro',
+      role: 'client',
+      companyId: a.companyId,
+    });
+    expect(await dashboardStats(deps, admin.viewer)).toEqual({
+      companies: 2,
+      activeClients: 2,
+      pendingInvites: 1,
+    });
+    const list = await listCompanies(deps, admin.viewer);
+    expect(list.find((c) => c.company.id === a.companyId)?.userCount).toBe(2);
   });
 });

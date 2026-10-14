@@ -19,7 +19,7 @@
   "vars": {
     // Overridden per environment; secrets (RESEND_API_KEY, TOTP_ENC_KEY) live in .dev.vars
     // locally and in the dashboard in production, never here.
-    "PORTAL_URL": "http://localhost:4321",
+    "PORTAL_URL": "http://localhost:4322",
     "MAIL_FROM": "BIOCETAN Portal <no-reply@biocetan.ro>",
     "RESEND_API_URL": "https://api.resend.com",
   },

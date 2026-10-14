@@ -1,0 +1,18 @@
+---
+interface Props {
+  variant?: 'success' | 'error' | 'info';
+}
+const { variant = 'info' } = Astro.props;
+const styles = {
+  success: 'border-green-600 bg-mint-50 text-ink',
+  error: 'border-danger bg-white text-danger',
+  info: 'border-navy-900 bg-mint-50 text-ink',
+} as const;
+---
+
+<div
+  role={variant === 'error' ? 'alert' : 'status'}
+  class:list={['rounded-md border-l-4 px-4 py-3 text-sm font-medium', styles[variant]]}
+>
+  <slot />
+</div>

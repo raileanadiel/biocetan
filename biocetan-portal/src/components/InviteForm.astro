@@ -1,0 +1,55 @@
+---
+import Button from './Button.astro';
+import Field from './Field.astro';
+import type { FieldErrors } from '../server/validation';
+
+interface Props {
+  errors: FieldErrors;
+  values: { name: string; email: string; phone: string; locale: string };
+}
+const { errors, values } = Astro.props;
+const { t } = Astro.locals;
+---
+
+<form method="post" class="space-y-4" novalidate>
+  <input type="hidden" name="intent" value="invite" />
+  <div class="grid gap-4 sm:grid-cols-2">
+    <Field
+      label={t('admin.name')}
+      name="name"
+      value={values.name}
+      error={errors.name}
+      autocomplete="off"
+      maxlength={120}
+    />
+    <Field
+      label={t('admin.email')}
+      name="email"
+      type="email"
+      value={values.email}
+      error={errors.email}
+      autocomplete="off"
+      inputmode="email"
+    />
+    <Field
+      label={t('admin.phone')}
+      name="phone"
+      type="tel"
+      value={values.phone}
+      optional
+      autocomplete="off"
+      maxlength={40}
+    />
+    <Field label={t('admin.userLanguage')} name="locale">
+      <select id="f-locale" name="locale" class="field-control">
+        <option value="ro" selected={values.locale !== 'en'}>
+          Română
+        </option>
+        <option value="en" selected={values.locale === 'en'}>
+          English
+        </option>
+      </select>
+    </Field>
+  </div>
+  <Button>{t('admin.sendInvite')}</Button>
+</form>

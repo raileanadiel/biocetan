@@ -1,6 +1,6 @@
 # BIOCETAN — Platforma pentru clienți (portal B2B): plan
 
-> Status: **plan, nimic construit încă** · 2026-10-13 · completează [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) (site-ul public)
+> Status: **P1 (fundația) construită local, încă nepublicată** · 2026-10-14 · cod în [`biocetan-portal/`](biocetan-portal/README.md) · completează [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) (site-ul public)
 
 ## 0. Pe scurt
 
@@ -212,6 +212,8 @@ Estimări brute pentru un dezvoltator (eu, cu tine la testare), **fără** timpu
 | **P4. Livrare și recepție**   | Livrări (una sau mai multe per comandă), statusuri cu documente, linia de timp pentru client, confirmare recepție, reclamații, facturi + plată + restanțe                                         | 1,5–2 săpt.    | Exemplul cu 1000 L merge cap-coadă până la „Închisă"                                                   |
 | **P5. Securizare și lansare** | Review de securitate, test de restaurare backup, GDPR (politică, DPA), RO/EN complet, accesibilitate, monitorizare și alerte, test cu 1–2 clienți reali de încredere                              | 1–1,5 săpt.    | Clienții de test parcurg o comandă reală fără ajutor; nicio problemă de securitate deschisă            |
 | **P6. Ulterior**              | Ce e în §7, după prioritățile voastre                                                                                                                                                             | —              | —                                                                                                      |
+
+**Progres (2026-10-14):** P1 este construită și testată local (51 de teste, inclusiv izolarea între firme): invitații, login, resetare parolă, 2FA obligatoriu pentru admini, firme-client, utilizatori, jurnal de audit. Pentru publicare lipsesc: planul Workers Paid, baza D1 în UE, secretele, domeniul `portal.biocetan.ro` și Cloudflare Access (pașii în `biocetan-portal/README.md`).
 
 **Total ≈ 8–9 săptămâni de dezvoltare.** Recomand să **lansăm întâi site-ul public** (îi lipsesc doar datele legale și configurările de lansare), apoi portalul, pentru că folosesc același domeniu și aceeași configurare de email.
 

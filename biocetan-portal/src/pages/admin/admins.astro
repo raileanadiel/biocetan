@@ -1,0 +1,45 @@
+---
+import AppLayout from '../../layouts/AppLayout.astro';
+import Alert from '../../components/Alert.astro';
+import InviteForm from '../../components/InviteForm.astro';
+import UserTable from '../../components/UserTable.astro';
+import type { TranslationKey } from '../../i18n';
+import { listAdmins } from '../../server/accounts';
+import { handleUserAction, type ActionResult } from '../../server/user-actions';
+import { readForm } from '../../server/web';
+
+const { auth, deps, t } = Astro.locals;
+const viewer = auth!.viewer;
+
+let result: ActionResult | null = null;
+const form = await readForm(Astro.request);
+if (form) result = await handleUserAction(deps, viewer, form, { role: 'admin' });
+const admins = await listAdmins(deps, viewer);
+---
+
+<AppLayout title={t('admin.adminsTitle')}>
+  <h1 class="text-h2 font-bold">{t('admin.adminsTitle')}</h1>
+  <div class="mt-4 space-y-3">
+    {result?.notice && <Alert variant="success">{t(result.notice.key, result.notice.vars)}</Alert>}
+    {result?.failure && (
+      <Alert variant="error">
+        {t(
+          (['emailTaken', 'mailFailed', 'notFound', 'forbidden'].includes(result.failure)
+            ? `errors.${result.failure}`
+            : 'errors.generic') as TranslationKey,
+        )}
+      </Alert>
+    )}
+  </div>
+  <section class="card mt-6">
+    <UserTable users={admins} selfId={viewer.userId} />
+  </section>
+  <section class="card mt-6 max-w-3xl">
+    <h2 class="text-h3 font-bold">{t('admin.inviteAdminTitle')}</h2>
+    <p class="mt-1 mb-4 text-sm text-muted">{t('admin.inviteAdminLead')}</p>
+    <InviteForm
+      errors={result?.errors ?? {}}
+      values={result?.values ?? { name: '', email: '', phone: '', locale: 'ro' }}
+    />
+  </section>
+</AppLayout>

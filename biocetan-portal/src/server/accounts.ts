@@ -2,7 +2,7 @@
  * Companies and their users. Admin-only writes; reads go through `visibleTo` so a client only
  * ever gets their own company and colleagues.
  */
-import { and, asc, desc, eq } from 'drizzle-orm';
+import { and, asc, desc, eq, sql } from 'drizzle-orm';
 import { audit, auditInsert } from './audit';
 import { revokeAllSessions } from './auth/session';
 import { issueToken } from './auth/tokens';
@@ -84,7 +84,16 @@ export async function createCompany(
 
 export async function listCompanies(deps: Deps, viewer: Viewer) {
   requireAdmin(viewer);
-  return deps.db.select().from(companies).orderBy(asc(companies.name)).all();
+  return deps.db
+    .select({
+      company: companies,
+      // Plain SQL: in a select field drizzle renders `${companies.id}` as a bare "id", which the
+      // subquery would resolve to users.id.
+      userCount: sql<number>`(SELECT count(*) FROM users u WHERE u.company_id = "companies"."id" AND u.status != 'disabled')`,
+    })
+    .from(companies)
+    .orderBy(asc(companies.name))
+    .all();
 }
 
 /**
@@ -247,14 +256,45 @@ export async function setUserDisabled(
   if (disabled) await revokeAllSessions(deps, userId);
 }
 
-/** Latest audit entries for one company (admin view of a client's history). */
-export async function companyActivity(deps: Deps, viewer: Viewer, companyId: string, limit = 50) {
+/**
+ * Latest audit entries with the actor's name, newest first: one company's history, or
+ * everything when `companyId` is omitted (admin dashboard).
+ */
+export async function activity(
+  deps: Deps,
+  viewer: Viewer,
+  { companyId, limit = 50 }: { companyId?: string; limit?: number } = {},
+) {
   requireAdmin(viewer);
   return deps.db
-    .select()
+    .select({
+      id: auditLog.id,
+      at: auditLog.at,
+      action: auditLog.action,
+      companyId: auditLog.companyId,
+      entityType: auditLog.entityType,
+      entityId: auditLog.entityId,
+      data: auditLog.data,
+      actorName: users.name,
+      actorEmail: users.email,
+    })
     .from(auditLog)
-    .where(eq(auditLog.companyId, companyId))
+    .leftJoin(users, eq(users.id, auditLog.actorUserId))
+    .where(companyId ? eq(auditLog.companyId, companyId) : sql`1 = 1`)
     .orderBy(desc(auditLog.at))
     .limit(limit)
     .all();
+}
+
+export async function dashboardStats(deps: Deps, viewer: Viewer) {
+  requireAdmin(viewer);
+  const row = await deps.db
+    .select({
+      companies: sql<number>`(SELECT count(*) FROM ${companies} WHERE ${companies.status} = 'active')`,
+      activeClients: sql<number>`(SELECT count(*) FROM ${users} WHERE ${users.role} = 'client' AND ${users.status} = 'active')`,
+      pendingInvites: sql<number>`(SELECT count(*) FROM ${users} WHERE ${users.status} = 'invited')`,
+    })
+    .from(sql`(SELECT 1)`)
+    .get();
+  return row ?? { companies: 0, activeClients: 0, pendingInvites: 0 };
 }

@@ -1,0 +1,52 @@
+---
+import AuthLayout from '../../layouts/AuthLayout.astro';
+import Alert from '../../components/Alert.astro';
+import Button from '../../components/Button.astro';
+import Field from '../../components/Field.astro';
+import { verifySecondFactor } from '../../server/auth/mfa';
+import { errorCode, field, homeFor, readForm, safeNext, upgradeSession } from '../../server/web';
+
+const { auth, deps, t } = Astro.locals;
+const { user, session } = auth!;
+if (!user.totpEnabledAt) return Astro.redirect('/2fa/setup');
+
+let error: string | null = null;
+const form = await readForm(Astro.request);
+if (form) {
+  try {
+    await verifySecondFactor(deps, user, field(form, 'code'));
+    await upgradeSession(deps, Astro.cookies, session.id, user);
+    return Astro.redirect(safeNext(Astro.url.searchParams.get('next'), homeFor(user.role)));
+  } catch (e) {
+    error = errorCode(e);
+  }
+}
+---
+
+<AuthLayout title={t('mfa.title')} showLanguage={false}>
+  <p class="mb-6 text-sm text-muted">{t('mfa.lead')}</p>
+  {error && (
+    <div class="mb-5">
+      <Alert variant="error">
+        {t(error === 'throttled' ? 'errors.throttled' : 'errors.invalidCode')}
+      </Alert>
+    </div>
+  )}
+  <form method="post" class="space-y-4" novalidate>
+    <Field
+      label={t('mfa.code')}
+      name="code"
+      autocomplete="one-time-code"
+      inputmode="numeric"
+      maxlength={11}
+      hint={t('mfa.recoveryHint')}
+      autofocus
+    />
+    <Button class="w-full">{t('mfa.submit')}</Button>
+  </form>
+  <form method="post" action="/logout" class="mt-5 text-sm">
+    <button type="submit" class="link">
+      {t('common.logout')}
+    </button>
+  </form>
+</AuthLayout>

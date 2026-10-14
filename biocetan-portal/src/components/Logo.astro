@@ -1,0 +1,19 @@
+---
+/**
+ * Same placeholder wordmark as the public site (biocetan-web/src/components/layout/Logo.astro);
+ * replace both when the vector logo arrives.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+const { t } = Astro.locals;
+---
+
+<span class:list={['inline-flex items-baseline gap-2', className]}>
+  <span class="inline-flex items-baseline font-heading text-[1.5rem] leading-none font-extrabold tracking-tight italic">
+    <span class="text-green-600">BIO</span>
+    <span class="text-logo-blue">CETAN</span>
+  </span>
+  <span class="text-sm font-semibold text-muted">{t('meta.portalName')}</span>
+</span>

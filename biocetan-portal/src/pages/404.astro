@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Logo from '../components/Logo.astro';
+
+Astro.response.status = 404;
+const { auth, t } = Astro.locals;
+const home = auth?.fullyAuthenticated ? (auth.viewer.role === 'admin' ? '/admin' : '/') : '/login';
+---
+
+<BaseLayout title={t('notFound.title')}>
+  <main id="main" class="flex min-h-dvh flex-col items-center justify-center px-4 text-center">
+    <Logo />
+    <h1 class="mt-8 text-h2 font-bold">{t('notFound.title')}</h1>
+    <p class="mt-2 text-muted">{t('notFound.body')}</p>
+    <a href={home} class="link mt-6">
+      {t('notFound.home')}
+    </a>
+  </main>
+</BaseLayout>

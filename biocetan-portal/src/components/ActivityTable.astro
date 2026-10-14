@@ -1,0 +1,51 @@
+---
+import type { TranslationKey } from '../i18n';
+import { formatDateTime } from '../server/web';
+
+interface Entry {
+  id: string;
+  at: Date;
+  action: string;
+  actorName: string | null;
+  actorEmail: string | null;
+}
+interface Props {
+  entries: Entry[];
+}
+const { entries } = Astro.props;
+const { t, locale } = Astro.locals;
+
+// Audit actions are dotted (`user.invited`); their labels live under `audit.<action with __>`.
+function label(action: string): string {
+  try {
+    return t(`audit.${action.replace('.', '__')}` as TranslationKey);
+  } catch {
+    return t('audit.other');
+  }
+}
+---
+
+{entries.length === 0 ? (
+  <p class="text-sm text-muted">{t('admin.noActivity')}</p>
+) : (
+  <div class="overflow-x-auto">
+    <table class="table-base">
+      <thead>
+        <tr>
+          <th scope="col">{t('admin.colWhen')}</th>
+          <th scope="col">{t('admin.colWho')}</th>
+          <th scope="col">{t('admin.colWhat')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {entries.map((entry) => (
+          <tr>
+            <td class="whitespace-nowrap text-muted">{formatDateTime(entry.at, locale)}</td>
+            <td>{entry.actorName ?? '—'}</td>
+            <td>{label(entry.action)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
