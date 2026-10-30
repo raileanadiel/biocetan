@@ -9,10 +9,9 @@ node_modules/
 # logs
 npm-debug.log*
 
-# local secrets and wrangler state
+# local secrets and the local database
 .env
-.dev.vars
-.wrangler/
+data/
 
 .DS_Store
 .idea/

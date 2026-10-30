@@ -7,25 +7,24 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev --port 4322",
+    "dev": "node --env-file-if-exists=.env node_modules/astro/bin/astro.mjs dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "start": "node --env-file-if-exists=.env scripts/migrate.mjs && node --env-file-if-exists=.env dist/server/entry.mjs",
     "astro": "astro",
     "check": "astro check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
-    "typegen": "wrangler types",
     "db:generate": "drizzle-kit generate",
-    "db:migrate:local": "wrangler d1 migrations apply DB --local",
-    "db:migrate:remote": "wrangler d1 migrations apply DB --remote",
+    "db:migrate": "node --env-file-if-exists=.env scripts/migrate.mjs",
     "mock:resend": "node scripts/mock-resend.mjs",
-    "admin:invite": "node scripts/invite-admin.mjs"
+    "admin:invite": "node --env-file-if-exists=.env scripts/invite-admin.mjs"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^14.3.4",
+    "@astrojs/node": "^11.1.9",
     "@fontsource-variable/inter": "^5.3.0",
     "@fontsource-variable/montserrat": "^5.3.0",
+    "@libsql/client": "^0.18.0",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.8",
     "drizzle-orm": "^0.45.4",
@@ -34,12 +33,11 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "@cloudflare/vitest-plugin": "^1.4.2",
+    "@types/node": "^22.20.5",
     "drizzle-kit": "^0.31.11",
     "prettier": "^3.9.10",
     "prettier-plugin-astro": "^1.1.1",
     "typescript": "^6.0.3",
-    "vitest": "~4.1.11",
-    "wrangler": "^4.151.0"
+    "vitest": "~4.1.11"
   }
 }

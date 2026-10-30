@@ -14,7 +14,7 @@ export interface AuditEntry {
 
 /**
  * Returns the insert without running it, so callers can put it in the same `db.batch()` as the
- * change it records (D1 runs a batch atomically: both happen or neither).
+ * change it records (a batch runs as one transaction: both happen or neither).
  */
 export function auditInsert(deps: Pick<Deps, 'db' | 'ip' | 'now'>, entry: AuditEntry) {
   return deps.db.insert(auditLog).values({

@@ -21,7 +21,10 @@ import { consumeToken, issueToken, peekToken } from './tokens';
 
 export type LoginResult = {
   user: User;
-  /** Admins always need a code; `setupRequired` when they haven't enrolled an authenticator. */
+  /**
+   * `required` when the user has 2FA on; `setupRequired` for an admin without it when the
+   * deployment sets REQUIRE_ADMIN_MFA; otherwise `none`.
+   */
   mfa: 'none' | 'required' | 'setupRequired';
 };
 
@@ -76,14 +79,11 @@ export async function login(
     }),
   ]);
 
-  const mfa =
-    user.role === 'admin'
-      ? user.totpEnabledAt
-        ? 'required'
-        : 'setupRequired'
-      : user.totpEnabledAt
-        ? 'required'
-        : 'none';
+  const mfa = user.totpEnabledAt
+    ? 'required'
+    : user.role === 'admin' && deps.env.REQUIRE_ADMIN_MFA
+      ? 'setupRequired'
+      : 'none';
   return { user, mfa };
 }
 

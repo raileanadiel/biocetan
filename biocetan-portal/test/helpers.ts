@@ -1,12 +1,10 @@
 import { eq } from 'drizzle-orm';
-import { env } from 'cloudflare:workers';
 import { createCompany, inviteUser } from '../src/server/accounts';
 import { acceptInvite } from '../src/server/auth/flows';
 import { toViewer } from '../src/server/auth/session';
 import type { Deps, Viewer } from '../src/server/context';
-import { getDb } from '../src/server/db/client';
 import { users, type User } from '../src/server/db/schema';
-import { sentMails } from './setup';
+import { sentMails, testConfig, testDb } from './setup';
 
 export const PASSWORD = 'correct horse battery staple';
 
@@ -14,8 +12,8 @@ export const PASSWORD = 'correct horse battery staple';
 export function makeDeps(start = Date.UTC(2026, 9, 14, 9, 0, 0)) {
   let now = start;
   const deps: Deps = {
-    db: getDb(env.DB),
-    env,
+    db: testDb,
+    env: testConfig,
     now: () => now,
     ip: '203.0.113.7',
     userAgent: 'vitest',

@@ -15,7 +15,7 @@ const KEY = 'dGVzdC1rZXktdGVzdC1rZXktdGVzdC1rZXktMzJieXQ';
 describe('passwords', () => {
   it('verifies the right password and rejects others', async () => {
     const hash = await hashPassword('a long passphrase here');
-    expect(hash.startsWith('pbkdf2-sha256$100000$')).toBe(true);
+    expect(hash.startsWith('pbkdf2-sha256$600000$')).toBe(true);
     expect(await verifyPassword('a long passphrase here', hash)).toBe(true);
     expect(await verifyPassword('a long passphrase herE', hash)).toBe(false);
     expect(await verifyPassword('', hash)).toBe(false);

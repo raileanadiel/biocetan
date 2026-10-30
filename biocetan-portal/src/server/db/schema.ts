@@ -1,5 +1,5 @@
 /**
- * D1 schema (SQLite). Source of truth for `drizzle-kit generate`, which writes the SQL files in
+ * SQLite schema. Source of truth for `drizzle-kit generate`, which writes the SQL files in
  * `migrations/`. Never edit an applied migration; change this file and generate a new one.
  *
  * Conventions: ids are random UUIDs (never sequential, so they can't be guessed or enumerated);

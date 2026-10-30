@@ -1,10 +1,10 @@
 ## Project (BIOCETAN client portal)
 
-Private B2B portal on Cloudflare Workers + D1. Read `README.md` (security model, structure) and
+Private B2B portal: Astro (Node adapter) + SQLite, self-hosted on the owner's VM (not Cloudflare Workers: the owner doesn't want a monthly bill). Read `README.md` (security model, structure) and
 `../PORTAL_PLAN.md` (Romanian; phases, data model, decisions) first.
 
 - Data access lives in `src/server/`; pages only parse forms and render. Services take `deps`
-  (db, env, clock, ip) explicitly so tests can drive them.
+  (db, config, clock, ip) explicitly so tests can drive them.
 - **Tenant isolation is the top rule.** Any query a client can trigger must filter with
   `visibleTo(viewer, table.companyId)` from `src/server/tenancy.ts`, never with a company id
   taken from the URL or a form. Every new client-facing query gets a case in
@@ -22,7 +22,9 @@ Private B2B portal on Cloudflare Workers + D1. Read `README.md` (security model,
 - UI strings in `src/i18n/en.json` + `ro.json`; `npm run check` fails on a missing key. Romanian
   is the default for clients.
 - Before committing: `npm test`, `npm run check`, `npx prettier --check .`.
+- Configuration only through `src/server/config.ts` (environment variables; `.env` locally,
+  `/etc/biocetan-portal.env` on the VM). 2FA exists but is off (`REQUIRE_ADMIN_MFA=false`, owner's
+  choice); keep it working and tested.
 - Local test accounts go in `.dev-accounts` (gitignored), never in chat or committed files. Real
   credentials and secrets are entered by the owner only.
-- TypeScript is pinned to 6.x (as in the site) because `@astrojs/check` doesn't support 7.x yet;
-  Vitest is 4.1.x because `@cloudflare/vitest-plugin` failed to load test files under Vitest 5.
+- TypeScript is pinned to 6.x (as in the site) because `@astrojs/check` doesn't support 7.x yet.

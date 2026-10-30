@@ -15,7 +15,7 @@ Deciziile luate (2026-10-13):
 | Cine lucrează ca admin  | **Tu și șeful**                                    | Un singur rol de admin, cu acces complet. Baza de date are totuși un câmp de rol, ca rolurile pe departamente să poată fi adăugate ulterior fără restructurare.                                                        |
 | Facturi și plăți        | **Doar urmărite**                                  | Facturați ca acum (programul vostru + e-Factura). Atașați factura în platformă și marcați plata; clientul vede statusul.                                                                                               |
 
-**Estimare brută: ~8–9 săptămâni de dezvoltare** până la prima versiune lansabilă (§8), fără timpul de răspuns al vostru, al avocatului sau al clienților. **Cost lunar estimat: ~5–25 €** (§6.4).
+**Estimare brută: ~8–9 săptămâni de dezvoltare** până la prima versiune lansabilă (§8), fără timpul de răspuns al vostru, al avocatului sau al clienților. **Cost lunar estimat: ~0 €** peste VM-ul pe care îl aveți deja (§6.4).
 
 ---
 
@@ -137,26 +137,26 @@ Prețurile nu calculează TVA. Ofertele arată prețuri **fără TVA**, iar TVA-
 
 ### 6.1 Componente
 
-| Ce                    | Tehnologie                                                                                    | De ce                                                                                                                               |
-| --------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Site public           | Astro static pe Cloudflare Pages (existent)                                                   | Rămâne neschimbat, primește un buton „Cont client"                                                                                  |
-| Portal                | **Aplicație separată**, Astro în mod server + adaptor Cloudflare, pe **`portal.biocetan.ro`** | Același framework, aceleași culori, fonturi și traduceri; separat de site pentru securitate și ca site-ul să rămână static și rapid |
-| Interfață interactivă | Câteva componente interactive (chat, formulare de ofertă)                                     | Restul paginilor se generează pe server, simplu și rapid                                                                            |
-| Bază de date          | **Cloudflare D1** (SQLite) + Drizzle ORM pentru schemă și migrări                             | Relațională, gratuită la volumul vostru, în același cont                                                                            |
-| Fișiere               | **Cloudflare R2**, bucket **privat**, cu jurisdicție UE                                       | Descărcare doar prin aplicație, după verificarea dreptului de acces; niciun link public                                             |
-| Chat în timp real     | **Durable Objects + WebSockets** (câte unul per conversație)                                  | Nativ Cloudflare, ieftin; dacă WebSocket cade, se revine la reîmprospătare periodică                                                |
-| Email                 | Resend (deja planificat pentru site), de pe `@biocetan.ro`                                    | Invitații, notificări, mementouri; necesită SPF/DKIM/DMARC (acum ușor, DNS-ul e pe Cloudflare)                                      |
-| PDF-uri               | Șablon HTML → PDF prin Cloudflare Browser Rendering                                           | Oferte și confirmări cu același design ca site-ul                                                                                   |
+| Ce                    | Tehnologie                                                                                             | De ce                                                                                                                                                                                                                |
+| --------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Site public           | Astro static pe Cloudflare Pages (existent)                                                            | Rămâne neschimbat, primește un buton „Cont client"                                                                                                                                                                   |
+| Portal                | **Aplicație separată**, Astro în mod server (Node.js) pe **VM-ul vostru**, la **`portal.biocetan.ro`** | Același framework, aceleași culori, fonturi și traduceri; separat de site pentru securitate și ca site-ul să rămână static și rapid. Decizie 2026-10-30: pe VM, nu pe Cloudflare Workers, ca să nu existe cost lunar |
+| Interfață interactivă | Câteva componente interactive (chat, formulare de ofertă)                                              | Restul paginilor se generează pe server, simplu și rapid                                                                                                                                                             |
+| Bază de date          | **SQLite** (fișier pe VM) + Drizzle ORM pentru schemă și migrări                                       | Relațională, fără server separat de întreținut; backup zilnic automat (copie consistentă)                                                                                                                            |
+| Fișiere               | Pe discul VM-ului, în afara folderului public                                                          | Descărcare doar prin aplicație, după verificarea dreptului de acces; niciun link public                                                                                                                              |
+| Chat în timp real     | WebSockets / Server-Sent Events direct din serverul Node                                               | Fără servicii plătite; dacă conexiunea cade, se revine la reîmprospătare periodică                                                                                                                                   |
+| Email                 | Resend (deja planificat pentru site), de pe `@biocetan.ro`                                             | Invitații, notificări, mementouri; necesită SPF/DKIM/DMARC (acum ușor, DNS-ul e pe Cloudflare)                                                                                                                       |
+| PDF-uri               | Șablon HTML → PDF prin Cloudflare Browser Rendering                                                    | Oferte și confirmări cu același design ca site-ul                                                                                                                                                                    |
 
 ### 6.2 Autentificare și securitate
 
 - **Doar pe invitație**: nimeni nu își face cont singur. Linkurile de invitație și resetare sunt de unică folosință, expiră și se stochează doar ca hash.
 - **Parole**: hash puternic (PBKDF2 prin WebCrypto, iterații mari), sesiuni în cookie `HttpOnly` + `Secure` + `SameSite`, expirare la inactivitate.
-- **Admini**: **2FA obligatoriu** (aplicație de autentificare), iar zona `/admin` e pusă și în spatele **Cloudflare Access** (gratuit până la 50 de utilizatori), ca a doua barieră.
-- **Limitare încercări** de login (Cloudflare WAF + Turnstile după câteva eșecuri).
+- **Admini**: 2FA (aplicație de autentificare) este construit și testat, dar **oprit deocamdată** (decizia voastră, 2026-10-30); se pornește cu o singură setare (`REQUIRE_ADMIN_MFA=true`). Opțional, zona `/admin` poate fi pusă și în spatele **Cloudflare Access** (gratuit până la 50 de utilizatori), ca a doua barieră.
+- **Limitare încercări** de login în aplicație (pe cont și pe IP), plus limita gratuită din Cloudflare dacă portalul e publicat prin Cloudflare Tunnel.
 - **Fișiere**: aceeași validare ca la formularul de contact (semnătură reală a fișierului, nu doar extensia), limite de mărime.
 - **Jurnal de audit** pentru tot ce contează juridic sau comercial.
-- **Backup**: D1 Time Travel (restaurare la orice moment din ultimele 30 de zile) + export zilnic automat în R2; **testăm o restaurare** înainte de lansare.
+- **Backup**: copie zilnică automată a bazei de date pe VM (se păstrează ultimele 30), care trebuie copiată și în afara VM-ului; **testăm o restaurare** înainte de lansare.
 
 ### 6.3 Notificări
 
@@ -166,13 +166,12 @@ Prețurile nu calculează TVA. Ofertele arată prețuri **fără TVA**, iar TVA-
 
 ### 6.4 Costuri lunare estimate
 
-| Serviciu                                                              | Cost                           |
-| --------------------------------------------------------------------- | ------------------------------ |
-| Cloudflare Workers Paid (include D1, Durable Objects, cote mari)      | ~5 $                           |
-| R2 (primii 10 GB gratuit)                                             | ~0 € la început                |
-| Browser Rendering (PDF-uri)                                           | inclus/minim la volumul vostru |
-| Resend (3.000 emailuri/lună gratuit; plan plătit ~20 $ dacă e nevoie) | 0–20 $                         |
-| **Total**                                                             | **~5–25 € / lună**             |
+| Serviciu                                                              | Cost                       |
+| --------------------------------------------------------------------- | -------------------------- |
+| VM-ul vostru (aplicație, bază de date, fișiere, PDF-uri)              | deja plătit                |
+| Cloudflare Tunnel / DNS                                               | 0 €                        |
+| Resend (3.000 emailuri/lună gratuit; plan plătit ~20 $ dacă e nevoie) | 0–20 $                     |
+| **Total**                                                             | **~0 € / lună** la început |
 
 Fără abonamente per utilizator: clienții nelimitați nu costă în plus.
 
@@ -203,17 +202,17 @@ Fără abonamente per utilizator: clienții nelimitați nu costă în plus.
 
 Estimări brute pentru un dezvoltator (eu, cu tine la testare), **fără** timpul de așteptare pentru avocat, șef sau clienți.
 
-| Etapă                         | Ce livrează                                                                                                                                                                                       | Durată         | Gata când                                                                                              |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------ |
-| **P0. Decizii și pregătire**  | Răspunsuri la §10; avocatul pregătește CGV, contractul-cadru și textul de acceptare; cont Cloudflare Workers Paid, D1, R2; domeniu de email verificat în Resend; subdomeniul `portal.biocetan.ro` | depinde de voi | Întrebările P0 au răspuns, CGV există măcar în draft                                                   |
-| **P1. Fundație**              | Aplicația portal, design comun cu site-ul, baza de date + migrări, invitații, login, resetare parolă, 2FA admin, Cloudflare Access pe `/admin`, izolare între firme + teste, jurnal de audit      | 1,5–2 săpt.    | Creezi o firmă, inviți un utilizator, acesta se loghează și vede un panou gol; testele de izolare trec |
-| **P2. Comunicare**            | Chat în timp real cu atașamente, cereri în portal, notificări email, lead-urile din formularul site-ului intră în admin                                                                           | ~1,5 săpt.     | Tu și un client de test vorbiți în timp real, cu fișiere; un mesaj necitit generează email             |
-| **P3. Vânzare**               | Catalog produse, oferte cu versiuni și PDF, accept/refuz/modificări cu dovadă, contract-cadru per client, comandă + confirmare PDF la acceptare                                                   | ~2 săpt.       | Exemplul cu 1000 L merge de la ofertă până la comandă confirmată, cu dovada salvată                    |
-| **P4. Livrare și recepție**   | Livrări (una sau mai multe per comandă), statusuri cu documente, linia de timp pentru client, confirmare recepție, reclamații, facturi + plată + restanțe                                         | 1,5–2 săpt.    | Exemplul cu 1000 L merge cap-coadă până la „Închisă"                                                   |
-| **P5. Securizare și lansare** | Review de securitate, test de restaurare backup, GDPR (politică, DPA), RO/EN complet, accesibilitate, monitorizare și alerte, test cu 1–2 clienți reali de încredere                              | 1–1,5 săpt.    | Clienții de test parcurg o comandă reală fără ajutor; nicio problemă de securitate deschisă            |
-| **P6. Ulterior**              | Ce e în §7, după prioritățile voastre                                                                                                                                                             | —              | —                                                                                                      |
+| Etapă                         | Ce livrează                                                                                                                                                                            | Durată         | Gata când                                                                                              |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------ |
+| **P0. Decizii și pregătire**  | Răspunsuri la §10; avocatul pregătește CGV, contractul-cadru și textul de acceptare; VM pregătit (Node.js 22+); domeniu de email verificat în Resend; subdomeniul `portal.biocetan.ro` | depinde de voi | Întrebările P0 au răspuns, CGV există măcar în draft                                                   |
+| **P1. Fundație**              | Aplicația portal, design comun cu site-ul, baza de date + migrări, invitații, login, resetare parolă, 2FA admin (opțional), izolare între firme + teste, jurnal de audit               | 1,5–2 săpt.    | Creezi o firmă, inviți un utilizator, acesta se loghează și vede un panou gol; testele de izolare trec |
+| **P2. Comunicare**            | Chat în timp real cu atașamente, cereri în portal, notificări email, lead-urile din formularul site-ului intră în admin                                                                | ~1,5 săpt.     | Tu și un client de test vorbiți în timp real, cu fișiere; un mesaj necitit generează email             |
+| **P3. Vânzare**               | Catalog produse, oferte cu versiuni și PDF, accept/refuz/modificări cu dovadă, contract-cadru per client, comandă + confirmare PDF la acceptare                                        | ~2 săpt.       | Exemplul cu 1000 L merge de la ofertă până la comandă confirmată, cu dovada salvată                    |
+| **P4. Livrare și recepție**   | Livrări (una sau mai multe per comandă), statusuri cu documente, linia de timp pentru client, confirmare recepție, reclamații, facturi + plată + restanțe                              | 1,5–2 săpt.    | Exemplul cu 1000 L merge cap-coadă până la „Închisă"                                                   |
+| **P5. Securizare și lansare** | Review de securitate, test de restaurare backup, GDPR (politică, DPA), RO/EN complet, accesibilitate, monitorizare și alerte, test cu 1–2 clienți reali de încredere                   | 1–1,5 săpt.    | Clienții de test parcurg o comandă reală fără ajutor; nicio problemă de securitate deschisă            |
+| **P6. Ulterior**              | Ce e în §7, după prioritățile voastre                                                                                                                                                  | —              | —                                                                                                      |
 
-**Progres (2026-10-14):** P1 este construită și testată local (51 de teste, inclusiv izolarea între firme): invitații, login, resetare parolă, 2FA obligatoriu pentru admini, firme-client, utilizatori, jurnal de audit. Pentru publicare lipsesc: planul Workers Paid, baza D1 în UE, secretele, domeniul `portal.biocetan.ro` și Cloudflare Access (pașii în `biocetan-portal/README.md`).
+**Progres (2026-10-30):** P1 este construită și testată local (52 de teste, inclusiv izolarea între firme): invitații, login, resetare parolă, 2FA (oprit deocamdată), firme-client, utilizatori, jurnal de audit. Rulează ca server Node.js cu SQLite, pentru VM-ul vostru. Pentru publicare lipsesc: instalarea pe VM, secretele, domeniul `portal.biocetan.ro` (pașii în `biocetan-portal/README.md`).
 
 **Total ≈ 8–9 săptămâni de dezvoltare.** Recomand să **lansăm întâi site-ul public** (îi lipsesc doar datele legale și configurările de lansare), apoi portalul, pentru că folosesc același domeniu și aceeași configurare de email.
 
@@ -227,7 +226,7 @@ Estimări brute pentru un dezvoltator (eu, cu tine la testare), **fără** timpu
 | Clienții nu folosesc portalul, rămân pe WhatsApp/email | Platforma devine o formalitate | Notificări email cu link direct, onboarding scurt, deciziile importante (oferte, acceptări) doar prin portal |
 | Platforma crește într-un ERP                           | Întârzieri, complexitate       | MVP strict (§7); orice funcție nouă trece prin P6                                                            |
 | Scurgere de date între clienți                         | Pierdere de încredere, GDPR    | Filtrare centrală pe firmă + teste automate dedicate + review de securitate în P5                            |
-| Cont de admin compromis                                | Acces la tot                   | 2FA obligatoriu + Cloudflare Access + jurnal de audit                                                        |
+| Cont de admin compromis                                | Acces la tot                   | Parole puternice + limitare încercări + jurnal de audit; 2FA gata de pornit                                  |
 | Pierdere de date                                       | Contracte, istorice            | Time Travel + export zilnic + test de restaurare                                                             |
 | O singură persoană întreține platforma                 | Blocaj la schimbări            | Stack simplu, teste automate, documentație în repo (ca la site)                                              |
 | Așteptări de răspuns instant în chat                   | Clienți nemulțumiți            | Programul de răspuns afișat în chat (ex. L–V 08–17)                                                          |

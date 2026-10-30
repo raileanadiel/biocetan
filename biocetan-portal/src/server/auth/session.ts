@@ -2,9 +2,9 @@
  * Login sessions. The browser holds a random 256-bit token in an HttpOnly cookie; the database
  * holds only its SHA-256, so reading the database doesn't let anyone log in as a user.
  *
- * Admin sessions are short. Admins (and clients who turned 2FA on) need the second factor
- * (`mfaVerifiedAt`) before the session counts as logged in; client sessions last longer
- * because clients log in rarely.
+ * Admin sessions are short; client sessions last longer because clients log in rarely. Anyone
+ * who turned 2FA on (and every admin when REQUIRE_ADMIN_MFA is set) needs the second factor
+ * (`mfaVerifiedAt`) before the session counts as logged in.
  */
 import { and, eq, isNull, ne } from 'drizzle-orm';
 import type { Deps, Viewer } from '../context';
@@ -24,18 +24,18 @@ export const SESSION_POLICY: Record<Role, { idleMs: number; absoluteMs: number }
 /** `last_seen_at` is written at most this often, to avoid a DB write on every page view. */
 const TOUCH_INTERVAL_MS = 5 * 60_000;
 
-/** A pending (pre-2FA) admin session may only be used this long to enter the code. */
+/** A pending (pre-2FA) session may only be used this long to enter the code. */
 export const MFA_PENDING_MS = 10 * 60_000;
 
 export async function createSession(
-  deps: Pick<Deps, 'db' | 'now' | 'ip' | 'userAgent'>,
+  deps: Pick<Deps, 'db' | 'now' | 'ip' | 'userAgent' | 'env'>,
   user: Pick<User, 'id' | 'role' | 'totpEnabledAt'>,
   { mfaVerified }: { mfaVerified: boolean },
 ): Promise<{ token: string; session: Session }> {
   const token = randomToken();
   const now = deps.now();
   const policy = SESSION_POLICY[user.role];
-  const pendingMfa = needsSecondFactor(user) && !mfaVerified;
+  const pendingMfa = needsSecondFactor(user, deps.env.REQUIRE_ADMIN_MFA) && !mfaVerified;
   const session = await deps.db
     .insert(sessions)
     .values({
@@ -62,7 +62,7 @@ export interface ValidSession {
 }
 
 export async function validateSession(
-  deps: Pick<Deps, 'db' | 'now'>,
+  deps: Pick<Deps, 'db' | 'now' | 'env'>,
   token: string | undefined,
 ): Promise<ValidSession | null> {
   if (!token || token.length > 100) return null;
@@ -98,13 +98,17 @@ export async function validateSession(
     session,
     user,
     viewer: toViewer(user),
-    fullyAuthenticated: !needsSecondFactor(user) || session.mfaVerifiedAt !== null,
+    fullyAuthenticated:
+      !needsSecondFactor(user, deps.env.REQUIRE_ADMIN_MFA) || session.mfaVerifiedAt !== null,
   };
 }
 
-/** Admins always; clients once they have turned 2FA on. */
-export function needsSecondFactor(user: Pick<User, 'role' | 'totpEnabledAt'>): boolean {
-  return user.role === 'admin' || user.totpEnabledAt !== null;
+/** Anyone who turned 2FA on; every admin too when the deployment requires it. */
+export function needsSecondFactor(
+  user: Pick<User, 'role' | 'totpEnabledAt'>,
+  requireAdminMfa: boolean,
+): boolean {
+  return user.totpEnabledAt !== null || (requireAdminMfa && user.role === 'admin');
 }
 
 export function toViewer(user: User): Viewer {

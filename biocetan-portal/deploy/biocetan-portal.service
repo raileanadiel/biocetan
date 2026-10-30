@@ -1,0 +1,37 @@
+# systemd unit for the portal on the VM. Install: see README "Deploy on the VM".
+# The app listens on 127.0.0.1:4322 only; the outside world reaches it through Cloudflare
+# Tunnel (recommended) or Caddy, never directly.
+[Unit]
+Description=BIOCETAN client portal
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=biocetan
+Group=biocetan
+WorkingDirectory=/opt/biocetan-portal
+EnvironmentFile=/etc/biocetan-portal.env
+Environment=NODE_ENV=production HOST=127.0.0.1 PORT=4322
+ExecStartPre=/usr/bin/node scripts/migrate.mjs
+ExecStart=/usr/bin/node dist/server/entry.mjs
+Restart=on-failure
+RestartSec=5
+
+# Hardening: the service can write only to its data directory.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+ReadWritePaths=/var/lib/biocetan-portal
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+[Install]
+WantedBy=multi-user.target

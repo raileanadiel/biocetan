@@ -1,3 +1,4 @@
+import type { PortalConfig } from './config';
 import type { Db } from './db/client';
 import type { Locale, Role } from './db/schema';
 
@@ -18,7 +19,7 @@ export interface Viewer {
  */
 export interface Deps {
   db: Db;
-  env: Env;
+  env: PortalConfig;
   now: () => number;
   ip: string | null;
   userAgent: string | null;

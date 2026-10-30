@@ -35,15 +35,15 @@
       "port": 8899
     },
     {
-      "name": "biocetan-portal-preview",
+      "name": "biocetan-portal-prod",
       "runtimeExecutable": "npm",
       "runtimeArgs": [
         "--prefix",
         "biocetan-portal",
         "run",
-        "preview"
+        "start"
       ],
-      "port": 4321
+      "port": 4322
     }
   ]
 }

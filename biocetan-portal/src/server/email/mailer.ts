@@ -2,6 +2,8 @@
  * Transactional email through Resend (same verified domain as the public site). Locally,
  * RESEND_API_URL points at scripts/mock-resend.mjs, which prints the mail instead of sending it.
  */
+import type { PortalConfig } from '../config';
+
 export interface Mail {
   to: string;
   subject: string;
@@ -11,7 +13,7 @@ export interface Mail {
 }
 
 export async function sendMail(
-  env: Env,
+  env: PortalConfig,
   mail: Mail,
   fetcher: typeof fetch = fetch,
 ): Promise<boolean> {

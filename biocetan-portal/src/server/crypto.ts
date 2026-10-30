@@ -1,5 +1,5 @@
 /**
- * Cryptographic primitives, WebCrypto only (runs in workerd and in the tests).
+ * Cryptographic primitives, WebCrypto only (Node's global `crypto.subtle`).
  * Everything security-sensitive in the portal goes through these helpers; don't hand-roll
  * hashing or comparisons elsewhere.
  */
@@ -46,11 +46,10 @@ export function constantTimeEqual(a: string, b: string): boolean {
 // --- passwords -----------------------------------------------------------------------------
 
 /**
- * PBKDF2-SHA256. 100 000 iterations is the maximum Cloudflare Workers allows (higher throws
- * NotSupportedError); it costs ~tens of ms of CPU, which needs the Workers Paid plan in
- * production (the free plan caps a request at 10 ms CPU).
+ * PBKDF2-SHA256 at 600 000 iterations (OWASP's 2023 recommendation for SHA-256). Hashes made
+ * with fewer (the earlier 100 000) are upgraded automatically at the user's next login.
  */
-export const PBKDF2_ITERATIONS = 100_000;
+export const PBKDF2_ITERATIONS = 600_000;
 
 async function pbkdf2(
   password: string,

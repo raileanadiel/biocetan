@@ -1,21 +1,31 @@
-import { applyD1Migrations } from 'cloudflare:test';
-import { env } from 'cloudflare:workers';
-import { afterEach, beforeEach, vi } from 'vitest';
+import { mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { afterAll, afterEach, beforeEach, vi } from 'vitest';
+import type { PortalConfig } from '../src/server/config';
+import { migrateDatabase, openDatabase, type Db } from '../src/server/db/client';
 
-declare global {
-  namespace Cloudflare {
-    interface Env {
-      TEST_MIGRATIONS: import('cloudflare:test').D1Migration[];
-    }
-  }
-}
+export const testConfig: PortalConfig = {
+  DATABASE_URL: '',
+  PORTAL_URL: 'https://portal.test',
+  MAIL_FROM: 'BIOCETAN Portal <no-reply@biocetan.ro>',
+  RESEND_API_URL: 'https://resend.test',
+  RESEND_API_KEY: 're_test',
+  // Test-only key: "test-key-test-key-test-key-32byt" (32 bytes, base64url).
+  TOTP_ENC_KEY: 'dGVzdC1rZXktdGVzdC1rZXktdGVzdC1rZXktMzJieXQ',
+  REQUIRE_ADMIN_MFA: false,
+  TRUSTED_PROXY: 'none',
+};
 
-// Applying migrations is idempotent (tracked in d1_migrations).
-await applyD1Migrations(env.DB, env.TEST_MIGRATIONS);
+// A fresh SQLite file per test file (an in-memory database would give batches/transactions a
+// separate, empty connection), migrated with the real migrations.
+const dir = mkdtempSync(join(tmpdir(), 'portal-test-'));
+const { client, db } = await openDatabase(`file:${join(dir, 'test.db')}`);
+await migrateDatabase(db);
+export const testDb: Db = db;
 
-// Storage persists across the tests of a file, so every test starts from empty tables. The
-// audit log's append-only triggers block DELETE, so they're dropped for the wipe and recreated
-// from the migration itself (one source of truth for their SQL).
+// Every test starts from empty tables. The audit log's append-only triggers block DELETE, so
+// they're dropped for the wipe and recreated from the migration itself (one source of truth).
 const TABLES_CHILD_FIRST = [
   'sessions',
   'recovery_codes',
@@ -25,17 +35,22 @@ const TABLES_CHILD_FIRST = [
   'users',
   'companies',
 ];
-const auditTriggers = env.TEST_MIGRATIONS.flatMap((m) => m.queries).filter((q) =>
-  /CREATE TRIGGER `audit_log_/.test(q),
-);
+const auditTriggers = readdirSync('migrations')
+  .filter((f) => f.endsWith('.sql'))
+  .flatMap((f) => readFileSync(join('migrations', f), 'utf8').split('--> statement-breakpoint'))
+  .map((q) => q.trim())
+  .filter((q) => /CREATE TRIGGER `audit_log_/.test(q));
 
 async function resetDatabase() {
-  await env.DB.batch([
-    env.DB.prepare('DROP TRIGGER IF EXISTS audit_log_no_update'),
-    env.DB.prepare('DROP TRIGGER IF EXISTS audit_log_no_delete'),
-    ...TABLES_CHILD_FIRST.map((table) => env.DB.prepare(`DELETE FROM ${table}`)),
-    ...auditTriggers.map((q) => env.DB.prepare(q)),
-  ]);
+  await client.batch(
+    [
+      'DROP TRIGGER IF EXISTS audit_log_no_update',
+      'DROP TRIGGER IF EXISTS audit_log_no_delete',
+      ...TABLES_CHILD_FIRST.map((table) => `DELETE FROM ${table}`),
+      ...auditTriggers,
+    ],
+    'write',
+  );
 }
 
 /** Mails "sent" during the current test (the Resend API is never really called). */
@@ -46,7 +61,7 @@ beforeEach(async () => {
   sentMails.length = 0;
   vi.spyOn(globalThis, 'fetch').mockImplementation(async (input, init) => {
     const url = String(input instanceof Request ? input.url : input);
-    if (url === `${env.RESEND_API_URL}/emails`) {
+    if (url === `${testConfig.RESEND_API_URL}/emails`) {
       sentMails.push(JSON.parse(String(init?.body)));
       return Response.json({ id: crypto.randomUUID() });
     }
@@ -56,4 +71,9 @@ beforeEach(async () => {
 
 afterEach(() => {
   vi.restoreAllMocks();
+});
+
+afterAll(() => {
+  client.close();
+  rmSync(dir, { recursive: true, force: true });
 });

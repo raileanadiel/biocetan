@@ -200,13 +200,22 @@ describe('sessions', () => {
     expect(await validateSession(deps, 'not-a-real-token')).toBeNull();
   });
 
-  it('keeps an admin session half-open until the second factor, for 10 minutes', async () => {
+  it('with REQUIRE_ADMIN_MFA, keeps an admin session half-open until the code, for 10 minutes', async () => {
     const { deps, clock } = makeDeps();
+    deps.env = { ...deps.env, REQUIRE_ADMIN_MFA: true };
     const admin = await seedAdmin(deps);
     const { token } = await createSession(deps, admin.user, { mfaVerified: false });
     expect((await validateSession(deps, token))?.fullyAuthenticated).toBe(false);
     clock.advance(MFA_PENDING_MS + 1);
     expect(await validateSession(deps, token)).toBeNull();
+  });
+
+  it('without REQUIRE_ADMIN_MFA (the current setting), an admin logs in with the password alone', async () => {
+    const { deps } = makeDeps();
+    const admin = await seedAdmin(deps);
+    expect((await login(deps, 'admin@biocetan.ro', PASSWORD)).mfa).toBe('none');
+    const { token } = await createSession(deps, admin.user, { mfaVerified: false });
+    expect((await validateSession(deps, token))?.fullyAuthenticated).toBe(true);
   });
 });
 
@@ -263,6 +272,7 @@ describe('password reset', () => {
 describe('two-step verification', () => {
   it('enrols, issues recovery codes once, and checks codes without replay', async () => {
     const { deps, clock } = makeDeps();
+    deps.env = { ...deps.env, REQUIRE_ADMIN_MFA: true };
     const admin = await seedAdmin(deps);
     expect((await login(deps, 'admin@biocetan.ro', PASSWORD)).mfa).toBe('setupRequired');
 

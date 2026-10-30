@@ -7,6 +7,7 @@
  */
 import { and, eq, isNull } from 'drizzle-orm';
 import { audit, auditInsert } from '../audit';
+import type { PortalConfig } from '../config';
 import { PortalError, type Deps } from '../context';
 import { decryptString, encryptString, randomBytes, sha256Hex } from '../crypto';
 import { recoveryCodes, users, type User } from '../db/schema';
@@ -15,7 +16,7 @@ import { base32Encode, generateTotpSecret, otpauthUri, verifyTotp } from './totp
 
 const RECOVERY_CODE_COUNT = 10;
 
-function encryptionKey(env: Env): string {
+function encryptionKey(env: PortalConfig): string {
   if (!env.TOTP_ENC_KEY) throw new Error('TOTP_ENC_KEY is not configured');
   return env.TOTP_ENC_KEY;
 }

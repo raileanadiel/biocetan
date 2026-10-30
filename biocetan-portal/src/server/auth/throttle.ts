@@ -1,7 +1,7 @@
 /**
- * Fixed-window attempt counters in D1. Used for login, 2FA codes and password-reset requests,
- * keyed per account and per IP so neither one person nor one machine can grind through guesses.
- * Cloudflare WAF rate limiting in front of the portal is a second, coarser layer.
+ * Fixed-window attempt counters in the database. Used for login, 2FA codes and password-reset
+ * requests, keyed per account and per IP so neither one person nor one machine can grind
+ * through guesses. A rate limit at the reverse proxy / Cloudflare is a second, coarser layer.
  */
 import { and, eq, gt, lt, sql } from 'drizzle-orm';
 import type { Deps } from '../context';

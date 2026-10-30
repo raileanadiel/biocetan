@@ -2,18 +2,18 @@
  * Runs before every page: loads the session, picks the language, enforces who may open which
  * area, and adds security headers. Pages can rely on these guarantees:
  *
- * - `/admin/**`: a fully authenticated admin (password + 2FA).
- * - `/2fa/**`: any session, including an admin who still owes the second factor.
+ * - `/admin/**`: a fully authenticated admin (password, plus the 2FA code if they owe one).
+ * - `/2fa/**`: any session, including someone who still owes the second factor.
  * - Public pages (`PUBLIC_PATHS`): anyone; a logged-in user opening /login is sent home.
  * - Everything else: a fully authenticated user of any role.
  */
 import type { APIContext, MiddlewareNext } from 'astro';
 import { defineMiddleware } from 'astro:middleware';
-import { env } from 'cloudflare:workers';
 import { LOCALE_COOKIE, detectLocale, useTranslations } from './i18n';
 import { SESSION_COOKIE, validateSession } from './server/auth/session';
+import { clientIp, getConfig } from './server/config';
 import type { Deps } from './server/context';
-import { getDb } from './server/db/client';
+import { getSharedDb } from './server/db/client';
 import { homeFor } from './server/web';
 
 const PUBLIC_PATHS = [/^\/login$/, /^\/forgot$/, /^\/reset\/[^/]+$/, /^\/invite\/[^/]+$/];
@@ -35,11 +35,18 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const { url, cookies, request, locals } = context;
   const path = url.pathname;
 
+  const config = getConfig();
+  let socketAddress: string | undefined;
+  try {
+    socketAddress = context.clientAddress;
+  } catch {
+    socketAddress = undefined;
+  }
   const deps: Deps = {
-    db: getDb(env.DB),
-    env,
+    db: await getSharedDb(config.DATABASE_URL),
+    env: config,
     now: () => Date.now(),
-    ip: request.headers.get('cf-connecting-ip') ?? (import.meta.env.DEV ? '127.0.0.1' : null),
+    ip: clientIp(config, request.headers, socketAddress),
     userAgent: request.headers.get('user-agent'),
   };
   locals.deps = deps;
