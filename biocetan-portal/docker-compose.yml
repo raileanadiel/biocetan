@@ -1,0 +1,36 @@
+# Runs on driverschat-vm next to the other apps. Caddy (the `driverschat_caddy` container, config
+# in /home/Caddy/Caddyfile) reaches it as biocetan_portal:4322 over app-network; no port is
+# published on the host. Secrets (RESEND_API_KEY, TOTP_ENC_KEY) come from `.env` next to this file
+# (chmod 600, never committed); the fixed settings below override anything set there.
+services:
+  portal:
+    build: .
+    image: biocetan-portal:latest
+    container_name: biocetan_portal
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: file:/data/portal.db
+      PORTAL_URL: https://portal.biocetan.ro
+      RESEND_API_URL: https://api.resend.com
+      # Caddy replaces X-Forwarded-For with the real client IP (the DNS record is "DNS only").
+      TRUSTED_PROXY: x-forwarded-for
+    volumes:
+      - portal_data:/data
+    networks:
+      - app-network
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 512m
+
+networks:
+  app-network:
+    external: true
+
+volumes:
+  portal_data:

@@ -1,10 +1,10 @@
 // Consistent snapshot of the SQLite database (safe while the portal is running: VACUUM INTO
 // copies a transactionally consistent state), then keeps only the newest KEEP snapshots.
-// Run daily by deploy/biocetan-portal-backup.timer. Copy the backup folder off the VM too
+// Run daily from the VM's crontab (`docker exec biocetan_portal node scripts/backup.mjs`). Copy the backup folder off the VM too
 // (another disk, another machine or cloud storage): a backup on the same disk doesn't survive
 // the disk.
 //
-//   node scripts/backup.mjs [--dir /var/lib/biocetan-portal/backups] [--keep 30]
+//   node scripts/backup.mjs [--dir /data/backups] [--keep 30]
 import { mkdirSync, readdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';

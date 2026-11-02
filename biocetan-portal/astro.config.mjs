@@ -2,10 +2,12 @@ import { defineConfig } from 'astro/config';
 import node from '@astrojs/node';
 import tailwindcss from '@tailwindcss/vite';
 
+const site = new URL(process.env.PORTAL_URL ?? 'https://portal.biocetan.ro');
+
 // Every page is rendered per request: the portal is private, nothing is prerendered or cached.
 // Runs as a plain Node.js server (`node dist/server/entry.mjs`) on the owner's VM.
 export default defineConfig({
-  site: process.env.PORTAL_URL ?? 'https://portal.biocetan.ro',
+  site: site.href,
   output: 'server',
   adapter: node({ mode: 'standalone' }),
   // Sessions are our own (SQLite `sessions` table, see src/server/auth/session.ts) so they can be
@@ -17,6 +19,9 @@ export default defineConfig({
     // Rejects cross-site form posts (CSRF) on every on-demand route. On by default; stated so
     // nobody turns it off by accident.
     checkOrigin: true,
+    // Behind Caddy the app sees plain http; Astro trusts X-Forwarded-Proto/Host only for the
+    // portal's own address, so the origin check compares against https://portal.biocetan.ro.
+    allowedDomains: [{ protocol: site.protocol.slice(0, -1), hostname: site.hostname }],
     csp: {
       directives: [
         "default-src 'self'",

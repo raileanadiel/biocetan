@@ -4,13 +4,13 @@ Private B2B platform at `portal.biocetan.ro`: BIOCETAN admins create client comp
 their people; later phases add chat, offers, orders, deliveries and invoices. The full plan, in
 Romanian, is [`../PORTAL_PLAN.md`](../PORTAL_PLAN.md).
 
-**Status: phase P1 (foundation) built, not deployed.** Admins log in with their password, create
+**Status: phase P1 (foundation) built.** Admins log in with their password, create
 client companies, invite client users and admins, resend invitations and disable users. Clients
 activate their account, log in, reset their password and see an (empty) home page. Everything
 is recorded in an append-only audit log.
 
-Runs on the owner's own VM (decision 2026-10-30: no monthly Cloudflare Workers bill). The public
-site stays on Cloudflare Pages (free).
+Runs on the owner's own VM, `driverschat-vm`, in Docker (decision 2026-10-30: no monthly
+Cloudflare Workers bill). The public site stays on Cloudflare Pages (free).
 
 ## Stack
 
@@ -38,7 +38,7 @@ site stays on Cloudflare Pages (free).
 | `npm run db:migrate`   | Applies pending migrations to `DATABASE_URL`                      |
 | `npm run admin:invite` | Creates an admin + one-time invitation link in `DATABASE_URL`     |
 
-`scripts/backup.mjs` writes a consistent snapshot of the database (used by the daily timer).
+`scripts/backup.mjs` writes a consistent snapshot of the database (run daily from cron on the VM).
 
 ## Local development
 
@@ -52,10 +52,11 @@ npm run admin:invite -- --email you@example.test --name "You"   # prints the inv
 
 ## Configuration (environment variables)
 
-All in `.env.example`, with comments. The important ones on the VM: `DATABASE_URL`
-(`file:/var/lib/biocetan-portal/portal.db`), `PORTAL_URL` (`https://portal.biocetan.ro`),
-`RESEND_API_KEY`, `TOTP_ENC_KEY`, `REQUIRE_ADMIN_MFA` (currently `false`), `TRUSTED_PROXY`
-(which header carries the visitor's IP; must match how the portal is exposed).
+All in `.env.example`, with comments. On the VM the fixed ones (`DATABASE_URL`, `PORTAL_URL`,
+`RESEND_API_URL`, `TRUSTED_PROXY`) are set in `docker-compose.yml`; only the secrets
+(`RESEND_API_KEY`, `TOTP_ENC_KEY`) and optionally `REQUIRE_ADMIN_MFA` (currently `false`) go in
+the VM's `.env`. `PORTAL_URL` is also read at build time: Astro trusts `X-Forwarded-Proto/Host`
+from Caddy only for that host, which the CSRF origin check needs.
 
 ## Structure
 
@@ -74,7 +75,8 @@ src/
   i18n/                 en.json + ro.json (a missing key is a type error)
 test/                   crypto/TOTP, auth flows, tenant isolation
 scripts/                migrate, invite-admin (bootstrap), backup, mock-resend
-deploy/                 systemd service + backup timer, Caddy example
+Dockerfile, docker-compose.yml   the container on the VM
+deploy/                 the Caddy block for portal.biocetan.ro
 ```
 
 ## Security model (what is already enforced)
@@ -101,50 +103,55 @@ deploy/                 systemd service + backup timer, Caddy example
   (links carry tokens), HSTS, `Cache-Control: no-store`, `noindex`.
 - **Audit log**: logins (also failed), invitations, password changes, 2FA events, company and
   user changes. UPDATE/DELETE on it are blocked by triggers.
-- **On the VM**: the app listens on 127.0.0.1 only, runs as an unprivileged user under a
-  hardened systemd unit that can write only to `/var/lib/biocetan-portal`.
+- **On the VM**: the container publishes no port (only Caddy reaches it), runs as the
+  unprivileged `node` user with a read-only filesystem except `/data`, no Linux capabilities and
+  `no-new-privileges`.
 
-## Deploy on the VM (not done yet)
+## Deploy on the VM (driverschat-vm)
 
-Needs: Linux with systemd, Node.js 22+, ~512 MB RAM, outbound internet (Resend). No inbound
-port has to be opened if Cloudflare Tunnel is used.
+The portal runs on `driverschat-vm` (Ubuntu 24.04, `81.181.102.218`, reached over SSH while
+Cloudflare WARP is connected) like the other apps there: a Docker container on `app-network`,
+behind the shared Caddy container (`/home/Caddy`), which owns ports 80/443 and the HTTPS
+certificates. Everything runs as the `nxcd` user (member of the `docker` group); no sudo needed.
 
-1. **User and folders**
-   ```bash
-   sudo useradd --system --home /var/lib/biocetan-portal --shell /usr/sbin/nologin biocetan
-   sudo install -d -o biocetan -g biocetan -m 750 /var/lib/biocetan-portal
-   sudo git clone https://github.com/raileanadiel/biocetan.git /opt/biocetan
-   sudo ln -s /opt/biocetan/biocetan-portal /opt/biocetan-portal
-   cd /opt/biocetan-portal && sudo npm ci && sudo npm run build
-   ```
-2. **Configuration**: `/etc/biocetan-portal.env` from `.env.example`, `chmod 600`, owned by
-   root. The owner types the secrets (`RESEND_API_KEY`: a separate Resend key, "Sending access",
-   domain biocetan.ro; `TOTP_ENC_KEY`: 32 random bytes). `DATABASE_URL=file:/var/lib/biocetan-portal/portal.db`,
-   `PORTAL_URL=https://portal.biocetan.ro`, `RESEND_API_URL=https://api.resend.com`.
-3. **Service + daily backup**
-   ```bash
-   sudo cp deploy/biocetan-portal*.service deploy/biocetan-portal-backup.timer /etc/systemd/system/
-   sudo systemctl daemon-reload
-   sudo systemctl enable --now biocetan-portal biocetan-portal-backup.timer
-   ```
-   Also copy `/var/lib/biocetan-portal/backups` off the VM regularly.
-4. **Expose it**, one of:
-   - **Cloudflare Tunnel (recommended, free)**: `cloudflared` on the VM, tunnel
-     `portal.biocetan.ro → http://127.0.0.1:4322`. No open ports, HTTPS and DDoS protection by
-     Cloudflare, and the free WAF rate limit can cover `POST /login` and `POST /forgot`.
-     `TRUSTED_PROXY=cloudflare`.
-   - **Caddy** on a VM with a public IP: `deploy/Caddyfile.example`, `TRUSTED_PROXY=x-forwarded-for`.
-5. **First admins** (runs as the service user with the service's environment, so the database
-   files keep the right owner):
-   ```bash
-   sudo systemd-run --uid=biocetan --gid=biocetan --pipe --wait \
-     -p EnvironmentFile=/etc/biocetan-portal.env -p WorkingDirectory=/opt/biocetan-portal \
-     /usr/bin/node scripts/invite-admin.mjs --email you@biocetan.ro --name "Your Name"
-   ```
-   and give each person their link.
-6. **Updates**: `git pull && npm ci && npm run build && sudo systemctl restart biocetan-portal`
-   (migrations run automatically before the start).
-7. Public site: add the "Cont client" link to `https://portal.biocetan.ro/login`.
+- Code: `~/biocetan` (git clone of this repo); compose file: `~/biocetan/biocetan-portal/docker-compose.yml`.
+- Secrets: `~/biocetan/biocetan-portal/.env` (chmod 600): `RESEND_API_KEY` (a separate Resend
+  key, "Sending access", domain biocetan.ro) and `TOTP_ENC_KEY` (32 random bytes, generated on the
+  VM). Fixed settings (`DATABASE_URL`, `PORTAL_URL`, `TRUSTED_PROXY`...) are in the compose file.
+- Data: Docker volume `biocetan-portal_portal_data` mounted at `/data` (database + `backups/`).
+- DNS: Cloudflare, `A portal → 81.181.102.218`, **DNS only** (grey cloud), so Caddy can issue the
+  certificate and sees the visitor's real IP.
+- Caddy: the block in `deploy/Caddyfile.example`, appended to `/home/Caddy/Caddyfile`.
+
+**First install** (on the VM):
+
+```bash
+git clone https://github.com/raileanadiel/biocetan.git ~/biocetan
+cd ~/biocetan/biocetan-portal
+install -m 600 /dev/null .env     # then add RESEND_API_KEY= and TOTP_ENC_KEY=
+docker compose up -d --build
+# Caddy: append deploy/Caddyfile.example to /home/Caddy/Caddyfile, then
+docker exec driverschat_caddy caddy validate --config /etc/caddy/Caddyfile
+docker exec driverschat_caddy caddy reload --config /etc/caddy/Caddyfile
+```
+
+**First admins** (prints a one-time link, valid 72 h):
+
+```bash
+docker exec biocetan_portal node scripts/invite-admin.mjs --email you@biocetan.ro --name "Your Name"
+```
+
+**Updates**: `cd ~/biocetan && git pull && cd biocetan-portal && docker compose up -d --build`
+(migrations run automatically at start).
+
+**Logs**: `docker logs -f biocetan_portal`.
+
+**Backups**: the `nxcd` crontab runs `scripts/backup.mjs` daily at 03:15 inside the container
+(newest 30 kept in `/data/backups`; output in `~/biocetan-portal-backup.log`). Copy them off the
+VM too: `docker cp biocetan_portal:/data/backups ./portal-backups`. To restore, stop the
+container, copy a snapshot over `/data/portal.db` and start it again.
+
+Public site: add the "Cont client" link to `https://portal.biocetan.ro/login`.
 
 ## Next: phase P2 (communication)
 

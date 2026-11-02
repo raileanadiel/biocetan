@@ -1,10 +1,10 @@
 /**
- * Runtime configuration, read once from environment variables (on the VM: the systemd unit's
- * EnvironmentFile; locally: `.env`, loaded by `node --env-file` / Astro). See `.env.example`.
+ * Runtime configuration, read once from environment variables (on the VM: docker-compose.yml plus
+ * its `.env`; locally: `.env`, loaded by `node --env-file` / Astro). See `.env.example`.
  * Secrets (RESEND_API_KEY, TOTP_ENC_KEY) only ever come from the environment, never from code.
  */
 export interface PortalConfig {
-  /** libsql URL; a local SQLite file on the VM, e.g. `file:/var/lib/biocetan-portal/portal.db`. */
+  /** libsql URL; a local SQLite file on the VM, e.g. `file:/data/portal.db` (Docker volume). */
   DATABASE_URL: string;
   PORTAL_URL: string;
   MAIL_FROM: string;

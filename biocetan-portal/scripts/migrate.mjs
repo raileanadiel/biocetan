@@ -2,7 +2,7 @@
 // records what ran in __drizzle_migrations. `npm start` runs it before the server, so a deploy
 // of new code also brings the schema up to date.
 //
-//   npm run db:migrate          (reads .env locally; on the VM the systemd environment)
+//   npm run db:migrate          (reads .env locally; on the VM it runs at every container start)
 import { mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

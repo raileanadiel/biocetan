@@ -1,6 +1,6 @@
 ## Project (BIOCETAN client portal)
 
-Private B2B portal: Astro (Node adapter) + SQLite, self-hosted on the owner's VM (not Cloudflare Workers: the owner doesn't want a monthly bill). Read `README.md` (security model, structure) and
+Private B2B portal: Astro (Node adapter) + SQLite, in Docker on the owner's VM `driverschat-vm` behind its shared Caddy (not Cloudflare Workers: the owner doesn't want a monthly bill). That VM also runs other apps (driverschat, wehost): touch only `biocetan_portal` and its Caddy block. Read `README.md` (security model, structure) and
 `../PORTAL_PLAN.md` (Romanian; phases, data model, decisions) first.
 
 - Data access lives in `src/server/`; pages only parse forms and render. Services take `deps`
@@ -23,7 +23,7 @@ Private B2B portal: Astro (Node adapter) + SQLite, self-hosted on the owner's VM
   is the default for clients.
 - Before committing: `npm test`, `npm run check`, `npx prettier --check .`.
 - Configuration only through `src/server/config.ts` (environment variables; `.env` locally,
-  `/etc/biocetan-portal.env` on the VM). 2FA exists but is off (`REQUIRE_ADMIN_MFA=false`, owner's
+  `.env` + `docker-compose.yml` on the VM). 2FA exists but is off (`REQUIRE_ADMIN_MFA=false`, owner's
   choice); keep it working and tested.
 - Local test accounts go in `.dev-accounts` (gitignored), never in chat or committed files. Real
   credentials and secrets are entered by the owner only.

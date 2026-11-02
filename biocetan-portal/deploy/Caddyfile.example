@@ -1,8 +1,8 @@
-# Alternative to Cloudflare Tunnel, for a VM with a public IP and ports 80/443 open.
-# Caddy gets and renews the HTTPS certificate by itself. Use TRUSTED_PROXY=x-forwarded-for.
-# (If the DNS record is proxied through Cloudflare instead, use TRUSTED_PROXY=cloudflare and
-# set SSL/TLS to Full (strict).)
+# Block added to the shared Caddyfile on driverschat-vm (/home/Caddy/Caddyfile). Caddy gets and
+# renews the HTTPS certificate by itself; the DNS record portal.biocetan.ro → 81.181.102.218 must
+# stay "DNS only" in Cloudflare (proxied, X-Forwarded-For would carry Cloudflare's IP instead of
+# the visitor's; then switch TRUSTED_PROXY to cloudflare). Security headers come from the app.
 portal.biocetan.ro {
 	encode zstd gzip
-	reverse_proxy 127.0.0.1:4322
+	reverse_proxy biocetan_portal:4322
 }
