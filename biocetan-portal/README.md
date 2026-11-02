@@ -4,7 +4,7 @@ Private B2B platform at `portal.biocetan.ro`: BIOCETAN admins create client comp
 their people; later phases add chat, offers, orders, deliveries and invoices. The full plan, in
 Romanian, is [`../PORTAL_PLAN.md`](../PORTAL_PLAN.md).
 
-**Status: phase P1 (foundation) built.** Admins log in with their password, create
+**Status: phase P1 (foundation) live at https://portal.biocetan.ro since 2026-11-02.** Admins log in with their password, create
 client companies, invite client users and admins, resend invitations and disable users. Clients
 activate their account, log in, reset their password and see an (empty) home page. Everything
 is recorded in an append-only audit log.
@@ -107,7 +107,7 @@ deploy/                 the Caddy block for portal.biocetan.ro
   unprivileged `node` user with a read-only filesystem except `/data`, no Linux capabilities and
   `no-new-privileges`.
 
-## Deploy on the VM (driverschat-vm)
+## Deploy on the VM (driverschat-vm, done 2026-11-02)
 
 The portal runs on `driverschat-vm` (Ubuntu 24.04, `81.181.102.218`, reached over SSH while
 Cloudflare WARP is connected) like the other apps there: a Docker container on `app-network`,
